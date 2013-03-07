@@ -1,3 +1,5 @@
+#ifndef _PRIMITIVAS
+#define _PRIMITIVAS
 
 
 void esfera_solid(float raio, int divv, int divh);
@@ -16,3 +18,4 @@ void cilindro_wire(float altura, float raio, int div);
 
 void cilindro_solid(float altura, float raio, int div);
 
+#endif
