@@ -42,7 +42,7 @@ void renderScene(void) {
 
 	// set the camera
 	glLoadIdentity();
-	gluLookAt(0.0,0.0,5.0, 
+	gluLookAt(0.0,3.0,5.0, 
 		      0.0,0.0,-1.0,
 			  0.0f,1.0f,0.0f);
 
@@ -51,7 +51,7 @@ void renderScene(void) {
 	t+=0.01;
 	float s = (0.3 * sin(t)) + 0.7;
 	//glutWireTeapot(s);
-	cilindro_wire(2.0,1.0,50);
+	cone_wire(2.0,1.0,30);
 	glColor3f((sin(t+1.5)+1)/2, (sin(t)+1)/2, (cos(t)+1)/2);
 
 	// End of frame
