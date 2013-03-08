@@ -81,17 +81,18 @@ void cilindro_solid(float altura, float raio, int div){
 			glVertex3f(raio*sin(ang+ang_inc),altura/2.0f, raio*cos(ang+ang_inc));
 
 			glVertex3f(0.0,-altura/2.0f, 0.0);
-			glVertex3f(raio*sin(ang),-altura/2.0f, raio*cos(ang));
 			glVertex3f(raio*sin(ang+ang_inc),-altura/2.0f, raio*cos(ang+ang_inc));
+			glVertex3f(raio*sin(ang),-altura/2.0f, raio*cos(ang));
+			
 
 		glEnd();
 
 		glBegin(GL_QUADS);
 			
 			glVertex3f(raio*sin(ang),altura/2.0f, raio*cos(ang));
-			glVertex3f(raio*sin(ang+ang_inc),altura/2.0f, raio*cos(ang+ang_inc));
 			glVertex3f(raio*sin(ang),-altura/2.0f, raio*cos(ang));
 			glVertex3f(raio*sin(ang+ang_inc),-altura/2.0f, raio*cos(ang+ang_inc));
+			glVertex3f(raio*sin(ang+ang_inc),altura/2.0f, raio*cos(ang+ang_inc));
 
 		glEnd();
 
@@ -148,9 +149,9 @@ void cone_solid(float altura, float raio, int div){
 		glVertex3f(raio*sin(ang+ang_inc),0.0f,raio*cos(ang+ang_inc));
 
 		glVertex3f(0.0f, 0.0f, 0.0f);
-		glVertex3f(raio*sin(ang),0.0f,raio*cos(ang));
 		glVertex3f(raio*sin(ang+ang_inc),0.0f,raio*cos(ang+ang_inc));
-
+		glVertex3f(raio*sin(ang),0.0f,raio*cos(ang));
+		
 		ang+=ang_inc;
 	}
 	glEnd();
