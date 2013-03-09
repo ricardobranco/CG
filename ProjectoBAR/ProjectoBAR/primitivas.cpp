@@ -223,3 +223,27 @@ void cone_wire(float altura, float raio, int div){
 	glEnd();
 
 }
+
+
+
+
+/// <summary>
+/// Desenha um plano centrado na origem voltado para o eixo dos yy com lados de tamanh especificado em X e Z.
+/// </summary>
+/// <param name="ladoX">O comprimento do lado segundo X.</param>
+/// <param name="ladoZ">O comprimento do lado segundo Z.</param>
+void plano(float ladoX, float ladoZ){
+
+	glBegin(GL_TRIANGLES);
+
+		glVertex3f(-ladoX/2,0.0f,-ladoZ/2);
+		glVertex3f(-ladoX/2,0.0f,ladoZ/2);
+		glVertex3f(ladoX/2,0.0f,ladoZ/2);
+
+		glVertex3f(-ladoX/2,0.0f,-ladoZ/2);
+		glVertex3f(ladoX/2,0.0f,ladoZ/2);
+		glVertex3f(ladoX/2,0.0f,-ladoZ/2);
+
+	glEnd();
+
+}
