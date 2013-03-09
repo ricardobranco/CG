@@ -5,6 +5,12 @@
 #include <math.h>
 
 
+/// <summary>
+/// Desenha uma esfera solida centrada na origem.
+/// </summary>
+/// <param name="raio">O raio da esfera a criar.</param>
+/// <param name="divv">Quantas divisões verticais tem a esfera (numero de paralelos do globo).</param>
+/// <param name="divh">Quantas divisões verricais tem a esfera (numero de meridianos do globo).</param>
 void esfera_solid(float raio, int divv, int divh){
 
 	float incv = M_PI /((float) divv);
@@ -38,6 +44,13 @@ void esfera_solid(float raio, int divv, int divh){
 	glEnd();
 }
 
+
+/// <summary>
+/// Desenha uma esfera em linhas centrada na origem.
+/// </summary>
+/// <param name="raio">O raio da esfera a criar.</param>
+/// <param name="divv">Quantas divisões verticais tem a esfera (numero de paralelos do globo).</param>
+/// <param name="divh">Quantas divisões verricais tem a esfera (numero de meridianos do globo).</param>
 void esfera_wire(float raio, int divv, int divh){
 
 	float incv = M_PI /((float) divv);
@@ -70,6 +83,12 @@ void esfera_wire(float raio, int divv, int divh){
 
 
 
+/// <summary>
+/// Desenha um cilindro solido centrado na origem.
+/// </summary>
+/// <param name="altura">A altura do cilindro.</param>
+/// <param name="raio">O raio da base.</param>
+/// <param name="div">O numero de subdivisões.</param>
 void cilindro_solid(float altura, float raio, int div){
 
 	float ang=0.0f;
@@ -105,6 +124,13 @@ void cilindro_solid(float altura, float raio, int div){
 	glEnd();
 }
 
+
+/// <summary>
+/// Desenha um cilindro com linhas centrado na origem.
+/// </summary>
+/// <param name="altura">A altura do cilindro.</param>
+/// <param name="raio">O raio da base.</param>
+/// <param name="div">O numero de subdivisões.</param>
 void cilindro_wire(float altura, float raio, int div){
 
 	float ang=0.0f;
@@ -138,6 +164,13 @@ void cilindro_wire(float altura, float raio, int div){
 	glEnd();
 }
 
+
+/// <summary>
+/// Desenha um cone solido sobre o plano xOz, centrado no eixo dos yy.
+/// </summary>
+/// <param name="altura">A altura do cone.</param>
+/// <param name="raio">O raio da base.</param>
+/// <param name="div">O numero de divisões. </param>
 void cone_solid(float altura, float raio, int div){
 
 	float ang=0.0f;
@@ -161,7 +194,12 @@ void cone_solid(float altura, float raio, int div){
 }
 
 
-
+/// <summary>
+/// Desenha um cone em linhas sobre o plano xOz, centrado no eixo dos yy.
+/// </summary>
+/// <param name="altura">A altura do cone.</param>
+/// <param name="raio">O raio da base.</param>
+/// <param name="div">O numero de divisões. </param>
 void cone_wire(float altura, float raio, int div){
 
 	float ang=0.0f;
