@@ -24,7 +24,7 @@ void changeSize(int w, int h) {
 	glLoadIdentity();
 	
 	// Set the viewport to be the entire window
-    glViewport(0, 0, w, h);
+	glViewport(0, 0, w, h);
 
 	// Set perspective
 	gluPerspective(45.0f ,ratio, 1.0f ,1000.0f);
@@ -43,7 +43,7 @@ void renderScene(void) {
 	// set the camera
 	glLoadIdentity();
 	gluLookAt(0.0,0.0,5.0, 
-		      0.0,0.0,-1.0,
+			  0.0,0.0,-1.0,
 			  0.0f,1.0f,0.0f);
 
 // pôr instruções de desenho aqui
