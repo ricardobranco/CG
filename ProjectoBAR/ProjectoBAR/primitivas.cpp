@@ -247,3 +247,15 @@ void plano(float ladoX, float ladoZ){
 	glEnd();
 
 }
+
+
+
+/// <summary>
+/// Desenha um cubo centrado na origem.
+/// </summary>
+/// <param name="lado">The lado.</param>
+void cubo(float lado){
+
+	
+
+}
