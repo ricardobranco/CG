@@ -257,23 +257,29 @@ void plano(float ladoX, float ladoZ){
 void cubo(float lado){
 	float x = lado/2;
 	glBegin(GL_TRIANGLES);
-		//BASE => Y=-x
-	glVertex3f(-x,-x,x);
+	
+	//BASE => Y=-x
+	
+	glColor3ub(255,0,0);
+	glVertex3f(x,-x,-x);
 	glVertex3f(-x,-x,-x);
-	glVertex3f(x,-x,-x);
-	glVertex3f(x,-x,-x);
-	glVertex3f(x,-x,x);
 	glVertex3f(-x,-x,x);
+	glVertex3f(-x,-x,x);
+	glVertex3f(x,-x,x);
+	glVertex3f(x,-x,-x);
+	
 
 		//TOPO => Y=x
-	glVertex3f(-x,x,x);
+	
+	glVertex3f(x,x,-x);
 	glVertex3f(-x,x,-x);
-	glVertex3f(x,x,-x);
-	glVertex3f(x,x,-x);
-	glVertex3f(x,x,x);
 	glVertex3f(-x,x,x);
-
+	glVertex3f(-x,x,x);
+	glVertex3f(x,x,x);
+	glVertex3f(x,x,-x);
+	
 		//LADO ESQUERDO => X=-x
+	
 	glVertex3f(-x,x,-x);
 	glVertex3f(-x,-x,-x);
 	glVertex3f(-x,-x,x);
@@ -291,6 +297,7 @@ void cubo(float lado){
 	glVertex3f(x,x,-x);
 
 		//FRENTE => Z=x
+
 	glVertex3f(-x,x,x);
 	glVertex3f(-x,-x,x);
 	glVertex3f(x,-x,x);
@@ -299,14 +306,13 @@ void cubo(float lado){
 	glVertex3f(-x,x,x);
 
 		//TRÁS => Z=-x
+
 	glVertex3f(-x,x,-x);
 	glVertex3f(-x,-x,-x);
 	glVertex3f(x,-x,-x);
 	glVertex3f(x,-x,-x);
 	glVertex3f(x,x,-x);
 	glVertex3f(-x,x,-x);
-
-
 
 	glEnd();
 
