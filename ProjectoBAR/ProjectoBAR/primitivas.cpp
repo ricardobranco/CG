@@ -253,20 +253,22 @@ void plano(float ladoX, float ladoZ){
 /// <summary>
 /// Desenha um cubo centrado na origem.
 /// </summary>
-/// <param name="lado">The lado.</param>
+/// <param name="lado">O comprimento do lado.</param>
 void cubo(float lado){
+	
+	
 	float x = lado/2;
 	glBegin(GL_TRIANGLES);
 	
 	//BASE => Y=-x
 	
-	glColor3ub(255,0,0);
+	//glColor3ub(255,0,0); para que caralho é isto???
 	glVertex3f(x,-x,-x);
+	glVertex3f(-x,-x,x);
 	glVertex3f(-x,-x,-x);
 	glVertex3f(-x,-x,x);
-	glVertex3f(-x,-x,x);
-	glVertex3f(x,-x,x);
 	glVertex3f(x,-x,-x);
+	glVertex3f(x,-x,x);
 	
 
 		//TOPO => Y=x
@@ -290,11 +292,11 @@ void cubo(float lado){
 		//LADO DIREITO => X=x
 
 	glVertex3f(x,x,-x);
+	glVertex3f(x,-x,x);
 	glVertex3f(x,-x,-x);
 	glVertex3f(x,-x,x);
-	glVertex3f(x,-x,x);
-	glVertex3f(x,x,x);
 	glVertex3f(x,x,-x);
+	glVertex3f(x,x,x);
 
 		//FRENTE => Z=x
 
@@ -308,14 +310,17 @@ void cubo(float lado){
 		//TRÁS => Z=-x
 
 	glVertex3f(-x,x,-x);
+	glVertex3f(x,-x,-x);
 	glVertex3f(-x,-x,-x);
 	glVertex3f(x,-x,-x);
-	glVertex3f(x,-x,-x);
-	glVertex3f(x,x,-x);
 	glVertex3f(-x,x,-x);
+	glVertex3f(x,x,-x);
 
 	glEnd();
 
+	
+
+	
 	
 
 }

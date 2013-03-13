@@ -56,7 +56,7 @@ void renderScene(void) {
    
    glTranslatef(x_off, 0, y_off);
    glRotatef(angle, 0, 1, 0);
-   glPolygonMode(GL_FRONT, GL_LINE);
+   //glPolygonMode(GL_FRONT, GL_LINE);
    // pôr instruções de desenho aqui
    cubo(1);
    // End of frame
@@ -119,7 +119,7 @@ int main(int argc, char **argv) {
    glutInitWindowPosition(100,100);
    glutInitWindowSize(800,800);
    glutCreateWindow("CG@DI-UM");
-   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+   //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
       
 
 // registo de funções 
