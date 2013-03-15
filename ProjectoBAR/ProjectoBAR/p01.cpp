@@ -56,9 +56,9 @@ void renderScene(void) {
    
    glTranslatef(x_off, 0, y_off);
    glRotatef(angle, 0, 1, 0);
-   //glPolygonMode(GL_FRONT, GL_LINE);
+   glPolygonMode(GL_FRONT, GL_LINE);
    // pôr instruções de desenho aqui
-   cubo(1);
+   cilindro_solid(10,5,50,50);
    // End of frame
    glutSwapBuffers();
 }

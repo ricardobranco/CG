@@ -14,8 +14,8 @@ void plano(float ladoX, float ladoZ);
 
 void cubo(float lado);
 
-void cilindro_wire(float altura, float raio, int div);
+void cilindro_wire(float altura, float raio, int div, int fat);
 
-void cilindro_solid(float altura, float raio, int div);
+void cilindro_solid(float altura, float raio, int div, int fat);
 
 #endif
