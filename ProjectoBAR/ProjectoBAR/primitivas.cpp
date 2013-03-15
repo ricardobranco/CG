@@ -28,13 +28,13 @@ void esfera_solid(float raio, int divv, int divh){
 			
 			
 			
-			glVertex3f(raio*sin(av)*cos(ah), raio*cos(av), raio*sin(av)*sin(ah));
-			glVertex3f(raio*sin(av+incv)*cos(ah), raio*cos(av+incv), raio*sin(av+incv)*sin(ah));
-			glVertex3f(raio*sin(av+incv)*cos(ah+inch), raio*cos(av+incv), raio*sin(av+incv)*sin(ah+inch));
+			glVertex3f(raio*sin(av)*sin(ah), raio*cos(av), raio*sin(av)*cos(ah));
+			glVertex3f(raio*sin(av+incv)*sin(ah), raio*cos(av+incv), raio*sin(av+incv)*cos(ah));
+			glVertex3f(raio*sin(av+incv)*sin(ah+inch), raio*cos(av+incv), raio*sin(av+incv)*cos(ah+inch));
 			
-			glVertex3f(raio*sin(av)*cos(ah), raio*cos(av), raio*sin(av)*sin(ah));
-			glVertex3f(raio*sin(av+incv)*cos(ah+inch), raio*cos(av+incv), raio*sin(av+incv)*sin(ah+inch));
-			glVertex3f(raio*sin(av)*cos(ah+inch), raio*cos(av), raio*sin(av)*sin(ah+inch));
+			glVertex3f(raio*sin(av)*sin(ah), raio*cos(av), raio*sin(av)*cos(ah));
+			glVertex3f(raio*sin(av+incv)*sin(ah+inch), raio*cos(av+incv), raio*sin(av+incv)*cos(ah+inch));
+			glVertex3f(raio*sin(av)*sin(ah+inch), raio*cos(av), raio*sin(av)*cos(ah+inch));
 				
 			ah+=inch;
 		}
