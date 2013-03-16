@@ -290,17 +290,35 @@ void cone_wire(float altura, float raio, int div){
 /// </summary>
 /// <param name="ladoX">O comprimento do lado segundo X.</param>
 /// <param name="ladoZ">O comprimento do lado segundo Z.</param>
-void plano(float ladoX, float ladoZ){
+void plano(float ladoX, float ladoZ, int divX, int divZ){
+
+	float incX = ladoX/((float) divX);
+	float incZ = ladoZ/((float) divZ);
+
 
 	glBegin(GL_TRIANGLES);
 
-		glVertex3f(-ladoX/2,0.0f,-ladoZ/2);
-		glVertex3f(-ladoX/2,0.0f,ladoZ/2);
-		glVertex3f(ladoX/2,0.0f,ladoZ/2);
+	float Z= -ladoZ/2;
+	
+	for(int iz=0; iz<divZ; iz++){
+		
+		float X= -ladoX/2;
+		
+		for(int ix=0; ix<divX; ix++){
 
-		glVertex3f(-ladoX/2,0.0f,-ladoZ/2);
-		glVertex3f(ladoX/2,0.0f,ladoZ/2);
-		glVertex3f(ladoX/2,0.0f,-ladoZ/2);
+			glVertex3f(X,0.0f,Z);
+			glVertex3f(X,0.0f,Z+incZ);
+			glVertex3f(X+incX,0.0f,Z+incZ);
+
+			glVertex3f(X,0.0f,Z);
+			glVertex3f(X+incX,0.0f,Z+incZ);
+			glVertex3f(X+incX,0.0f,Z);
+
+			X+=incX;
+
+		}
+		Z+=incZ;
+	}
 
 	glEnd();
 
