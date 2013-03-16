@@ -89,24 +89,45 @@ void esfera_wire(float raio, int divv, int divh){
 /// <param name="altura">A altura do cilindro.</param>
 /// <param name="raio">O raio da base.</param>
 /// <param name="div">O numero de subdivisões.</param>
+/// <param name="fat">O numero de fatias.</param>
 void cilindro_solid(float altura, float raio, int div, int fat){
 
 	float ang=0.0f;
 	float ang_inc=2*M_PI/((float)div);
-	float alt_inc=altura/((float) fat);
+	
 	float alt=altura/2;
+	float alt_inc=altura/((float) fat);
+	
+	float r_inc=raio/((float) div);
+	
 	glBegin(GL_TRIANGLES);
+	
 	for(int i=0; i<div;i++){
 
-		
+			float r=0.0;
+			for(int ri=0;ri<div;ri++){
 
-			glVertex3f(0.0,altura/2.0f, 0.0);
-			glVertex3f(raio*sin(ang),altura/2.0f, raio*cos(ang));
-			glVertex3f(raio*sin(ang+ang_inc),altura/2.0f, raio*cos(ang+ang_inc));
+				glVertex3f(r*sin(ang),altura/2.0f, r*cos(ang));
+				glVertex3f((r+r_inc)*sin(ang),altura/2.0f, (r+r_inc)*cos(ang));
+				glVertex3f((r+r_inc)*sin(ang+ang_inc),altura/2.0f, (r+r_inc)*cos(ang+ang_inc));
 
-			glVertex3f(0.0,-altura/2.0f, 0.0);
-			glVertex3f(raio*sin(ang+ang_inc),-altura/2.0f, raio*cos(ang+ang_inc));
-			glVertex3f(raio*sin(ang),-altura/2.0f, raio*cos(ang));
+				glVertex3f(r*sin(ang),altura/2.0f, r*cos(ang));
+				glVertex3f((r+r_inc)*sin(ang+ang_inc),altura/2.0f, (r+r_inc)*cos(ang+ang_inc));
+				glVertex3f(r*sin(ang+ang_inc),altura/2.0f, r*cos(ang+ang_inc));
+
+
+				glVertex3f(r*sin(ang),-altura/2.0f, r*cos(ang));
+				glVertex3f((r+r_inc)*sin(ang+ang_inc),-altura/2.0f, (r+r_inc)*cos(ang+ang_inc));
+				glVertex3f((r+r_inc)*sin(ang),-altura/2.0f, (r+r_inc)*cos(ang));
+
+				glVertex3f(r*sin(ang),-altura/2.0f, r*cos(ang));
+				glVertex3f(r*sin(ang+ang_inc),-altura/2.0f, r*cos(ang+ang_inc));
+				glVertex3f((r+r_inc)*sin(ang+ang_inc),-altura/2.0f, (r+r_inc)*cos(ang+ang_inc));
+
+				r+=r_inc;
+			}
+
+			
 			
 			alt=altura/2;
 
@@ -177,22 +198,53 @@ void cilindro_wire(float altura, float raio, int div){
 /// <param name="altura">A altura do cone.</param>
 /// <param name="raio">O raio da base.</param>
 /// <param name="div">O numero de divisões. </param>
-void cone_solid(float altura, float raio, int div){
+/// <param name="fat">O numero de fatias.</param>
+void cone_solid(float altura, float raio, int div,int fat){
 
 	float ang=0.0f;
 	float ang_inc=2*M_PI/((float) div);
+
+	float r_inc=raio/((float)div);
 	
+	float fr_inc=raio/((float)fat);
+	float alt_dec=altura/((float)fat);
+
 	glBegin(GL_TRIANGLES);
 	
 	for(int i=0; i<div;i++){
 
-		glVertex3f(0.0f, altura, 0.0f);
-		glVertex3f(raio*sin(ang),0.0f,raio*cos(ang));
-		glVertex3f(raio*sin(ang+ang_inc),0.0f,raio*cos(ang+ang_inc));
 
-		glVertex3f(0.0f, 0.0f, 0.0f);
-		glVertex3f(raio*sin(ang+ang_inc),0.0f,raio*cos(ang+ang_inc));
-		glVertex3f(raio*sin(ang),0.0f,raio*cos(ang));
+		float fr=0.0;
+		float alt=altura;
+		for(int f=0; f<fat;f++){
+			
+			glVertex3f(fr*sin(ang), alt, fr*cos(ang));
+			glVertex3f((fr+fr_inc)*sin(ang),alt-alt_dec,(fr+fr_inc)*cos(ang));
+			glVertex3f((fr+fr_inc)*sin(ang+ang_inc),alt-alt_dec,(fr+fr_inc)*cos(ang+ang_inc));
+
+			glVertex3f(fr*sin(ang), alt, fr*cos(ang));
+			glVertex3f((fr+fr_inc)*sin(ang+ang_inc),alt-alt_dec,(fr+fr_inc)*cos(ang+ang_inc));
+			glVertex3f(fr*sin(ang+ang_inc), alt, fr*cos(ang+ang_inc));
+
+
+			fr+=fr_inc;
+			alt-=alt_dec;
+
+		}
+
+		float r=0;
+		for(int ri=0;ri<div;ri++){
+			glVertex3f(r*sin(ang),0.0f, r*cos(ang));
+			glVertex3f((r+r_inc)*sin(ang+ang_inc),0.0f, (r+r_inc)*cos(ang+ang_inc));
+			glVertex3f((r+r_inc)*sin(ang),0.0f, (r+r_inc)*cos(ang));
+
+			glVertex3f(r*sin(ang),0.0f, r*cos(ang));
+			glVertex3f(r*sin(ang+ang_inc),0.0f, r*cos(ang+ang_inc));
+			glVertex3f((r+r_inc)*sin(ang+ang_inc),0.0f, (r+r_inc)*cos(ang+ang_inc));
+
+			r+=r_inc;
+
+		}
 		
 		ang+=ang_inc;
 	}

@@ -8,7 +8,7 @@ void esfera_wire(float raio, int divv, int divh);
 
 void cone_wire(float altura, float raio, int div);
 
-void cone_solid(float altura, float raio,  int div);
+void cone_solid(float altura, float raio,  int div, int fat);
 
 void plano(float ladoX, float ladoZ);
 
