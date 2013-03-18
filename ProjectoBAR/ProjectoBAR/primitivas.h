@@ -14,7 +14,9 @@ void plano(float ladoX, float ladoZ, int divX, int divZ);
 
 void cubo(float lado);
 
-void cubo2(float lado, int nc);
+void cuboSOLID(float lado, int nc);
+
+void cuboLINES(float lado, int nc);
 
 void cilindro_wire(float altura, float raio, int div, int fat);
 

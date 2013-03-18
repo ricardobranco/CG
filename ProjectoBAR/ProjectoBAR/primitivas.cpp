@@ -401,7 +401,92 @@ void cubo(float lado){
 
 }
 
-void cubo2(float lado, int nc){
+void cuboSOLID(float lado, int nc){
+	
+	
+	float y = lado/2;
+	float x= -lado/2;
+	float z= lado/2;
+	float lad =lado/nc;
+	while(y>-lado/2){
+
+		while(z>-lado/2){
+
+			while(x<lado/2){
+				
+				glBegin(GL_TRIANGLES);
+	
+	//Frente
+	
+	//glColor3ub(255,0,0); para que caralho é isto???
+				glVertex3f(x+lad,y-lad,z);
+				glVertex3f(x+lad,y,z);
+				glVertex3f(x,y,z);
+				glVertex3f(x,y,z);
+				glVertex3f(x,y-lad,z);
+				glVertex3f(x+lad,y-lad,z);
+	
+
+		//TOPO => Y=x
+	
+				glVertex3f(x,y,z-lad);
+				glVertex3f(x,y,z);
+				glVertex3f(x+lad,y,z);
+				glVertex3f(x+lad,y,z);
+				glVertex3f(x+lad,y,z-lad);
+				glVertex3f(x,y,z-lad);
+	
+		//LADO ESQUERDO => X=-x
+	
+				glVertex3f(x,y,z-lad);
+				glVertex3f(x,y-lad,z-lad);
+				glVertex3f(x,y-lad,z);
+				glVertex3f(x,y-lad,z);
+				glVertex3f(x,y,z);
+				glVertex3f(x,y,z-lad);
+
+		//LADO DIREITO => X=x
+
+				glVertex3f(x+lad,y,z-lad);
+				glVertex3f(x+lad,y,z);
+				glVertex3f(x+lad,y-lad,z);
+				glVertex3f(x+lad,y-lad,z);
+				glVertex3f(x+lad,y-lad,z-lad);
+				glVertex3f(x+lad,y,z-lad);
+
+		//BASE
+
+				glVertex3f(x,y-lad,z);
+				glVertex3f(x,y-lad,z-lad);
+				glVertex3f(x+lad,y-lad,z-lad);
+				glVertex3f(x+lad,y-lad,z-lad);
+				glVertex3f(x+lad,y-lad,z);
+				glVertex3f(x,y-lad,z);
+
+		//TRÁS => Z=-x
+
+				glVertex3f(x,y-lad,z-lad);
+				glVertex3f(x,y,z-lad);
+				glVertex3f(x+lad,y,z-lad);
+				glVertex3f(x+lad,y,z-lad);
+				glVertex3f(x+lad,y-lad,z-lad);
+				glVertex3f(x,y-lad,z-lad);
+
+				glEnd();
+
+			x=x+lad;
+
+			}
+			x=-lado/2;
+		z=z-lad;
+		}
+		x=-lado/2;
+		z=lado/2;
+	y=y-lad;
+	}
+}
+
+void cuboLINES(float lado, int nc){
 	
 	
 	float y = lado/2;
