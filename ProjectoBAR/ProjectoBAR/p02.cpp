@@ -1,7 +1,7 @@
 #define _USE_MATH_DEFINES
 #include <GL/glut.h>
 #include <math.h>
-#include "C:\Users\Cesar\documents\GitHub\CG\ProjectoBAR\ProjectoBAR\primitivas.h"
+#include "C:\Users\Paxaxa\documents\GitHub\CG\ProjectoBAR\ProjectoBAR\primitivas.h"
 
 #define MOV 0.1
 #define ANG 0.05
@@ -64,7 +64,7 @@ void renderScene(void) {
 	//glRotatef(angulo,0.0f,1.0f,0.0f);
 	
 	//glPolygonMode(GL_FRONT,GL_LINE);
-	plano(1,2,5,10);
+	cubo2(1,2);
 
 	// End of frame
 	glutSwapBuffers();
