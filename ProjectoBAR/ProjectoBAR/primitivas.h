@@ -12,13 +12,7 @@ void cone_solid(float altura, float raio,  int div, int fat);
 
 void plano(float ladoX, float ladoZ, int divX, int divZ);
 
-void cubo(float lado);
-
 void cuboSOLID(float lado, int nc);
-
-void cuboLINES(float lado, int nc);
-
-void cubo2(float lado, int nc);
 
 void cilindro_wire(float altura, float raio, int div, int fat);
 
