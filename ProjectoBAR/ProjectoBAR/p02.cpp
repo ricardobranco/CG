@@ -64,7 +64,7 @@ void renderScene(void) {
 	//glRotatef(angulo,0.0f,1.0f,0.0f);
 	
 	//glPolygonMode(GL_FRONT,GL_LINE);
-	cuboSOLID(1,30);
+	cuboSOLID(1,20);
 
 	// End of frame
 	glutSwapBuffers();

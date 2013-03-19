@@ -15,27 +15,27 @@ void esfera_solid(float raio, int divv, int divh){
 
 	float incv = M_PI /((float) divv);
 	float inch = 2*M_PI /((float) divh);
-	
+
 	glBegin(GL_TRIANGLES);
 
 	float av=0.0f;
 
 	for(int iv=0; iv<divv; iv++){
-		
+
 		float ah=0.0f;
 
 		for(int ih=0; ih<divh; ih++){
-			
-			
-			
+
+
+
 			glVertex3f(raio*sin(av)*sin(ah), raio*cos(av), raio*sin(av)*cos(ah));
 			glVertex3f(raio*sin(av+incv)*sin(ah), raio*cos(av+incv), raio*sin(av+incv)*cos(ah));
 			glVertex3f(raio*sin(av+incv)*sin(ah+inch), raio*cos(av+incv), raio*sin(av+incv)*cos(ah+inch));
-			
+
 			glVertex3f(raio*sin(av)*sin(ah), raio*cos(av), raio*sin(av)*cos(ah));
 			glVertex3f(raio*sin(av+incv)*sin(ah+inch), raio*cos(av+incv), raio*sin(av+incv)*cos(ah+inch));
 			glVertex3f(raio*sin(av)*sin(ah+inch), raio*cos(av), raio*sin(av)*cos(ah+inch));
-				
+
 			ah+=inch;
 		}
 		av+=incv;
@@ -55,19 +55,19 @@ void esfera_wire(float raio, int divv, int divh){
 
 	float incv = M_PI /((float) divv);
 	float inch = 2*M_PI /((float) divh);
-	
+
 	glBegin(GL_LINES);
-	
+
 	float av=0.0f;
-	
+
 	for(int iv=0; iv<divv; iv++){
-		
+
 		float ah=0.0f;
-		
+
 		for(int ih=0; ih<divh; ih++){
-			
-			
-			
+
+
+
 			glVertex3f(raio*sin(av)*cos(ah), raio*cos(av), raio*sin(av)*sin(ah));
 			glVertex3f(raio*sin(av+incv)*cos(ah), raio*cos(av+incv), raio*sin(av+incv)*sin(ah));
 			glVertex3f(raio*sin(av+incv)*cos(ah), raio*cos(av+incv), raio*sin(av+incv)*sin(ah));
@@ -94,56 +94,56 @@ void cilindro_solid(float altura, float raio, int div, int fat){
 
 	float ang=0.0f;
 	float ang_inc=2*M_PI/((float)div);
-	
+
 	float alt=altura/2;
 	float alt_inc=altura/((float) fat);
-	
+
 	float r_inc=raio/((float) div);
-	
+
 	glBegin(GL_TRIANGLES);
-	
+
 	for(int i=0; i<div;i++){
 
-			float r=0.0;
-			for(int ri=0;ri<div;ri++){
+		float r=0.0;
+		for(int ri=0;ri<div;ri++){
 
-				glVertex3f(r*sin(ang),altura/2.0f, r*cos(ang));
-				glVertex3f((r+r_inc)*sin(ang),altura/2.0f, (r+r_inc)*cos(ang));
-				glVertex3f((r+r_inc)*sin(ang+ang_inc),altura/2.0f, (r+r_inc)*cos(ang+ang_inc));
+			glVertex3f(r*sin(ang),altura/2.0f, r*cos(ang));
+			glVertex3f((r+r_inc)*sin(ang),altura/2.0f, (r+r_inc)*cos(ang));
+			glVertex3f((r+r_inc)*sin(ang+ang_inc),altura/2.0f, (r+r_inc)*cos(ang+ang_inc));
 
-				glVertex3f(r*sin(ang),altura/2.0f, r*cos(ang));
-				glVertex3f((r+r_inc)*sin(ang+ang_inc),altura/2.0f, (r+r_inc)*cos(ang+ang_inc));
-				glVertex3f(r*sin(ang+ang_inc),altura/2.0f, r*cos(ang+ang_inc));
+			glVertex3f(r*sin(ang),altura/2.0f, r*cos(ang));
+			glVertex3f((r+r_inc)*sin(ang+ang_inc),altura/2.0f, (r+r_inc)*cos(ang+ang_inc));
+			glVertex3f(r*sin(ang+ang_inc),altura/2.0f, r*cos(ang+ang_inc));
 
 
-				glVertex3f(r*sin(ang),-altura/2.0f, r*cos(ang));
-				glVertex3f((r+r_inc)*sin(ang+ang_inc),-altura/2.0f, (r+r_inc)*cos(ang+ang_inc));
-				glVertex3f((r+r_inc)*sin(ang),-altura/2.0f, (r+r_inc)*cos(ang));
+			glVertex3f(r*sin(ang),-altura/2.0f, r*cos(ang));
+			glVertex3f((r+r_inc)*sin(ang+ang_inc),-altura/2.0f, (r+r_inc)*cos(ang+ang_inc));
+			glVertex3f((r+r_inc)*sin(ang),-altura/2.0f, (r+r_inc)*cos(ang));
 
-				glVertex3f(r*sin(ang),-altura/2.0f, r*cos(ang));
-				glVertex3f(r*sin(ang+ang_inc),-altura/2.0f, r*cos(ang+ang_inc));
-				glVertex3f((r+r_inc)*sin(ang+ang_inc),-altura/2.0f, (r+r_inc)*cos(ang+ang_inc));
+			glVertex3f(r*sin(ang),-altura/2.0f, r*cos(ang));
+			glVertex3f(r*sin(ang+ang_inc),-altura/2.0f, r*cos(ang+ang_inc));
+			glVertex3f((r+r_inc)*sin(ang+ang_inc),-altura/2.0f, (r+r_inc)*cos(ang+ang_inc));
 
-				r+=r_inc;
-			}
+			r+=r_inc;
+		}
 
-			
-			
-			alt=altura/2;
 
-			for(int f=0;f<fat;f++){
-				
-				glVertex3f(raio*sin(ang),alt, raio*cos(ang));
-				glVertex3f(raio*sin(ang),alt-alt_inc, raio*cos(ang));
-				glVertex3f(raio*sin(ang+ang_inc),alt-alt_inc, raio*cos(ang+ang_inc));
-			
-				glVertex3f(raio*sin(ang),alt, raio*cos(ang));
-				glVertex3f(raio*sin(ang+ang_inc),alt-alt_inc, raio*cos(ang+ang_inc));
-				glVertex3f(raio*sin(ang+ang_inc),alt, raio*cos(ang+ang_inc));
 
-				alt -=alt_inc;
-			}
-		
+		alt=altura/2;
+
+		for(int f=0;f<fat;f++){
+
+			glVertex3f(raio*sin(ang),alt, raio*cos(ang));
+			glVertex3f(raio*sin(ang),alt-alt_inc, raio*cos(ang));
+			glVertex3f(raio*sin(ang+ang_inc),alt-alt_inc, raio*cos(ang+ang_inc));
+
+			glVertex3f(raio*sin(ang),alt, raio*cos(ang));
+			glVertex3f(raio*sin(ang+ang_inc),alt-alt_inc, raio*cos(ang+ang_inc));
+			glVertex3f(raio*sin(ang+ang_inc),alt, raio*cos(ang+ang_inc));
+
+			alt -=alt_inc;
+		}
+
 
 		ang+=ang_inc;
 
@@ -167,23 +167,23 @@ void cilindro_wire(float altura, float raio, int div){
 
 	for(int i=0; i<div;i++){
 
-		
 
-			glVertex3f(0.0,altura/2.0f, 0.0);
-			glVertex3f(raio*sin(ang),altura/2.0f, raio*cos(ang));
-			
-			glVertex3f(raio*sin(ang),altura/2.0f, raio*cos(ang));
-			glVertex3f(raio*sin(ang+ang_inc),altura/2.0f, raio*cos(ang+ang_inc));
 
-			glVertex3f(0.0,-altura/2.0f, 0.0);
-			glVertex3f(raio*sin(ang),-altura/2.0f, raio*cos(ang));
-			
-			glVertex3f(raio*sin(ang),-altura/2.0f, raio*cos(ang));
-			glVertex3f(raio*sin(ang+ang_inc),-altura/2.0f, raio*cos(ang+ang_inc));
-			
-			glVertex3f(raio*sin(ang),altura/2.0f, raio*cos(ang));
-			glVertex3f(raio*sin(ang),-altura/2.0f, raio*cos(ang));
-		
+		glVertex3f(0.0,altura/2.0f, 0.0);
+		glVertex3f(raio*sin(ang),altura/2.0f, raio*cos(ang));
+
+		glVertex3f(raio*sin(ang),altura/2.0f, raio*cos(ang));
+		glVertex3f(raio*sin(ang+ang_inc),altura/2.0f, raio*cos(ang+ang_inc));
+
+		glVertex3f(0.0,-altura/2.0f, 0.0);
+		glVertex3f(raio*sin(ang),-altura/2.0f, raio*cos(ang));
+
+		glVertex3f(raio*sin(ang),-altura/2.0f, raio*cos(ang));
+		glVertex3f(raio*sin(ang+ang_inc),-altura/2.0f, raio*cos(ang+ang_inc));
+
+		glVertex3f(raio*sin(ang),altura/2.0f, raio*cos(ang));
+		glVertex3f(raio*sin(ang),-altura/2.0f, raio*cos(ang));
+
 		ang+=ang_inc;
 
 	}
@@ -205,19 +205,19 @@ void cone_solid(float altura, float raio, int div,int fat){
 	float ang_inc=2*M_PI/((float) div);
 
 	float r_inc=raio/((float)div);
-	
+
 	float fr_inc=raio/((float)fat);
 	float alt_dec=altura/((float)fat);
 
 	glBegin(GL_TRIANGLES);
-	
+
 	for(int i=0; i<div;i++){
 
 
 		float fr=0.0;
 		float alt=altura;
 		for(int f=0; f<fat;f++){
-			
+
 			glVertex3f(fr*sin(ang), alt, fr*cos(ang));
 			glVertex3f((fr+fr_inc)*sin(ang),alt-alt_dec,(fr+fr_inc)*cos(ang));
 			glVertex3f((fr+fr_inc)*sin(ang+ang_inc),alt-alt_dec,(fr+fr_inc)*cos(ang+ang_inc));
@@ -245,7 +245,7 @@ void cone_solid(float altura, float raio, int div,int fat){
 			r+=r_inc;
 
 		}
-		
+
 		ang+=ang_inc;
 	}
 	glEnd();
@@ -262,9 +262,9 @@ void cone_wire(float altura, float raio, int div){
 
 	float ang=0.0f;
 	float ang_inc=2*M_PI/((float) div);
-	
+
 	glBegin(GL_LINES);
-	
+
 	for(int i=0; i<div;i++){
 
 		glVertex3f(0.0f, altura, 0.0f);
@@ -299,11 +299,11 @@ void plano(float ladoX, float ladoZ, int divX, int divZ){
 	glBegin(GL_TRIANGLES);
 
 	float Z= -ladoZ/2;
-	
+
 	for(int iz=0; iz<divZ; iz++){
-		
+
 		float X= -ladoX/2;
-		
+
 		for(int ix=0; ix<divX; ix++){
 
 			glVertex3f(X,0.0f,Z);
@@ -332,94 +332,98 @@ void plano(float ladoX, float ladoZ, int divX, int divZ){
 /// <param name="lado">O comprimento do lado.</param>
 
 void cuboSOLID(float lado, int nc){
-	
+
 	int i,j;
 	float y = lado/2;
 	float x= -lado/2;
 	float z= lado/2;
 	float lad =lado/nc;
 
+	glBegin(GL_TRIANGLES);
+
 	for(j=0;j<nc;j++){
 
-			for(i=0;i<nc;i++){
-				//Frente
-				glColor3f(1,0,0);
-				glBegin(GL_TRIANGLES);
-				glVertex3f(x+lad,y-lad,z);
-				glVertex3f(x+lad,y,z);
-				glVertex3f(x,y,z);
-				glVertex3f(x,y,z);
-				glVertex3f(x,y-lad,z);
-				glVertex3f(x+lad,y-lad,z);
-				//Tras
-				glVertex3f(x,y-lad,-z);
-				glVertex3f(x,y,-z);
-				glVertex3f(x+lad,y,-z);
-				glVertex3f(x+lad,y,-z);
-				glVertex3f(x+lad,y-lad,-z);
-				glVertex3f(x,y-lad,-z);
-				glEnd();
-				x=x+lad;
-				}
-				i=0;
-				x=-lado/2;
-				y=y-lad;
-			}
-			x=-lado/2;
-			y=lado/2;
+		for(i=0;i<nc;i++){
+			//Frente
 
-		//TOPO => Y=x
-			for(j=0;j<nc;j++){
-				for(i=0;i<nc;i++){
-					glColor3f(0,1,0);
-					glBegin(GL_TRIANGLES);
-					glVertex3f(x,y,z-lad);
-					glVertex3f(x,y,z);
-					glVertex3f(x+lad,y,z);
-					glVertex3f(x+lad,y,z);
-					glVertex3f(x+lad,y,z-lad);
-					glVertex3f(x,y,z-lad);
-					//BASE
-						glVertex3f(x,-y,z);
-						glVertex3f(x,-y,z-lad);
-						glVertex3f(x+lad,-y,z-lad);
-						glVertex3f(x+lad,-y,z-lad);
-						glVertex3f(x+lad,-y,z);
-						glVertex3f(x,-y,z);
-					glEnd();
-					x=x+lad;
-				}
-				i=0;
-				x=-lado/2;
-				z=z-lad;
-			}
-			
-			x=-lado/2;
-			z=lado/2;
+
+			glVertex3f(x+lad,y-lad,z);
+			glVertex3f(x+lad,y,z);
+			glVertex3f(x,y,z);
+			glVertex3f(x,y,z);
+			glVertex3f(x,y-lad,z);
+			glVertex3f(x+lad,y-lad,z);
+			//Tras
+			glVertex3f(x,y-lad,-z);
+			glVertex3f(x,y,-z);
+			glVertex3f(x+lad,y,-z);
+			glVertex3f(x+lad,y,-z);
+			glVertex3f(x+lad,y-lad,-z);
+			glVertex3f(x,y-lad,-z);
+
+			x=x+lad;
+		}
+		i=0;
+		x=-lado/2;
+		y=y-lad;
+	}
 	
-		//LADO ESQUERDO => X=-x
-				for(j=0;j<nc;j++){
-					for(i=0;i<nc;i++){
-						glColor3f(0,0,1);
-						glBegin(GL_TRIANGLES);
-						glVertex3f(x,y,z);
-						glVertex3f(x,y,z-lad);
-						glVertex3f(x,y-lad,z-lad);
-						glVertex3f(x,y-lad,z-lad);
-						glVertex3f(x,y-lad,z);
-						glVertex3f(x,y,z);
-						//DIREITO
-						glVertex3f(-x,y-lad,z-lad);
-						glVertex3f(-x,y,z-lad);
-						glVertex3f(-x,y,z);
-						glVertex3f(-x,y,z);
-						glVertex3f(-x,y-lad,z);
-						glVertex3f(-x,y-lad,z-lad);
-						glEnd();
-						z=z-lad;
-					}
-					i=0;
-					z=lado/2;
-					y=y-lad;
-				}
+	x=-lado/2;
+	y=lado/2;
+
+	//TOPO => Y=x
+	for(j=0;j<nc;j++){
+		for(i=0;i<nc;i++){
+
+
+			glVertex3f(x,y,z-lad);
+			glVertex3f(x,y,z);
+			glVertex3f(x+lad,y,z);
+			glVertex3f(x+lad,y,z);
+			glVertex3f(x+lad,y,z-lad);
+			glVertex3f(x,y,z-lad);
+			//BASE
+			glVertex3f(x,-y,z);
+			glVertex3f(x,-y,z-lad);
+			glVertex3f(x+lad,-y,z-lad);
+			glVertex3f(x+lad,-y,z-lad);
+			glVertex3f(x+lad,-y,z);
+			glVertex3f(x,-y,z);
+			
+			x=x+lad;
+		}
+		i=0;
+		x=-lado/2;
+		z=z-lad;
+	}
+
+	x=-lado/2;
+	z=lado/2;
+
+	//LADO ESQUERDO => X=-x
+	for(j=0;j<nc;j++){
+		for(i=0;i<nc;i++){
+			
+			glVertex3f(x,y,z);
+			glVertex3f(x,y,z-lad);
+			glVertex3f(x,y-lad,z-lad);
+			glVertex3f(x,y-lad,z-lad);
+			glVertex3f(x,y-lad,z);
+			glVertex3f(x,y,z);
+			//DIREITO
+			glVertex3f(-x,y-lad,z-lad);
+			glVertex3f(-x,y,z-lad);
+			glVertex3f(-x,y,z);
+			glVertex3f(-x,y,z);
+			glVertex3f(-x,y-lad,z);
+			glVertex3f(-x,y-lad,z-lad);
+			
+			z=z-lad;
+		}
+		i=0;
+		z=lado/2;
+		y=y-lad;
+	}
+
+	glEnd();
 }
