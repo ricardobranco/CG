@@ -18,6 +18,28 @@ float raio=5.0;
 int ratoX =0.0;
 int ratoY=0.0;
 
+int solido=1;
+
+void desenha_solid(){
+	switch(solido){
+	case 1:
+		esfera_solid(1,20,40);
+		break;
+	case 2:
+		cone_solid(2,1,15,30);
+		break;
+	case 3:
+		plano(2,1,20,10);
+		break;
+	case 4:
+		cubo_solid(1,10);
+		break;
+	case 5:
+		cilindro_solid(2,1,20,10);
+		break;
+	}
+}
+
 void changeSize(int w, int h) {
 
 	// Prevent a divide by zero, when window is too short
@@ -63,8 +85,8 @@ void renderScene(void) {
 	//glTranslatef(posx,0.0,posz);
 	//glRotatef(angulo,0.0f,1.0f,0.0f);
 	
-	//glPolygonMode(GL_FRONT,GL_LINE);
-	cuboSOLID(1,20);
+	
+	desenha_solid();
 
 	// End of frame
 	glutSwapBuffers();
@@ -85,7 +107,20 @@ void teclas(unsigned char tecla, int x, int y)
 		case 's':
 			raio+=SIZ;
 			break;
-		default:
+		case '1':
+			solido=1;
+			break;
+		case '2':
+			solido=2;
+			break;
+		case '3':
+			solido=3;
+			break;
+		case '4':
+			solido=4;
+			break;
+		case '5':
+			solido=5;
 			break;
 	}
 	glutPostRedisplay();
@@ -117,17 +152,10 @@ void opcao_menu(int op){
 
 	switch(op){
 	case 1:
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glPolygonMode(GL_FRONT, GL_LINE);
 		break;
 	case 2:
 		glPolygonMode(GL_FRONT,GL_FILL);
-		glPolygonMode(GL_BACK,GL_LINE);
-		glCullFace(GL_BACK);
-		break;
-	case 3:
-		glPolygonMode(GL_FRONT, GL_LINE);
-		glPolygonMode(GL_BACK, GL_FILL);
-		glCullFace(GL_FRONT);
 		break;
 	default:
 		break;
@@ -175,16 +203,17 @@ int main(int argc, char **argv) {
 	glutSpecialFunc(teclas_especiais);
 
 // pôr aqui a criação do menu
-	int menu = glutCreateMenu(opcao_menu);
+	
 	
 
 	glutMouseFunc(rato);
 	glutMotionFunc(rato_mov);
 	
-	
+	int menu = glutCreateMenu(opcao_menu);
+
 	glutAddMenuEntry("Linhas",1);
 	glutAddMenuEntry("Solido",2);
-	glutAddMenuEntry("Cenas",3);
+
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
 // alguns settings para OpenGL

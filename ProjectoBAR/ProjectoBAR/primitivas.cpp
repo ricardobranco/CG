@@ -331,7 +331,7 @@ void plano(float ladoX, float ladoZ, int divX, int divZ){
 /// </summary>
 /// <param name="lado">O comprimento do lado.</param>
 
-void cuboSOLID(float lado, int nc){
+void cubo_solid(float lado, int nc){
 
 	int i,j;
 	float y = lado/2;
