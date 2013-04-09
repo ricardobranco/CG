@@ -2,6 +2,7 @@
 #include <GL/glut.h>
 #include <math.h>
 #include "primitivas.h"
+#include "copo.h"
 
 #define MOV 0.1
 #define ANG 0.05
@@ -86,7 +87,9 @@ void renderScene(void) {
 	//glRotatef(angulo,0.0f,1.0f,0.0f);
 	
 	
-	desenha_solid();
+	//desenha_solid();
+
+	desenha_copo(1);
 
 	// End of frame
 	glutSwapBuffers();
@@ -152,10 +155,10 @@ void opcao_menu(int op){
 
 	switch(op){
 	case 1:
-		glPolygonMode(GL_FRONT, GL_LINE);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		break;
 	case 2:
-		glPolygonMode(GL_FRONT,GL_FILL);
+		glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
 		break;
 	default:
 		break;
