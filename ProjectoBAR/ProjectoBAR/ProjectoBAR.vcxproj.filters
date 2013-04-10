@@ -18,13 +18,13 @@
     <ClCompile Include="primitivas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="p02.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="copo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Objetos.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

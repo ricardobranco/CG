@@ -90,7 +90,7 @@ void renderScene(void) {
 	
 	//desenha_solid();
 
-	sofa(1,1,1);
+	sofa(1,1,0.7);
 
 	// End of frame
 	glutSwapBuffers();

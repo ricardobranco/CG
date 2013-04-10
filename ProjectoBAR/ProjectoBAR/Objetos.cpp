@@ -12,11 +12,21 @@ void Paralelipipedo(float comp,float alt,float larg){
 }
 
 void sofa(float comp,float alt,float larg){
-	float margem=0.3*larg;
+	float margem=0.4*larg;
 	glPushMatrix();
 	Paralelipipedo(comp,alt,margem);
+	glTranslatef(0.0f,alt/2,0.0f);
+	glRotatef(90,0.0f,0.0f,1.0f);
+	cilindro_solid(comp,margem/2,20,20);
+	glPopMatrix();
+	glPopMatrix();
 	glTranslatef(0.0f,-alt/4,larg/2);
-	Paralelipipedo(comp,alt/2,0.7*larg);
+	Paralelipipedo(comp,alt/2,0.6*larg);
+	glTranslatef(0.0f,0,0.6*larg/2);
+	glRotatef(90,0.0f,0.0f,1.0f);
+	cilindro_solid(comp,alt/4,20,20);
+	glPopMatrix();
+	glPopMatrix();
 	glPopMatrix();
 }
 

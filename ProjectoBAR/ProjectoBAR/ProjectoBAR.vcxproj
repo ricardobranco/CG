@@ -84,7 +84,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Objetos.cpp" />
-    <ClCompile Include="p02.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="primitivas.cpp" />
     <ClCompile Include="copo.cpp" />
   </ItemGroup>
