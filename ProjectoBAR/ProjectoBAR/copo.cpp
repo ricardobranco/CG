@@ -8,6 +8,8 @@ void desenha_copo(float size) {
 
 	glPushMatrix();
 
+	glScalef(size,size,size);
+
 	glScalef(1,1.4,1);
 
 	glTranslatef(0,2,0);

@@ -7,7 +7,7 @@
 
 #define MOV 0.1
 #define ANG 0.05
-#define SIZ 0.01
+#define SIZ 1
 #define SENS_RATO 0.005
 
 float base =1.0f;
@@ -90,7 +90,7 @@ void renderScene(void) {
 	
 	//desenha_solid();
 
-	sofa(1,1,0.7);
+	desenha_copo(2);
 
 	// End of frame
 	glutSwapBuffers();
