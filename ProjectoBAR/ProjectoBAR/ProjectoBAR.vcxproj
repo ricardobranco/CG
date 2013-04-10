@@ -83,12 +83,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Objetos.cpp" />
     <ClCompile Include="p02.cpp" />
     <ClCompile Include="primitivas.cpp" />
     <ClCompile Include="copo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="copo.h" />
+    <ClInclude Include="Objetos.h" />
     <ClInclude Include="primitivas.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

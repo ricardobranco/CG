@@ -24,12 +24,18 @@
     <ClCompile Include="copo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Objetos.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="primitivas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="copo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Objetos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

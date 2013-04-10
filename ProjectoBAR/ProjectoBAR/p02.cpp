@@ -3,6 +3,7 @@
 #include <math.h>
 #include "primitivas.h"
 #include "copo.h"
+#include "Objetos.h"
 
 #define MOV 0.1
 #define ANG 0.05
@@ -89,7 +90,7 @@ void renderScene(void) {
 	
 	//desenha_solid();
 
-	desenha_copo(1);
+	sofa(1,1,1);
 
 	// End of frame
 	glutSwapBuffers();
