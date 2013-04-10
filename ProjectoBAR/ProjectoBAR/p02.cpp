@@ -14,7 +14,7 @@ float altura =1.0f;
 
 float alpha=0.0f;
 float beta=0.0;
-float raio=5.0;
+float raio=10.0;
 
 int ratoX =0.0;
 int ratoY=0.0;
@@ -24,19 +24,19 @@ int solido=1;
 void desenha_solid(){
 	switch(solido){
 	case 1:
-		esfera_solid(1,20,40);
+		esfera_solid(1,45,90);
 		break;
 	case 2:
-		cone_solid(2,1,15,30);
+		cone_solid(2,1,45,90);
 		break;
 	case 3:
-		plano(2,1,20,10);
+		plano(2,1,90,45);
 		break;
 	case 4:
-		cubo_solid(1,10);
+		cubo_solid(1,45);
 		break;
 	case 5:
-		cilindro_solid(2,1,20,10);
+		cilindro_solid(2,1,45,90);
 		break;
 	}
 }

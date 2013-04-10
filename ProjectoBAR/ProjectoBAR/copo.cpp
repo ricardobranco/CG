@@ -2,6 +2,7 @@
 #include <math.h>
 #include <glew.h>
 #include <GL/glut.h>
+#include "primitivas.h"
 
 void desenha_copo(float size) {
 
@@ -9,8 +10,9 @@ void desenha_copo(float size) {
 
 	glScalef(1,1.4,1);
 
+	glTranslatef(0,2,0);
 	
-	int divh=100;
+	int divh=50;
 	int divv=60;
 
 	float incv = M_PI /((float) divv);
@@ -85,8 +87,21 @@ void desenha_copo(float size) {
 
 	}
 
+	
+	
+	
+
 	glEnd();
 
+	glTranslatef(0,-1.475,0);
+	
+	cilindro_solid(1.05,0.1,10,50);
+	
+	glTranslatef(0,-0.5,0);
+
+	cilindro_solid(0.05,1,50,3);
+	
 	glPopMatrix();
 
+	
 }

@@ -23,10 +23,12 @@ void esfera_solid(float raio, int divv, int divh){
 	for(int iv=0; iv<divv; iv++){
 
 		float ah=0.0f;
-
+		
+		av=incv*((float)iv);
+		
 		for(int ih=0; ih<divh; ih++){
 
-
+			ah=inch*((float)ih);
 
 			glVertex3f(raio*sin(av)*sin(ah), raio*cos(av), raio*sin(av)*cos(ah));
 			glVertex3f(raio*sin(av+incv)*sin(ah), raio*cos(av+incv), raio*sin(av+incv)*cos(ah));
@@ -36,9 +38,9 @@ void esfera_solid(float raio, int divv, int divh){
 			glVertex3f(raio*sin(av+incv)*sin(ah+inch), raio*cos(av+incv), raio*sin(av+incv)*cos(ah+inch));
 			glVertex3f(raio*sin(av)*sin(ah+inch), raio*cos(av), raio*sin(av)*cos(ah+inch));
 
-			ah+=inch;
+			
 		}
-		av+=incv;
+		
 	}
 
 	glEnd();
@@ -63,19 +65,21 @@ void esfera_wire(float raio, int divv, int divh){
 	for(int iv=0; iv<divv; iv++){
 
 		float ah=0.0f;
-
+		
+		av=incv*((float)iv);
+		
 		for(int ih=0; ih<divh; ih++){
 
-
+			ah=inch*((float)ih);
 
 			glVertex3f(raio*sin(av)*cos(ah), raio*cos(av), raio*sin(av)*sin(ah));
 			glVertex3f(raio*sin(av+incv)*cos(ah), raio*cos(av+incv), raio*sin(av+incv)*sin(ah));
 			glVertex3f(raio*sin(av+incv)*cos(ah), raio*cos(av+incv), raio*sin(av+incv)*sin(ah));
 			glVertex3f(raio*sin(av+incv)*cos(ah+inch), raio*cos(av+incv), raio*sin(av+incv)*sin(ah+inch));
 
-			ah+=inch;
+			
 		}
-		av+=incv;
+		
 	}
 
 	glEnd();
@@ -105,8 +109,13 @@ void cilindro_solid(float altura, float raio, int div, int fat){
 	for(int i=0; i<div;i++){
 
 		float r=0.0;
-		for(int ri=0;ri<div;ri++){
+		
+		ang=ang_inc*((float)i);
 
+		for(int ri=0;ri<div;ri++){
+			
+			r=r_inc*((float)ri);
+			
 			glVertex3f(r*sin(ang),altura/2.0f, r*cos(ang));
 			glVertex3f((r+r_inc)*sin(ang),altura/2.0f, (r+r_inc)*cos(ang));
 			glVertex3f((r+r_inc)*sin(ang+ang_inc),altura/2.0f, (r+r_inc)*cos(ang+ang_inc));
@@ -124,7 +133,7 @@ void cilindro_solid(float altura, float raio, int div, int fat){
 			glVertex3f(r*sin(ang+ang_inc),-altura/2.0f, r*cos(ang+ang_inc));
 			glVertex3f((r+r_inc)*sin(ang+ang_inc),-altura/2.0f, (r+r_inc)*cos(ang+ang_inc));
 
-			r+=r_inc;
+			
 		}
 
 
@@ -132,7 +141,9 @@ void cilindro_solid(float altura, float raio, int div, int fat){
 		alt=altura/2;
 
 		for(int f=0;f<fat;f++){
-
+			
+			alt =altura/2 - alt_inc*((float)f);
+			
 			glVertex3f(raio*sin(ang),alt, raio*cos(ang));
 			glVertex3f(raio*sin(ang),alt-alt_inc, raio*cos(ang));
 			glVertex3f(raio*sin(ang+ang_inc),alt-alt_inc, raio*cos(ang+ang_inc));
@@ -141,11 +152,11 @@ void cilindro_solid(float altura, float raio, int div, int fat){
 			glVertex3f(raio*sin(ang+ang_inc),alt-alt_inc, raio*cos(ang+ang_inc));
 			glVertex3f(raio*sin(ang+ang_inc),alt, raio*cos(ang+ang_inc));
 
-			alt -=alt_inc;
+			
 		}
 
 
-		ang+=ang_inc;
+		
 
 	}
 	glEnd();
@@ -167,7 +178,7 @@ void cilindro_wire(float altura, float raio, int div){
 
 	for(int i=0; i<div;i++){
 
-
+		ang=ang_inc*((float)i);
 
 		glVertex3f(0.0,altura/2.0f, 0.0);
 		glVertex3f(raio*sin(ang),altura/2.0f, raio*cos(ang));
@@ -184,7 +195,7 @@ void cilindro_wire(float altura, float raio, int div){
 		glVertex3f(raio*sin(ang),altura/2.0f, raio*cos(ang));
 		glVertex3f(raio*sin(ang),-altura/2.0f, raio*cos(ang));
 
-		ang+=ang_inc;
+		
 
 	}
 
@@ -218,6 +229,11 @@ void cone_solid(float altura, float raio, int div,int fat){
 		float alt=altura;
 		for(int f=0; f<fat;f++){
 
+			fr=fr_inc*((float)f);
+			alt=alt_dec*((float)(fat-f));
+			
+			
+			
 			glVertex3f(fr*sin(ang), alt, fr*cos(ang));
 			glVertex3f((fr+fr_inc)*sin(ang),alt-alt_dec,(fr+fr_inc)*cos(ang));
 			glVertex3f((fr+fr_inc)*sin(ang+ang_inc),alt-alt_dec,(fr+fr_inc)*cos(ang+ang_inc));
@@ -227,13 +243,14 @@ void cone_solid(float altura, float raio, int div,int fat){
 			glVertex3f(fr*sin(ang+ang_inc), alt, fr*cos(ang+ang_inc));
 
 
-			fr+=fr_inc;
-			alt-=alt_dec;
 
 		}
 
 		float r=0;
 		for(int ri=0;ri<div;ri++){
+			
+			r=r_inc*((float)ri);
+
 			glVertex3f(r*sin(ang),0.0f, r*cos(ang));
 			glVertex3f((r+r_inc)*sin(ang+ang_inc),0.0f, (r+r_inc)*cos(ang+ang_inc));
 			glVertex3f((r+r_inc)*sin(ang),0.0f, (r+r_inc)*cos(ang));
@@ -242,7 +259,7 @@ void cone_solid(float altura, float raio, int div,int fat){
 			glVertex3f(r*sin(ang+ang_inc),0.0f, r*cos(ang+ang_inc));
 			glVertex3f((r+r_inc)*sin(ang+ang_inc),0.0f, (r+r_inc)*cos(ang+ang_inc));
 
-			r+=r_inc;
+			
 
 		}
 
@@ -267,6 +284,8 @@ void cone_wire(float altura, float raio, int div){
 
 	for(int i=0; i<div;i++){
 
+		ang=ang_inc*((float) i);
+
 		glVertex3f(0.0f, altura, 0.0f);
 		glVertex3f(raio*sin(ang),0.0f,raio*cos(ang));
 
@@ -276,7 +295,7 @@ void cone_wire(float altura, float raio, int div){
 		glVertex3f(0.0f, 0.0f, 0.0f);
 		glVertex3f(raio*sin(ang),0.0f,raio*cos(ang));
 
-		ang+=ang_inc;
+		
 	}
 	glEnd();
 
