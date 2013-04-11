@@ -90,8 +90,13 @@ void renderScene(void) {
 	
 	//desenha_solid();
 
+<<<<<<< HEAD
 	desenha_copo(2);
+=======
+	//Candi2(3,2,1.5,0.5,4,0.1);
+>>>>>>> refs/heads/candeeiro
 
+	Candi3(0.5,1,3);
 	// End of frame
 	glutSwapBuffers();
 }

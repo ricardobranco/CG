@@ -34,3 +34,27 @@ void Candi1(float raiomax,float alt){
 	cone_solid(alt,raiomax,20,20);
 	esfera_solid(raiomax/2,20,20);
 }
+
+void Candi2(float comp,float alt,float larg,float raio,float alturafio,float raiofio){
+	glPushMatrix();
+	esfera_wire(1,20,20);
+	glScalef(comp,alt,larg);
+	esfera_solid(1,20,20);
+	glPopMatrix();
+	glTranslatef(0.0f,alt+alturafio/2,0.0f);
+	cilindro_solid(alturafio,raiofio,20,20);
+	glPopMatrix();
+}
+
+void Candi3(float raioesf,float raio,float altura){
+	glPushMatrix();
+	glRotatef(90,1,0,0);
+	esfera_solid(raioesf,20,20);
+	glTranslatef(0.0f,raioesf*1.3,0.0f);
+	cilindro_solid(0.5*altura,raio,20,20);
+	glTranslatef(0.0f,0.25*altura,0.0f);
+	cone_solid(0.45*altura,raio,20,20);
+	glTranslatef(0.0f,0.4*altura,0.0f);
+	cilindro_solid(0.1*altura,raio/4,20,20);
+	glPopMatrix();
+}
