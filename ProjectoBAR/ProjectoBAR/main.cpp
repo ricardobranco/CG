@@ -90,8 +90,9 @@ void renderScene(void) {
 	
 	//desenha_solid();
 
-	sofa(1,1,0.7);
+	//Candi2(3,2,1.5,0.5,4,0.1);
 
+	Candi3(0.5,1,3);
 	// End of frame
 	glutSwapBuffers();
 }
