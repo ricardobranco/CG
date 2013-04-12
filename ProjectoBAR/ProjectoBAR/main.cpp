@@ -10,7 +10,7 @@
 #define SIZ 0.01
 #define SENS_RATO 0.005
 
-float base =1.0f;
+float base=1.0f;
 float altura =1.0f;
 
 float alpha=0.0f;
@@ -92,7 +92,7 @@ void renderScene(void) {
 
 	//Candi2(3,2,1.5,0.5,4,0.1);
 
-	Candi3(0.5,1,3);
+	Mesacafe(0.75,1.5);
 	// End of frame
 	glutSwapBuffers();
 }

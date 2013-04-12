@@ -12,4 +12,6 @@ void Candi2(float comp,float alt,float larg,float raio,float alturafio,float rai
 
 void Candi3(float raioesf,float raio,float altura);
 
+void Mesacafe(float raio, float alt)
+
 #endif

@@ -58,3 +58,26 @@ void Candi3(float raioesf,float raio,float altura){
 	cilindro_solid(0.1*altura,raio/4,20,20);
 	glPopMatrix();
 }
+
+void ovo(float comp,float alt,float larg){
+	glPushMatrix();
+	glScalef(comp,alt,larg);
+	esfera_solid(1,20,20);
+	glPopMatrix();
+}
+
+void Mesacafe(float raio, float alt){
+	glPushMatrix();
+	cilindro_solid(alt/10,raio/4,20,20);
+	glTranslatef(0.0f,alt/20+alt/10,0.0f);
+	cilindro_solid(alt/5,raio/6,20,20);
+	glTranslatef(0.0f,alt/5+alt/10,0.0f);
+	ovo(raio/5,alt/5,raio/5);
+	glTranslatef(0.0f,alt/5+alt/10,0.0f);
+	cilindro_solid(alt/5,raio/6,20,20);
+	glTranslatef(0.0f,alt/5+alt/10,0.0f);
+	ovo(raio/5,alt/5,raio/5);
+	glTranslatef(0.0f,alt/5+alt/10,0.0f);
+	cilindro_solid(alt/10,raio,20,20);
+	glPopMatrix();
+}
