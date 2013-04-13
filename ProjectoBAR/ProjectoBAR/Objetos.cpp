@@ -11,46 +11,6 @@ void Paralelipipedo(float comp,float alt,float larg){
 	glPopMatrix();
 }
 
-void parede(float altura, float base, float espessura){
-
-	glPushMatrix();
-	Paralelipipedo(base,altura,espessura);
-	glPopMatrix();
-}
-
-
-void paredesparalelas(float altura, float base, float espessura,float distancia){
-	glPushMatrix();
-	parede(altura,base,espessura);
-	glTranslatef(0.0f,0.0f,distancia);
-	parede(altura,base,espessura);
-	glPopMatrix();
-
-}
-
-void paredeporta(float altura, float base, float espessura, float alturaporta, float baseporta){
-
-	float basesporta = base-baseporta;
-	float alturasporta = altura-alturaporta;
-	if(basesporta<0)
-		basesporta=0;
-	if(alturasporta<0)
-		alturasporta=0;
-
-	glPushMatrix();
-	parede(alturasporta,base,espessura);
-	glTranslatef(-(baseporta/2+basesporta/4),-(alturaporta/2+alturasporta/2),0.0f);
-	parede(alturaporta,basesporta/2,espessura);
-	glPopMatrix();
-	glPushMatrix();
-	glTranslatef((baseporta/2+basesporta/4),-(alturaporta/2+alturasporta/2),0.0f);
-	parede(alturaporta,basesporta/2,espessura);
-	glPopMatrix();
-
-
-
-}
-
 
 
 

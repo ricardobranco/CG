@@ -4,6 +4,9 @@
 #include "primitivas.h"
 #include "copo.h"
 #include "Objetos.h"
+#include "Paredes.h"
+#include "Bar.h"
+
 
 #define MOV 0.1
 #define ANG 0.05
@@ -89,7 +92,8 @@ void renderScene(void) {
 	
 	
 	//desenha_solid();
-	paredeporta(3.0f,5.0f,0.2f,2.0f,1.0f);
+	Bar();
+	//paredeporta(3.0f,5.0f,0.2f,2.0f,1.0f);
 	//sofa(2,1.5,1);
 	// End of frame
 	glutSwapBuffers();
