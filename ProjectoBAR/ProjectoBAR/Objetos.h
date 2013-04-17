@@ -2,7 +2,6 @@
 #define _OBJ
 
 
-void Paralelipipedo(float comp,float alt,float larg);
 
 void sofa(float comp,float alt,float larg);
 

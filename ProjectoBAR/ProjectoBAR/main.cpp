@@ -92,9 +92,7 @@ void renderScene(void) {
 	
 	
 	//desenha_solid();
-	Bar();
-	//paredeporta(3.0f,5.0f,0.2f,2.0f,1.0f);
-	//sofa(2,1.5,1);
+	Candi3(0.7,1.5,3);
 	// End of frame
 	glutSwapBuffers();
 }
