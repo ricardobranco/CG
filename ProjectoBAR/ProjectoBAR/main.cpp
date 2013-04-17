@@ -92,14 +92,12 @@ void renderScene(void) {
 	
 	
 	//desenha_solid();
-<<<<<<< HEAD
-	Candi3(0.7,1.5,3);
-=======
 
-	Candi3(2);
+
+	Candi2(2);
 
 	//Mesacafe(0.75,1.5);
->>>>>>> origin/candeeiro
+
 	// End of frame
 	glutSwapBuffers();
 }

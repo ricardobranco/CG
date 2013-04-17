@@ -12,9 +12,6 @@ void Paralelipipedo(float comp,float alt,float larg){
 }
 
 
-
-
-
 void sofa(float comp,float alt,float larg){
 	float margem=0.4*larg;
 	glPushMatrix();
@@ -34,18 +31,7 @@ void sofa(float comp,float alt,float larg){
 	glPopMatrix();
 }
 
-<<<<<<< HEAD
-void Candi1(float raiomax,float alt){
-	cone_solid(alt,raiomax,20,20);
-	esfera_solid(raiomax/2,20,20);
-}
 
-void Candi2(float comp,float alt,float larg,float raio,float alturafio,float raiofio){
-	glPushMatrix();
-	esfera_wire(1,20,20);
-	glScalef(comp,alt,larg);
-	esfera_solid(1,20,20);
-=======
 void Candi1(float tamanho){
 	float raiocone=0.65*tamanho;
 	float altcone=0.9*tamanho;
@@ -54,8 +40,8 @@ void Candi1(float tamanho){
 }
 
 void Candi2(float tamanho){
-	float raiofio=0.05*tamanho;
-	float alturafio=1;
+	float raiofio=0.005*tamanho;
+	float alturafio=tamanho*2;
 	float raio=0.4*tamanho;
 	float comp=tamanho;
 	float larg=0.65*tamanho;
@@ -65,20 +51,13 @@ void Candi2(float tamanho){
 	esfera_wire(1,20,20);
 	glPopMatrix();
 	esfera_solid(raio,20,20);
->>>>>>> origin/candeeiro
 	glPopMatrix();
 	glTranslatef(0.0f,alt+alturafio/2,0.0f);
 	cilindro_solid(alturafio,raiofio,20,20);
 	glPopMatrix();
 }
 
-<<<<<<< HEAD
-void Candi3(float raioesf,float raio,float altura){
-	glPushMatrix();
-	glRotatef(90,1,0,0);
-	esfera_solid(raioesf,20,20);
-	glTranslatef(0.0f,raioesf*1.3,0.0f);
-=======
+
 void Candi3(float tamanho){
 	float altura=tamanho;
 	float raioesf=0.35*tamanho;
@@ -87,15 +66,12 @@ void Candi3(float tamanho){
 	glRotatef(90,1,0,0);
 	esfera_solid(raioesf,20,20);
 	glTranslatef(0.0f,raioesf*0.5,0.0f);
->>>>>>> origin/candeeiro
 	cilindro_solid(0.5*altura,raio,20,20);
 	glTranslatef(0.0f,0.25*altura,0.0f);
 	cone_solid(0.45*altura,raio,20,20);
 	glTranslatef(0.0f,0.4*altura,0.0f);
 	cilindro_solid(0.1*altura,raio/4,20,20);
 	glPopMatrix();
-<<<<<<< HEAD
-=======
 }
 
 void ovo(float comp,float alt,float larg){
@@ -119,5 +95,5 @@ void Mesacafe(float raio, float alt){
 	glTranslatef(0.0f,alt/5,0.0f);
 	cilindro_solid(alt/10,raio,20,20);
 	glPopMatrix();
->>>>>>> origin/candeeiro
+
 }
