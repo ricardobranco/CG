@@ -5,11 +5,18 @@
 #include "primitivas.h"
 #include "Objetos.h"
 
+void Paralelipiped(float comp,float alt,float larg){
+	glPushMatrix();
+	glScalef(comp,alt,larg);
+	cubo_solid(1,5);
+	glPopMatrix();
+}
+
 
 void parede(float altura, float base, float espessura){
 
 	glPushMatrix();
-	Paralelipipedo(base,altura,espessura);
+	Paralelipiped(base,altura,espessura);
 	glPopMatrix();
 }
 
@@ -49,6 +56,3 @@ void paredeporta(float altura, float base, float espessura, float alturaporta, f
 	glPopMatrix();
 
 }
-
-
-
