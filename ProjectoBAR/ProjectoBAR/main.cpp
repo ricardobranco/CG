@@ -13,7 +13,7 @@
 #define SIZ 1
 #define SENS_RATO 0.005
 
-float base =1.0f;
+float base=1.0f;
 float altura =1.0f;
 
 float alpha=0.0f;
@@ -92,7 +92,14 @@ void renderScene(void) {
 	
 	
 	//desenha_solid();
+<<<<<<< HEAD
 	Candi3(0.7,1.5,3);
+=======
+
+	Candi3(2);
+
+	//Mesacafe(0.75,1.5);
+>>>>>>> origin/candeeiro
 	// End of frame
 	glutSwapBuffers();
 }
