@@ -4,15 +4,15 @@
 #include <GL/glut.h>
 #include "primitivas.h"
 
-void desenha_copo(float size) {
+void desenha_copo(float size,float r, float along, float pe, float rbase, float hbase) {
 
 	glPushMatrix();
 
 	glScalef(size,size,size);
 
-	glScalef(1,1.4,1);
+	glScalef(1,along,1);
 
-	glTranslatef(0,2,0);
+	glTranslatef(0,r+pe,0);
 	
 	int divh=50;
 	int divv=60;
@@ -21,8 +21,8 @@ void desenha_copo(float size) {
 	float inch = 2*M_PI /((float) divh);
 
 	glBegin(GL_TRIANGLES);
-	float raio1=1.0;
-	float raio2=0.95;
+	float raio1=r;
+	float raio2=0.95*r;
 	float av=20*incv;
 	
 	
@@ -48,7 +48,7 @@ void desenha_copo(float size) {
 	
 	
 
-	float av2=acos((cos(20*incv))/raio2);
+	float av2=acos((cos(20*incv))/0.95);
 	float incv2=(M_PI-av2)/40;
 	for(int iv=20; iv<divv; iv++){
 
@@ -74,7 +74,7 @@ void desenha_copo(float size) {
 	float y =raio1*cos(incv*20);
 	
 	float raiob1=raio1*sin(incv*20);
-	float raiob2=raio2*sin(acos((cos(20*incv))/raio2));
+	float raiob2=raio2*sin(acos((cos(20*incv))/0.95));
 	
 	for(int ih=0;ih<divh;ih++){
 		float ah=((float)ih)*inch;
@@ -95,15 +95,33 @@ void desenha_copo(float size) {
 
 	glEnd();
 
-	glTranslatef(0,-1.475,0);
+	glTranslatef(0,-r-pe+(pe+0.05*r)/2,0);
 	
-	cilindro_solid(1.05,0.1,10,50);
+	cilindro_solid(pe+0.05*r,0.1,10,50);
 	
-	glTranslatef(0,-0.5,0);
+	glTranslatef(0,-(pe+0.05*r)/2+hbase/2,0);
 
-	cilindro_solid(0.05,1,50,3);
+	cilindro_solid(hbase,rbase,50,3);
 	
 	glPopMatrix();
 
 	
+}
+
+void copo_vinho(float size){
+
+	desenha_copo(size,1.3,1.4,1,1,0.05);
+
+}
+
+void flute(float size){
+
+	desenha_copo(size,0.7,2.3,0.3,0.6,0.02);
+
+}
+
+void copo_largo(float size){
+
+	desenha_copo(size,3,0.6,5,2,0.1);
+
 }

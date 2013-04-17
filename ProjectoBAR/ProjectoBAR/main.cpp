@@ -92,7 +92,7 @@ void renderScene(void) {
 	
 	
 	//desenha_solid();
-	Candi3(0.7,1.5,3);
+	copo_largo(1);
 	// End of frame
 	glutSwapBuffers();
 }

@@ -2,8 +2,9 @@
 #define _COPO
 
 
-void desenha_copo(float size);
-
+void copo_vinho(float size);
+void flute(float size);
+void copo_largo(float size);
 
 #endif
 
