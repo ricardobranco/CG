@@ -90,9 +90,9 @@ void renderScene(void) {
 	
 	//desenha_solid();
 
-	//Candi2(3,2,1.5,0.5,4,0.1);
+	Candi3(2);
 
-	Mesacafe(0.75,1.5);
+	//Mesacafe(0.75,1.5);
 	// End of frame
 	glutSwapBuffers();
 }

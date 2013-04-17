@@ -30,27 +30,39 @@ void sofa(float comp,float alt,float larg){
 	glPopMatrix();
 }
 
-void Candi1(float raiomax,float alt){
-	cone_solid(alt,raiomax,20,20);
-	esfera_solid(raiomax/2,20,20);
+void Candi1(float tamanho){
+	float raiocone=0.65*tamanho;
+	float altcone=0.9*tamanho;
+	cone_solid(altcone,raiocone,20,20);
+	esfera_solid(raiocone/2,20,20);
 }
 
-void Candi2(float comp,float alt,float larg,float raio,float alturafio,float raiofio){
+void Candi2(float tamanho){
+	float raiofio=0.05*tamanho;
+	float alturafio=1;
+	float raio=0.4*tamanho;
+	float comp=tamanho;
+	float larg=0.65*tamanho;
+	float alt=0.8*tamanho;
 	glPushMatrix();
-	esfera_wire(1,20,20);
 	glScalef(comp,alt,larg);
-	esfera_solid(1,20,20);
+	esfera_wire(1,20,20);
+	glPopMatrix();
+	esfera_solid(raio,20,20);
 	glPopMatrix();
 	glTranslatef(0.0f,alt+alturafio/2,0.0f);
 	cilindro_solid(alturafio,raiofio,20,20);
 	glPopMatrix();
 }
 
-void Candi3(float raioesf,float raio,float altura){
+void Candi3(float tamanho){
+	float altura=tamanho;
+	float raioesf=0.35*tamanho;
+	float raio= 0.5*tamanho;
 	glPushMatrix();
 	glRotatef(90,1,0,0);
 	esfera_solid(raioesf,20,20);
-	glTranslatef(0.0f,raioesf*1.3,0.0f);
+	glTranslatef(0.0f,raioesf*0.5,0.0f);
 	cilindro_solid(0.5*altura,raio,20,20);
 	glTranslatef(0.0f,0.25*altura,0.0f);
 	cone_solid(0.45*altura,raio,20,20);
