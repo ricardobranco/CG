@@ -85,6 +85,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bar.cpp" />
+    <ClCompile Include="mesa.cpp" />
     <ClCompile Include="Objetos.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="primitivas.cpp" />
@@ -94,6 +95,7 @@
   <ItemGroup>
     <ClInclude Include="Bar.h" />
     <ClInclude Include="copo.h" />
+    <ClInclude Include="mesa.h" />
     <ClInclude Include="Paredes.h" />
     <ClInclude Include="Objetos.h" />
     <ClInclude Include="primitivas.h" />
