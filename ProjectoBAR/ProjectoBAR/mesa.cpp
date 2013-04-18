@@ -4,44 +4,45 @@
 #include <GL/glut.h>
 #include "primitivas.h"
 
+
 //A funçao apenas depende da variavel altura
 
-void desenha_mesa() {
-	float altura=2;
+void mesa(float alt) {
+	float altura=alt;
 //Extras
 	float expMesa=altura/13;
 	float altCone=altura*0.2, altCilin=altura-altCone;
 
 	glPushMatrix();
 
-	cone_solid(altCone,altCone*1.5,50,10);
+	cone_solid(altCone,altCone*1.5,50,50);
 
 	glPopMatrix();
 	glPushMatrix();
 
 	glTranslatef(0,(altCone*0.5)+(altCilin/2),0);
 	
-	cilindro_solid(altCilin,altCone*1.5/2,50,50);
+	cilindro_solid(altCilin,altCone*1.5/2,60,60);
 
 	glPopMatrix();
 	glPushMatrix();
 	
 	glTranslatef(0,(altCone*0.5)+(altCilin)+(expMesa/2),0);
 
-	cilindro_solid(expMesa,altCone*2.5,50,3);
+	cilindro_solid(expMesa,altCone*2.5,60,10);
 	
 	glPopMatrix();
 	
 }
 
 //a funçao depende das variaveis mesa(tamanho da mesa(quadrada)) e altura
-void desenha_mesa1(){
-	float mesa=3;
-	float altura=1;
+void mesa1(float ms,float alt){
+	float mesa=ms;
+	float altura=alt;
 //Extra
 	float meiaMesa=mesa/2,posicaoPerna=meiaMesa-(meiaMesa*0.4);
-	int nCubosPerna=5;
-	int nCubosMesa=5;
+	int nCubosPerna=30;
+	int nCubosMesa=50;
 //Escalas
 	float escLargPerna=0.2,escAltPerna=2;
 
@@ -88,5 +89,19 @@ void desenha_mesa1(){
 	glTranslatef(0,meiaMesa,0);
 	cubo_solid(mesa,nCubosMesa);
 
+	glPopMatrix();
+}
+
+void desenha_mesa(float size){
+	glPushMatrix();
+	glScalef(size,size,size); 
+	mesa(2);
+	glPopMatrix();
+}
+
+void desenha_mesa1(float size){
+	glPushMatrix();
+	glScalef(size,size,size); 
+	mesa1(2.5,1);
 	glPopMatrix();
 }
