@@ -90,7 +90,7 @@ void renderScene(void) {
 	
 	//desenha_solid();
 
-	Candi3(2);
+	Candi4(2.0,4,10);
 
 	//Mesacafe(0.75,1.5);
 	// End of frame
