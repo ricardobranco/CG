@@ -8,7 +8,7 @@
 void Paralelipiped(float comp,float alt,float larg){
 	glPushMatrix();
 	glScalef(comp,alt,larg);
-	cubo_solid(1,5);
+	cubo_solid(1,comp*alt*larg*10);
 	glPopMatrix();
 }
 
@@ -56,3 +56,5 @@ void paredeporta(float altura, float base, float espessura, float alturaporta, f
 	glPopMatrix();
 
 }
+
+

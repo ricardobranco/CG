@@ -14,7 +14,7 @@ void Bar(){
 	float porta = 2.0f;
 	float baseporta = 0.8f;
 	glPushMatrix();
-		plano(ladoz,ladox,10,10);
+		plano(ladoz,ladox,50,50);
 		glTranslatef(0.0f,altura/2,0.0f);;
 		
 		glPushMatrix();
@@ -31,7 +31,7 @@ void Bar(){
 	
 		glPopMatrix();
 		glTranslatef(0.0f,altura/2,0.0f);
-		plano(ladoz,ladox,10,10);	
+		plano(ladoz,ladox,50,50);	
 	glPopMatrix();
 	
 
