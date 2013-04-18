@@ -89,13 +89,28 @@ void banco_sofa_parametros(float altura,float raio){
 	//acento
 	glPushMatrix();
 	glTranslatef(0,altura,0);
-	glScalef(raio*1.2,raio/2,raio*1.2);
+	glScalef(raio*1.2,raio/3,raio*1.2);
 	esfera_solid(raio,camadas,dim);
 	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef(0,altura/1.3,0);
+	glScalef(raio*1.2,raio/2,raio*1.2);
+	cilindro_solid(raio,raio,camadas,dim);
+	glPopMatrix();
+
+	
+	
+
+
 
 
 	//base
 	cilindro_solid(altura*1/20,raio*0.3,camadas,dim);
+
+
+
+
 
 }
 
