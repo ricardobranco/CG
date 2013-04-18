@@ -93,7 +93,7 @@ void renderScene(void) {
 	
 	//desenha_solid();
 
-	sofa(5,1,3);
+	Bar();
 
 	//Mesacafe(0.75,1.5);
 
