@@ -10,6 +10,19 @@ void Paralelipipedo(float comp,float alt,float larg){
 	cubo_solid(1,5);
 	glPopMatrix();
 }
+void ovo(float comp,float alt,float larg){
+	glPushMatrix();
+	glScalef(comp,alt,larg);
+	esfera_solid(1,20,20);
+	glPopMatrix();
+}
+
+void ovo_wire(float comp,float alt,float larg){
+	glPushMatrix();
+	glScalef(comp,alt,larg);
+	esfera_wire(1,20,20);
+	glPopMatrix();
+}
 
 
 void sofa(float comp,float alt,float larg){
@@ -74,10 +87,37 @@ void Candi3(float tamanho){
 	glPopMatrix();
 }
 
-void ovo(float comp,float alt,float larg){
+void Candi4(float tamanho, int ncamadas,int nlamp){
+	float raio=0.25*tamanho;
+	float alt=tamanho/ncamadas;
+	float altfio=alt/4;
+	float raiofio=0.01;
+	float raioesf=0.2*raio;
+	int i=0,j=0,div=20;
+	float ang=0.0f;
+	float ang_inc=2*M_PI/((float) nlamp);
 	glPushMatrix();
-	glScalef(comp,alt,larg);
-	esfera_solid(1,20,20);
+	while(i<ncamadas){
+			
+			cilindro_solid(alt,raio,div,div);
+			
+			while (j<nlamp)
+			{
+				glTranslatef(cos(ang)*raio,-alt/2-alt/8,sin(ang));
+				cilindro_solid(altfio,raiofio,20,20);
+				glTranslatef(0.0f,-altfio/2-raioesf,0.0f);
+				esfera_solid(raioesf,20,20);
+				ang=ang+ang_inc;
+				j++;
+				glPopMatrix();
+				glPopMatrix();
+			}
+			
+			glTranslatef(0.0f,alt,0.0f);
+			i++;
+			raio=1.6*raio;
+			div=div*1.8;
+	}
 	glPopMatrix();
 }
 
