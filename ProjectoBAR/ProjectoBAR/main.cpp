@@ -6,6 +6,7 @@
 #include "Objetos.h"
 #include "Paredes.h"
 #include "Bar.h"
+#include "cadeira.h"
 
 
 #define MOV 0.1
@@ -94,7 +95,7 @@ void renderScene(void) {
 	//desenha_solid();
 
 
-	Candi4(2,3,5);
+	
 
 	//Mesacafe(0.75,1.5);
 

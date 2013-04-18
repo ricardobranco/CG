@@ -36,6 +36,9 @@
     <ClCompile Include="mesa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cadeira.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="primitivas.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="mesa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cadeira.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
