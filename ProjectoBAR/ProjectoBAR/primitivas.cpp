@@ -163,44 +163,74 @@ void cilindro_solid(float altura, float raio, int div, int fat){
 }
 
 
-/// <summary>
-/// Desenha um cilindro com linhas centrado na origem.
-/// </summary>
-/// <param name="altura">A altura do cilindro.</param>
-/// <param name="raio">O raio da base.</param>
-/// <param name="div">O numero de subdivisões.</param>
-void cilindro_wire(float altura, float raio, int div){
+void cilindro_wire(float altura, float raio, int div, int fat){
 
 	float ang=0.0f;
 	float ang_inc=2*M_PI/((float)div);
+
+	float alt=altura/2;
+	float alt_inc=altura/((float) fat);
+
+	float r_inc=raio/((float) div);
 
 	glBegin(GL_LINES);
 
 	for(int i=0; i<div;i++){
 
+		float r=0.0;
+		
 		ang=ang_inc*((float)i);
 
-		glVertex3f(0.0,altura/2.0f, 0.0);
-		glVertex3f(raio*sin(ang),altura/2.0f, raio*cos(ang));
+		for(int ri=0;ri<div;ri++){
+			
+			r=r_inc*((float)ri);
+			
+			glVertex3f(r*sin(ang),altura/2.0f, r*cos(ang));
+			glVertex3f((r+r_inc)*sin(ang),altura/2.0f, (r+r_inc)*cos(ang));
+			glVertex3f((r+r_inc)*sin(ang+ang_inc),altura/2.0f, (r+r_inc)*cos(ang+ang_inc));
 
-		glVertex3f(raio*sin(ang),altura/2.0f, raio*cos(ang));
-		glVertex3f(raio*sin(ang+ang_inc),altura/2.0f, raio*cos(ang+ang_inc));
+			glVertex3f(r*sin(ang),altura/2.0f, r*cos(ang));
+			glVertex3f((r+r_inc)*sin(ang+ang_inc),altura/2.0f, (r+r_inc)*cos(ang+ang_inc));
+			glVertex3f(r*sin(ang+ang_inc),altura/2.0f, r*cos(ang+ang_inc));
 
-		glVertex3f(0.0,-altura/2.0f, 0.0);
-		glVertex3f(raio*sin(ang),-altura/2.0f, raio*cos(ang));
 
-		glVertex3f(raio*sin(ang),-altura/2.0f, raio*cos(ang));
-		glVertex3f(raio*sin(ang+ang_inc),-altura/2.0f, raio*cos(ang+ang_inc));
+			glVertex3f(r*sin(ang),-altura/2.0f, r*cos(ang));
+			glVertex3f((r+r_inc)*sin(ang+ang_inc),-altura/2.0f, (r+r_inc)*cos(ang+ang_inc));
+			glVertex3f((r+r_inc)*sin(ang),-altura/2.0f, (r+r_inc)*cos(ang));
 
-		glVertex3f(raio*sin(ang),altura/2.0f, raio*cos(ang));
-		glVertex3f(raio*sin(ang),-altura/2.0f, raio*cos(ang));
+			glVertex3f(r*sin(ang),-altura/2.0f, r*cos(ang));
+			glVertex3f(r*sin(ang+ang_inc),-altura/2.0f, r*cos(ang+ang_inc));
+			glVertex3f((r+r_inc)*sin(ang+ang_inc),-altura/2.0f, (r+r_inc)*cos(ang+ang_inc));
+
+			
+		}
+
+
+
+		alt=altura/2;
+
+		for(int f=0;f<fat;f++){
+			
+			alt =altura/2 - alt_inc*((float)f);
+			
+			glVertex3f(raio*sin(ang),alt, raio*cos(ang));
+			glVertex3f(raio*sin(ang),alt-alt_inc, raio*cos(ang));
+			glVertex3f(raio*sin(ang+ang_inc),alt-alt_inc, raio*cos(ang+ang_inc));
+
+			glVertex3f(raio*sin(ang),alt, raio*cos(ang));
+			glVertex3f(raio*sin(ang+ang_inc),alt-alt_inc, raio*cos(ang+ang_inc));
+			glVertex3f(raio*sin(ang+ang_inc),alt, raio*cos(ang+ang_inc));
+
+			
+		}
+
 
 		
 
 	}
-
 	glEnd();
 }
+
 
 
 /// <summary>

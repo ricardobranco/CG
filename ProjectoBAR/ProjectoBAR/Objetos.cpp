@@ -99,20 +99,9 @@ void Candi4(float tamanho, int ncamadas,int nlamp){
 	glPushMatrix();
 	while(i<ncamadas){
 			
-			cilindro_solid(alt,raio,div,div);
-			
-			while (j<nlamp)
-			{
-				glTranslatef(cos(ang)*raio,-alt/2-alt/8,sin(ang));
-				cilindro_solid(altfio,raiofio,20,20);
-				glTranslatef(0.0f,-altfio/2-raioesf,0.0f);
-				esfera_solid(raioesf,20,20);
-				ang=ang+ang_inc;
-				j++;
-				glPopMatrix();
-				glPopMatrix();
-			}
-			
+			cilindro_wire(alt,raio,div,div);
+			if(i==0)
+				esfera_solid(raio*0.3,20,20);
 			glTranslatef(0.0f,alt,0.0f);
 			i++;
 			raio=1.6*raio;

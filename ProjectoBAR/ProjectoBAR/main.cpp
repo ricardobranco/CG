@@ -93,11 +93,8 @@ void renderScene(void) {
 	
 	//desenha_solid();
 
-<<<<<<< HEAD
-	Bar();
-=======
-	Candi4(2.0,4,10);
->>>>>>> origin/candeeiro
+
+	Candi4(2,3,5);
 
 	//Mesacafe(0.75,1.5);
 
