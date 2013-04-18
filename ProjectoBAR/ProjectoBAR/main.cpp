@@ -93,7 +93,7 @@ void renderScene(void) {
 	
 	//desenha_solid();
 
-	Candi2(2);
+	copo_largo(1);
 
 	//Mesacafe(0.75,1.5);
 
