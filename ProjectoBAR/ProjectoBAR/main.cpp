@@ -94,7 +94,7 @@ void renderScene(void) {
 	
 	//desenha_solid();
 
-
+	banco_sofa(3);
 	
 
 	//Mesacafe(0.75,1.5);
