@@ -26,22 +26,53 @@ int ratoY=0.0;
 int solido=1;
 
 void desenha_solid(){
-	switch(solido){
+	switch(solido)
+	{
 	case 1:
-		esfera_solid(1,45,90);
+	 desenha_mesa(1);
 		break;
 	case 2:
-		cone_solid(2,1,45,90);
+		desenha_mesa1(1);
 		break;
 	case 3:
-		plano(2,1,90,45);
+		banco_alto(2);
 		break;
 	case 4:
-		cubo_solid(1,45);
+		banco_balcao(2);
 		break;
 	case 5:
-		cilindro_solid(2,1,45,90);
+		banco_sofa(2);
 		break;
+	case 6:
+		Candi1(2);
+		break;
+	case 7:
+		Candi2(2);
+		break;
+	case 8:
+		Candi3(2);
+		break;
+	case 9:
+		Candi5(2);
+		break;
+	case 10:
+		copo_vinho(0.5);
+		break;
+	case 11:
+		flute(0.5);
+		break;
+	case 12:
+		copo_largo(0.5);
+		break;
+	case 13:
+		tecto(0.5);
+		break;
+	case 14:
+		chao(0.5);
+		break;
+	case 15:
+		paredes(0.5);
+		 break;
 	}
 }
 
@@ -92,7 +123,7 @@ void renderScene(void) {
 	
 	
 	//desenha_solid();
-	desenha_mesa(2);
+	desenha_solid();
 	//Mesacafe(0.75,1.5);
 
 	// End of frame
@@ -128,6 +159,37 @@ void teclas(unsigned char tecla, int x, int y)
 			break;
 		case '5':
 			solido=5;
+			break;
+		case '6':
+			solido=6;
+			break;
+		case '7':
+		solido=7;
+			break;
+		case '8':
+			solido=8;
+			break;
+	    case '9':
+			solido=9;
+			break;
+		case 'z':
+	    	solido=10;
+			break;
+		case 'x':
+	    	solido=11;
+			break;
+		case 'c':
+	    	solido=12;
+			break;
+		case 'v':
+	    	solido=13;
+			break;
+		case 'b':
+	    	solido=14;
+			break;
+
+	    case 'n':
+	    	solido=15;
 			break;
 	}
 	glutPostRedisplay();

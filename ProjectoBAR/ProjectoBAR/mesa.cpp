@@ -12,24 +12,25 @@ void mesa(float alt) {
 //Extras
 	float expMesa=altura/13;
 	float altCone=altura*0.2, altCilin=altura-altCone;
+	int camadas=60,lad=60;
 
 	glPushMatrix();
 
-	cone_solid(altCone,altCone*1.5,50,50);
+	cone_solid(altCone,altCone*1.5,camadas,lad);
 
 	glPopMatrix();
 	glPushMatrix();
 
 	glTranslatef(0,(altCone*0.5)+(altCilin/2),0);
 	
-	cilindro_solid(altCilin,altCone*1.5/2,60,60);
+	cilindro_solid(altCilin,altCone*1.5/2,camadas,lad);
 
 	glPopMatrix();
 	glPushMatrix();
 	
 	glTranslatef(0,(altCone*0.5)+(altCilin)+(expMesa/2),0);
 
-	cilindro_solid(expMesa,altCone*2.5,60,10);
+	cilindro_solid(expMesa,altCone*2.5,camadas,lad);
 	
 	glPopMatrix();
 	
@@ -41,8 +42,8 @@ void mesa1(float ms,float alt){
 	float altura=alt;
 //Extra
 	float meiaMesa=mesa/2,posicaoPerna=meiaMesa-(meiaMesa*0.4);
-	int nCubosPerna=30;
-	int nCubosMesa=50;
+	int nCubosPerna=100;
+	int nCubosMesa=100;
 //Escalas
 	float escLargPerna=0.2,escAltPerna=2;
 

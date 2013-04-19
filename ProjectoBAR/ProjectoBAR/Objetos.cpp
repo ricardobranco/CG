@@ -149,7 +149,6 @@ void Candi5(float tamanho){
 	float raio=0.2*tamanho;
 	glPushMatrix();
 	cilindro_wire(tamanho,raio,20,20);
-	glColor3f(1,0,1);
 	cone_solid(tamanho/2,raio,20,20);
 	glRotatef(180,0,0,1);
 	cone_solid(tamanho/2,raio,20,20);
