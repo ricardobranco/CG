@@ -1,4 +1,5 @@
 #define _USE_MATH_DEFINES
+
 #include <math.h>
 #include <glew.h>
 #include <GL/glut.h>
@@ -87,28 +88,74 @@ void Candi3(float tamanho){
 	glPopMatrix();
 }
 
+void aux(float altura,float raio,int nlamp,int div){
+	int j,i;
+	float altfio=altura;
+	float raiofio=0.01;
+	float raioesf=0.2*altura;
+	float altcone=0.4*altura;
+	float ang=0.0f;
+	float ang_inc=2*M_PI/((float) nlamp);
+	for(i=0;i<nlamp;i++){
+		glPushMatrix();
+	}
+	cilindro_wire(altura,raio,div,div);
+	for(j=0;j<nlamp;j++){
+		glTranslatef(raio*cos(ang),-altura/2-altura/2,raio*sin(ang));
+		cilindro_solid(altfio,raiofio,20,20);
+		glTranslatef(0,-raioesf-altura/2,0);
+		if (j%3==0)
+		{
+			esfera_solid(raioesf,20,20);
+		}	
+	
+		else
+		{
+			if (j%3==1)
+			{
+				cone_solid(altcone,raioesf,20,20);
+			}
+			else
+			{
+				cilindro_solid(altcone,raioesf,20,20);
+			}
+		}
+		ang=ang+ang_inc;
+		glPopMatrix();
+	}
+	ang=0;
+
+}
+
+
 void Candi4(float tamanho, int ncamadas,int nlamp){
 	float raio=0.25*tamanho;
 	float alt=tamanho/ncamadas;
-	float altfio=alt/4;
-	float raiofio=0.01;
-	float raioesf=0.2*raio;
 	int i=0,j=0,div=20;
-	float ang=0.0f;
-	float ang_inc=2*M_PI/((float) nlamp);
 	glPushMatrix();
+	
 	while(i<ncamadas){
-			
-			cilindro_wire(alt,raio,div,div);
-			if(i==0)
-				esfera_solid(raio*0.3,20,20);
+			aux(alt,raio,nlamp,div);
+			glPopMatrix();
 			glTranslatef(0.0f,alt,0.0f);
 			i++;
 			raio=1.6*raio;
-			div=div*1.8;
+			div=div*1.5;
 	}
 	glPopMatrix();
 }
+
+void Candi5(float tamanho){
+	float raio=0.2*tamanho;
+	glPushMatrix();
+	cilindro_wire(tamanho,raio,20,20);
+	glColor3f(1,0,1);
+	cone_solid(tamanho/2,raio,20,20);
+	glRotatef(180,0,0,1);
+	cone_solid(tamanho/2,raio,20,20);
+	glPopMatrix();
+}
+
 
 void Mesacafe(float raio, float alt){
 	glPushMatrix();
