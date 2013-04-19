@@ -5,7 +5,7 @@
 #include <GL/glut.h>
 #include "primitivas.h"
 
-void chao(float comp, float larg){
+void chao_params(float comp, float larg){
 
 	int camadas = 60;
 	float cateto,hipotnusa;
@@ -45,7 +45,7 @@ void chao(float comp, float larg){
 
 } 
 
-void paredes(float comp,float larg,float altura){
+void paredes_params(float comp,float larg,float altura){
 	
 
 	int camadas=60;
@@ -201,7 +201,7 @@ void paredes(float comp,float larg,float altura){
 	
 }
 
-void tecto(float comp, float larg,float altura){
+void tecto_params(float comp, float larg,float altura){
 
 
 	int camadas = 60;
@@ -255,3 +255,37 @@ void tecto(float comp, float larg,float altura){
 } 
 
 
+void chao(float scale){
+	float larg = 15;
+	float comp = 10;
+
+	glPushMatrix();
+		glScalef(scale,scale,scale);
+		chao_params(comp,larg);
+	glPopMatrix();
+
+}
+
+void paredes(float scale){
+	float larg=15;
+	float comp=10;
+	float altura=3;
+
+	glPushMatrix();
+		glScalef(scale,scale,scale);
+		paredes_params(comp,larg,altura);
+	glPopMatrix();
+}
+
+
+void tecto(float scale){
+	float larg=15;
+	float comp=10;
+	float altura=3;
+
+	glPushMatrix();
+		glScalef(scale,scale,scale);
+		tecto_params(comp,larg,altura);
+	glPopMatrix();
+
+}
