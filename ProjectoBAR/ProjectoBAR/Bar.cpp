@@ -151,7 +151,7 @@ void paredes(float comp,float larg,float altura){
 		plano(altura,cateto,camadas,camadas);
 	glPopMatrix();
 
-	glPushMatrix();//PAREDESWC
+	glPushMatrix();//PAREDESWCDIR
 		glTranslatef(-comp/2+sul,altura/2,larg/2-cateto/2);
 		glRotatef(90,0,1,0);
 		glRotatef(90,0,0,1);
@@ -161,13 +161,42 @@ void paredes(float comp,float larg,float altura){
 			glRotatef(180,1,0,0);
 			plano(altura,2*base_porta,camadas,camadas);
 		glPopMatrix();
-		/*glPushMatrix();
-			
+		
+		glPushMatrix();
+		glTranslatef(altura/2-(altura-altura_porta)/2,0,0);
+			plano(altura-altura_porta,cateto,camadas,camadas);
+			glRotatef(180,1,0,0);
+			plano(altura-altura_porta,cateto,camadas,camadas);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,-0.15,-base_porta);
+			glRotatef(-90,1,0,0);
+			plano(altura,0.30,camadas,camadas);
+			glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0,-0.15,base_porta);
+			glRotatef(90,1,0,0);
+			plano(altura,0.30,camadas,camadas);
+		glPopMatrix();
+	glPopMatrix();
+
+	glPushMatrix();//PAREDESWCESQ
+		glTranslatef(-comp/2+sul-0.30,altura/2,larg/2-cateto/2);
+		glRotatef(90,0,1,0);
+		glRotatef(90,0,0,1);
+		glRotatef(90,1,0,0);
+		glPushMatrix();
 			plano(altura,2*base_porta,camadas,camadas);
 			glRotatef(180,1,0,0);
 			plano(altura,2*base_porta,camadas,camadas);
-		glPopMatrix();*/
-
+		glPopMatrix();
+		
+		glPushMatrix();
+		glTranslatef(altura/2-(altura-altura_porta)/2,0,0);
+			plano(altura-altura_porta,cateto,camadas,camadas);
+			glRotatef(180,1,0,0);
+			plano(altura-altura_porta,cateto,camadas,camadas);
+		glPopMatrix();
 	glPopMatrix();
 	
 }
@@ -197,26 +226,32 @@ void tecto(float comp, float larg,float altura){
 
 	glPushMatrix();
 
-	glTranslatef(0,altura,0);
+		glTranslatef(0,altura,0);
 	
-	glPushMatrix();
-		glTranslatef(comp/2-cateto,0.0f,larg/2-cateto);
-		glRotatef(180,1,0,0);
-		glRotatef(45,0,1,0);
-		plano(hipotnusa,hipotnusa,camadas,camadas);
+		glPushMatrix();
+			glTranslatef(comp/2-cateto,0.0f,larg/2-cateto);
+			glRotatef(180,1,0,0);
+			glRotatef(45,0,1,0);
+			plano(hipotnusa,hipotnusa,camadas,camadas);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(comp/2-cateto,0.0f,-(larg/2-dir/2));
+			glRotatef(180,1,0,0);
+			plano(cateto*2,dir,camadas,camadas);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-(comp/2-(cateto+sul)/2),0.0f,larg/2-cateto/2);
+			glRotatef(180,0,0,1);
+			plano(cateto+sul,cateto,camadas,camadas);
+		glPopMatrix();
 	glPopMatrix();
-	glPushMatrix();
-		glTranslatef(comp/2-cateto,0.0f,-(larg/2-dir/2));
-		glRotatef(180,1,0,0);
-		plano(cateto*2,dir,camadas,camadas);
+	glPushMatrix(); //WCENTRADA
+		glTranslatef(0,0.7*altura,0);
+		glTranslatef(-comp/2+sul-0.15,0,larg/2-cateto/2);
+		glRotated(180,1,0,0);
+		plano(0.3,cateto,camadas,camadas);
 	glPopMatrix();
-	glPushMatrix();
-	glTranslatef(-(comp/2-(cateto+sul)/2),0.0f,larg/2-cateto/2);
-	glRotatef(180,1,0,0);
-	plano(cateto+sul,cateto,camadas,camadas);
-	glPopMatrix();
-	glPopMatrix();
-
+	
 } 
 
 
