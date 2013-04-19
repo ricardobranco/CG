@@ -92,13 +92,11 @@ void renderScene(void) {
 	
 	
 	//desenha_solid();
-	/*
-	chao(10,15);
-	paredes(10,15,2);
-	tecto(10,15,2);
+
+	chao(20,30);
+	paredes(20,30,3);
+	tecto(20,30,3);
 	//Mesacafe(0.75,1.5);
-	*/
-	Candi4(2,5,30);
 
 	// End of frame
 	glutSwapBuffers();
@@ -235,6 +233,7 @@ int main(int argc, char **argv) {
 // entrar no ciclo do GLUT 
 	glutMainLoop();
 	
+
 	return 1;
 }
 
