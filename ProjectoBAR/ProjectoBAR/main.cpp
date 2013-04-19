@@ -4,7 +4,6 @@
 #include "primitivas.h"
 #include "copo.h"
 #include "Objetos.h"
-#include "Paredes.h"
 #include "Bar.h"
 #include "cadeira.h"
 
@@ -94,9 +93,9 @@ void renderScene(void) {
 	
 	//desenha_solid();
 
-	banco_sofa(3);
-	
-
+	chao(10,15);
+	paredes(10,15,2);
+	tecto(10,15,2);
 	//Mesacafe(0.75,1.5);
 
 	// End of frame

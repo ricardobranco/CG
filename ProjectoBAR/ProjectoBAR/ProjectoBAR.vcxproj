@@ -91,14 +91,12 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="primitivas.cpp" />
     <ClCompile Include="copo.cpp" />
-    <ClCompile Include="Paredes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bar.h" />
     <ClInclude Include="copo.h" />
     <ClInclude Include="cadeira.h" />
     <ClInclude Include="mesa.h" />
-    <ClInclude Include="Paredes.h" />
     <ClInclude Include="Objetos.h" />
     <ClInclude Include="primitivas.h" />
   </ItemGroup>
