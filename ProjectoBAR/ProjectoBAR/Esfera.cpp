@@ -76,6 +76,9 @@ Esfera::Esfera(float raio, int divv, int divh)
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[1]);
 	glBufferData(GL_ARRAY_BUFFER, arraySize, normalB, GL_STATIC_DRAW);
 
+	free(vertexB);
+	free(normalB);
+
 }
 
 

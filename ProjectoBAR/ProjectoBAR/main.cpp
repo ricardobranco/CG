@@ -63,12 +63,21 @@ void renderScene(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glLoadIdentity();
-	glLightfv(GL_LIGHT0, GL_POSITION, pos);
+	
 	gluLookAt(camX,camY,camZ, 
 			  0.0,0.0,0.0,
 			  0.0f,1.0f,0.0f);
 
+	glLightfv(GL_LIGHT0, GL_POSITION, pos);
+
 // Desenhar Cilindro
+	float cor[]={0.3,0.3,0.3};
+	float spec[]={0.7,0.7,0.7,1.0};
+	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,cor);
+	glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,spec);
+	glMateriali(GL_FRONT_AND_BACK,GL_SHININESS,128);
+	e->desenhar();
+	glTranslatef(3,0,0);
 	e->desenhar();
 
 // End of frame
@@ -142,7 +151,7 @@ void main(int argc, char **argv) {
 // init
 	converte();
 	
-	e=new Esfera(1,1000,2000);
+	e=new Esfera(1,150,300);
 
 // entrar no ciclo do GLUT 
 	glutMainLoop();
