@@ -93,7 +93,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="primitivas.cpp" />
     <ClCompile Include="copo.cpp" />
-    <ClCompile Include="Solido.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bar.h" />
@@ -103,7 +102,6 @@
     <ClInclude Include="mesa.h" />
     <ClInclude Include="Objetos.h" />
     <ClInclude Include="primitivas.h" />
-    <ClInclude Include="Solido.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -36,9 +36,6 @@
     <ClCompile Include="cadeira.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Solido.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Esfera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -60,9 +57,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cadeira.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Solido.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Esfera.h">

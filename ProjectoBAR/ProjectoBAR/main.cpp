@@ -1,85 +1,28 @@
-#define _USE_MATH_DEFINES
-#include <GL\glew.h>
+#include <stdlib.h>
+#include <GL/glew.h>
 #include <GL/glut.h>
+
 #include <math.h>
-#include "primitivas.h"
-#include "copo.h"
-#include "Objetos.h"
-#include "Bar.h"
-#include "cadeira.h"
-#include "mesa.h"
 
 #include "Esfera.h"
 
-#define MOV 0.1
-#define ANG 0.05
-#define SIZ 1
-#define SENS_RATO 0.005
+#define _PI_ 3.14159
 
-float base=1.0f;
-float altura =1.0f;
+float alfa = 0.0f, beta = 0.0f, raio = 5.0f;
+float camX, camY, camZ;
 
-float alpha=0.0f;
-float beta=0.0;
-float raio=10.0;
+Esfera *e;
 
-int ratoX =0.0;
-int ratoY=0.0;
+// declarar variáveis para armazenar os VBOs e número de vértices total
+//...
 
-int solido=1;
+void converte() {
 
-Esfera e;
-
-void desenha_solid(){
-	switch(solido)
-	{
-	case 1:
-	 desenha_mesa(1);
-		break;
-	case 2:
-		desenha_mesa1(1);
-		break;
-	case 3:
-		banco_alto(2);
-		break;
-	case 4:
-		banco_balcao(2);
-		break;
-	case 5:
-		banco_sofa(2);
-		break;
-	case 6:
-		Candi1(2);
-		break;
-	case 7:
-		Candi2(2);
-		break;
-	case 8:
-		Candi3(2);
-		break;
-	case 9:
-		Candi5(2);
-		break;
-	case 10:
-		copo_vinho(0.5);
-		break;
-	case 11:
-		flute(0.5);
-		break;
-	case 12:
-		copo_largo(0.5);
-		break;
-	case 13:
-		tecto(0.5);
-		break;
-	case 14:
-		chao(0.5);
-		break;
-	case 15:
-		paredes(0.5);
-		 break;
-	}
+	camX = raio * cos(beta) * sin(alfa);
+	camY = raio * sin(beta);
+	camZ = raio * cos(beta) * cos(alfa);
 }
+
 
 void changeSize(int w, int h) {
 
@@ -91,16 +34,15 @@ void changeSize(int w, int h) {
 	// compute window's aspect ratio 
 	float ratio = w * 1.0 / h;
 
-	// Set the projection matrix as current
+	// Reset the coordinate system before modifying
 	glMatrixMode(GL_PROJECTION);
-	// Load Identity Matrix
 	glLoadIdentity();
 	
 	// Set the viewport to be the entire window
 	glViewport(0, 0, w, h);
 
-	// Set perspective
-	gluPerspective(45.0f ,ratio, 1.0f ,1000.0f);
+	// Set the correct perspective
+	gluPerspective(45,ratio,1,1000);
 
 	// return to the model view matrix mode
 	glMatrixMode(GL_MODELVIEW);
@@ -108,201 +50,101 @@ void changeSize(int w, int h) {
 
 
 
+
+/*----------------------------------------------------------------------------------- 
+		RENDER SCENE
+-----------------------------------------------------------------------------------*/
+
 void renderScene(void) {
 
-	// clear buffers
+	float pos[4] = {1.0, 1.0, 1.0, 0.0};
+
+	glClearColor(0.0f,0.0f,0.0f,0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	if(beta>M_PI/2-0.0001) beta=M_PI/2-0.0001;
-	if(beta<-M_PI/2+0.0001) beta=-M_PI/2+0.0001;
-
-	// set the camera
 	glLoadIdentity();
-	gluLookAt(raio*cos(beta)*sin(alpha) ,raio*sin(beta), raio*cos(beta)*cos(alpha), 
+	glLightfv(GL_LIGHT0, GL_POSITION, pos);
+	gluLookAt(camX,camY,camZ, 
 			  0.0,0.0,0.0,
 			  0.0f,1.0f,0.0f);
 
-// pôr instruções de desenho aqui
-	//glTranslatef(posx,0.0,posz);
-	//glRotatef(angulo,0.0f,1.0f,0.0f);
-	
-	
-	
-	//desenha_solid();
-	
-	e.desenhar();
+// Desenhar Cilindro
+	e->desenhar();
 
-	// End of frame
+// End of frame
 	glutSwapBuffers();
 }
 
 
-
-// escrever função de processamento do teclado
-
-void teclas(unsigned char tecla, int x, int y)
+// função de processamento do teclado
+void processKeys(int key, int xx, int yy) 
 {
+	switch(key) {
+	
+		case GLUT_KEY_RIGHT: 
+						alfa -=0.1; break;
 
-	switch (tecla)
-	{
-		case 'w': 
-			raio-=SIZ;
-			break;
-		case 's':
-			raio+=SIZ;
-			break;
-		case '1':
-			solido=1;
-			break;
-		case '2':
-			solido=2;
-			break;
-		case '3':
-			solido=3;
-			break;
-		case '4':
-			solido=4;
-			break;
-		case '5':
-			solido=5;
-			break;
-		case '6':
-			solido=6;
-			break;
-		case '7':
-		solido=7;
-			break;
-		case '8':
-			solido=8;
-			break;
-	    case '9':
-			solido=9;
-			break;
-		case 'z':
-	    	solido=10;
-			break;
-		case 'x':
-	    	solido=11;
-			break;
-		case 'c':
-	    	solido=12;
-			break;
-		case 'v':
-	    	solido=13;
-			break;
-		case 'b':
-	    	solido=14;
+		case GLUT_KEY_LEFT: 
+						alfa += 0.1; break;
+
+		case GLUT_KEY_UP : 
+						beta += 0.1f;
+						if (beta > 1.5f)
+							beta = 1.5f;
+						break;
+
+		case GLUT_KEY_DOWN: 
+						beta -= 0.1f; 
+						if (beta < -1.5f)
+							beta = -1.5f;
+						break;
+
+		case GLUT_KEY_PAGE_UP : raio -= 0.1f; 
+			if (raio < 0.1f)
+				raio = 0.1f;
 			break;
 
-	    case 'n':
-	    	solido=15;
-			break;
+		case GLUT_KEY_PAGE_DOWN: raio += 0.1f; break;
+	
 	}
+	converte();
 	glutPostRedisplay();
 }
 
-void teclas_especiais(int tecla, int x, int y){
 
-	switch(tecla){
-	case GLUT_KEY_UP:
-		beta+=ANG;
-		break;
-	case GLUT_KEY_DOWN:
-		beta-=ANG;
-		break;
-	case GLUT_KEY_LEFT:
-		alpha-=ANG;
-		break;
-	case GLUT_KEY_RIGHT:
-		alpha+=ANG;
-	default:
-		break;
-	}
-	glutPostRedisplay();
-}
-
-// escrever função de processamento do menu
-
-void opcao_menu(int op){
-
-	switch(op){
-	case 1:
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		break;
-	case 2:
-		glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
-		break;
-	default:
-		break;
-	}
-	glutPostRedisplay();
-}
-
-void rato(int button, int state, int x, int y){
-	if(button==GLUT_LEFT_BUTTON){
-		ratoX=x;
-		ratoY=y;
-	}
-}
-
-void rato_mov(int x, int y){
-	int deltaX=ratoX-x;
-	int deltaY=ratoY-y;
-	ratoX=x;
-	ratoY=y;
-
-	beta-=deltaY*SENS_RATO;
-	alpha+=deltaX*SENS_RATO;
-
-	glutPostRedisplay();
-}
-
-int main(int argc, char **argv) {
+void main(int argc, char **argv) {
 
 // inicialização
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
 	glutInitWindowPosition(100,100);
-	glutInitWindowSize(800,800);
+	glutInitWindowSize(320,320);
 	glutCreateWindow("CG@DI-UM");
 		
-	
 // registo de funções 
 	glutDisplayFunc(renderScene);
 	glutIdleFunc(renderScene);
 	glutReshapeFunc(changeSize);
 
-// pôr aqui registo da funções do teclado e rato
-
-	glutKeyboardFunc(teclas);
-	glutSpecialFunc(teclas_especiais);
-
-// pôr aqui a criação do menu
-	
-	
-
-	glutMouseFunc(rato);
-	glutMotionFunc(rato_mov);
-	
-	int menu = glutCreateMenu(opcao_menu);
-
-	glutAddMenuEntry("Linhas",1);
-	glutAddMenuEntry("Solido",2);
-
-	glutAttachMenu(GLUT_RIGHT_BUTTON);
+// registo da funções do teclado e rato
+	glutSpecialFunc(processKeys);
 
 	glewInit();
-
+	
 // alguns settings para OpenGL
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
-	
 
-	e = Esfera(2,45,90);
+// inicialização da luz
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+
+// init
+	converte();
+	
+	e=new Esfera(1,1000,2000);
+
 // entrar no ciclo do GLUT 
 	glutMainLoop();
-	
-
-	return 1;
 }
 
