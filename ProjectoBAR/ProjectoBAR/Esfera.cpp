@@ -1,31 +1,34 @@
 #include "Esfera.h"
+
+#define _USE_MATH_DEFINES
+
 #include <stdlib.h>
 #include <GL/glew.h>
 #include <GL/glut.h>
-#include <IL/il.h>
-#define _USE_MATH_DEFINES
 #include <math.h>
 
 Esfera::Esfera(float raio, int divv, int divh)
 {
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
-
-	float arraySize=3*(divv+1)*divh*sizeof(float);
-	float* vertexB = (float*) malloc(arraySize);
-	float* normalB = (float*) malloc(arraySize);
-	nvertex=3*2*divv*divh;
-	indices=(int*) malloc(nvertex*sizeof(int));
-
+	
+	count=6*divv*divh;
+	int arraySize = 3*(divv+1)*divh*sizeof(float);
 	int i=0;
-	float angv, angh;
-	float incv=M_PI/divv;
-	float inch=2*M_PI/divh;
 
-	for(int ih=0; ih<divh; ih++){
+
+	float* vertexB= (float*) malloc(arraySize);
+	float* normalB= (float*) malloc(arraySize);
+	indices=(int*) malloc(count*sizeof(int));
+
+	float angv, angh;
+	float inch=2*M_PI/divh;
+	float incv=M_PI/divv;
+
+	for(int ih=0; ih<divh;ih++){
 		angh=inch*ih;
 
-		for(int iv=0; iv<=divv; iv++){
+		for(int iv=0; iv<=divv;iv++){
 			angv=incv*iv;
 
 			vertexB[i]=raio*sin(angv)*sin(angh);
@@ -46,11 +49,11 @@ Esfera::Esfera(float raio, int divv, int divh)
 
 	i=0;
 
-	for(int ih=0; ih<divh; ih++){
-		
+	for(int ih=0; ih<divh;ih++){
 
-		for(int iv=0; iv<divv; iv++){
-			int c1, c2, c3, c4;
+		for(int iv=0; iv<divv;iv++){
+
+			int c1,c2,c3,c4;
 			c1=(divv+1)*((ih)%divh)+iv;
 			c2=(divv+1)*((ih)%divh)+iv+1;
 			c3=(divv+1)*((ih+1)%divh)+iv;
@@ -66,19 +69,27 @@ Esfera::Esfera(float raio, int divv, int divh)
 		}
 
 	}
-	
+
 	glGenBuffers(2, buffers);
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[0]);
 	glBufferData(GL_ARRAY_BUFFER, arraySize, vertexB, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[1]);
 	glBufferData(GL_ARRAY_BUFFER, arraySize, normalB, GL_STATIC_DRAW);
 
-	free(vertexB);
-	free(normalB);
-
 }
 
 
 Esfera::~Esfera(void)
 {
+}
+
+
+void Esfera::desenhar(){
+	
+	glBindBuffer(GL_ARRAY_BUFFER,buffers[0]);
+	glVertexPointer(3,GL_FLOAT,0,0);
+	glBindBuffer(GL_ARRAY_BUFFER,buffers[1]);
+	glNormalPointer(GL_FLOAT,0,0);
+
+	glDrawElements(GL_TRIANGLES, count ,GL_UNSIGNED_INT, indices);
 }
