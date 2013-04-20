@@ -1,4 +1,5 @@
 #define _USE_MATH_DEFINES
+#include <GL\glew.h>
 #include <GL/glut.h>
 #include <math.h>
 #include "primitivas.h"
@@ -7,6 +8,8 @@
 #include "Bar.h"
 #include "cadeira.h"
 #include "mesa.h"
+
+#include "Esfera.h"
 
 #define MOV 0.1
 #define ANG 0.05
@@ -24,6 +27,8 @@ int ratoX =0.0;
 int ratoY=0.0;
 
 int solido=1;
+
+Esfera e;
 
 void desenha_solid(){
 	switch(solido)
@@ -122,9 +127,10 @@ void renderScene(void) {
 	//glRotatef(angulo,0.0f,1.0f,0.0f);
 	
 	
+	
 	//desenha_solid();
-	desenha_solid();
-	//Mesacafe(0.75,1.5);
+	
+	e.desenhar();
 
 	// End of frame
 	glutSwapBuffers();
@@ -260,10 +266,10 @@ int main(int argc, char **argv) {
 	glutInitWindowSize(800,800);
 	glutCreateWindow("CG@DI-UM");
 		
-
+	
 // registo de funções 
 	glutDisplayFunc(renderScene);
-	//glutIdleFunc(renderScene);
+	glutIdleFunc(renderScene);
 	glutReshapeFunc(changeSize);
 
 // pôr aqui registo da funções do teclado e rato
@@ -285,10 +291,14 @@ int main(int argc, char **argv) {
 
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
+	glewInit();
+
 // alguns settings para OpenGL
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	
+
+	e = Esfera(2,45,90);
 // entrar no ciclo do GLUT 
 	glutMainLoop();
 	
