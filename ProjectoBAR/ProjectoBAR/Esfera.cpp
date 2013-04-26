@@ -11,21 +11,28 @@ Esfera::Esfera(float raio, int divv, int divh)
 {
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	
 	count=6*divv*divh;
-	int arraySize = 3*(divv+1)*divh*sizeof(float);
+	int arraySize = 3*(divv+1)*(divh+1)*sizeof(float);
+	int textSize=2*(divv+1)*(divh+1)*sizeof(float);
 	int i=0;
+	int texI=0;
 
+	float texIncV=1/(float)divv;
+	float texIncH=1/(float)divh;
 
 	float* vertexB= (float*) malloc(arraySize);
 	float* normalB= (float*) malloc(arraySize);
+	float* textureB= (float*) malloc(textSize);
+
 	indices=(int*) malloc(count*sizeof(int));
 
 	float angv, angh;
 	float inch=2*M_PI/divh;
 	float incv=M_PI/divv;
 
-	for(int ih=0; ih<divh;ih++){
+	for(int ih=0; ih<=divh;ih++){
 		angh=inch*ih;
 
 		for(int iv=0; iv<=divv;iv++){
@@ -43,6 +50,12 @@ Esfera::Esfera(float raio, int divv, int divh)
 			normalB[i]=sin(angv)*cos(angh);
 			i++;
 
+			textureB[texI]=ih*texIncH;
+			texI++;
+
+			textureB[texI]=1-iv*texIncV;
+			texI++;
+
 		}
 
 	}
@@ -54,10 +67,10 @@ Esfera::Esfera(float raio, int divv, int divh)
 		for(int iv=0; iv<divv;iv++){
 
 			int c1,c2,c3,c4;
-			c1=(divv+1)*((ih)%divh)+iv;
-			c2=(divv+1)*((ih)%divh)+iv+1;
-			c3=(divv+1)*((ih+1)%divh)+iv;
-			c4=(divv+1)*((ih+1)%divh)+iv+1;
+			c1=(divv+1)*(ih)+iv;
+			c2=(divv+1)*(ih)+iv+1;
+			c3=(divv+1)*(ih+1)+iv;
+			c4=(divv+1)*(ih+1)+iv+1;
 
 			indices[i]=c1; i++;
 			indices[i]=c2; i++;
@@ -70,15 +83,17 @@ Esfera::Esfera(float raio, int divv, int divh)
 
 	}
 
-	glGenBuffers(2, buffers);
+	glGenBuffers(3, buffers);
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[0]);
 	glBufferData(GL_ARRAY_BUFFER, arraySize, vertexB, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[1]);
 	glBufferData(GL_ARRAY_BUFFER, arraySize, normalB, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER,buffers[2]);
+	glBufferData(GL_ARRAY_BUFFER, textSize, textureB, GL_STATIC_DRAW);
 
 	free(vertexB);
 	free(normalB);
-
+	free(textureB);
 }
 
 
@@ -93,6 +108,8 @@ void Esfera::desenhar(){
 	glVertexPointer(3,GL_FLOAT,0,0);
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[1]);
 	glNormalPointer(GL_FLOAT,0,0);
+	glBindBuffer(GL_ARRAY_BUFFER,buffers[2]);
+	glTexCoordPointer(2,GL_FLOAT,0,0);
 
 	glDrawElements(GL_TRIANGLES, count ,GL_UNSIGNED_INT, indices);
 }
