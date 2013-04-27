@@ -53,7 +53,7 @@ Esfera::Esfera(float raio, int divv, int divh)
 			textureB[texI]=ih*texIncH;
 			texI++;
 
-			textureB[texI]=1-iv*texIncV;
+			textureB[texI]=iv*texIncV;
 			texI++;
 
 		}
