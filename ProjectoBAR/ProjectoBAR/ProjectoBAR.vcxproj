@@ -83,14 +83,19 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>glew32.lib;DevIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>if exist "$(TargetPath).locked" del "$(TargetPath).locked"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bar.cpp" />
     <ClCompile Include="cadeira.cpp" />
+    <ClCompile Include="Cubo.cpp" />
     <ClCompile Include="Esfera.cpp" />
     <ClCompile Include="mesa.cpp" />
     <ClCompile Include="Objetos.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Plano.cpp" />
     <ClCompile Include="primitivas.cpp" />
     <ClCompile Include="copo.cpp" />
   </ItemGroup>
@@ -98,9 +103,11 @@
     <ClInclude Include="Bar.h" />
     <ClInclude Include="copo.h" />
     <ClInclude Include="cadeira.h" />
+    <ClInclude Include="Cubo.h" />
     <ClInclude Include="Esfera.h" />
     <ClInclude Include="mesa.h" />
     <ClInclude Include="Objetos.h" />
+    <ClInclude Include="Plano.h" />
     <ClInclude Include="primitivas.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
