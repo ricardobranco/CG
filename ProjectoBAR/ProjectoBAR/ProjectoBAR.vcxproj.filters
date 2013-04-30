@@ -39,6 +39,12 @@
     <ClCompile Include="Esfera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Cubo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Plano.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="primitivas.h">
@@ -60,6 +66,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Esfera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cubo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Plano.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

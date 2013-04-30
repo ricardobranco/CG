@@ -5,6 +5,8 @@
 #include <math.h>
 
 #include "Esfera.h"
+#include "Cubo.h"
+#include "Plano.h"
 
 #define _PI_ 3.14159
 
@@ -12,6 +14,9 @@ float alfa = 0.0f, beta = 0.0f, raio = 5.0f;
 float camX, camY, camZ;
 
 Esfera *e;
+Cubo *c;
+Plano *p;
+
 
 // declarar variáveis para armazenar os VBOs e número de vértices total
 //...
@@ -76,9 +81,9 @@ void renderScene(void) {
 	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,cor);
 	glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,spec);
 	glMateriali(GL_FRONT_AND_BACK,GL_SHININESS,128);
-	e->desenhar();
-	glTranslatef(3,0,0);
-	e->desenhar();
+	c->desenhar();
+	/*glTranslatef(3,0,0);*/
+	//e->desenhar();
 
 // End of frame
 	glutSwapBuffers();
@@ -127,7 +132,7 @@ void main(int argc, char **argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
 	glutInitWindowPosition(100,100);
-	glutInitWindowSize(320,320);
+	glutInitWindowSize(800,800);
 	glutCreateWindow("CG@DI-UM");
 		
 // registo de funções 
@@ -151,7 +156,9 @@ void main(int argc, char **argv) {
 // init
 	converte();
 	
-	e=new Esfera(1,100,200);
+	e=new Esfera(1,50,60);
+	c = new Cubo(1,500);
+	p = new Plano(2,2,100,100);
 
 // entrar no ciclo do GLUT 
 	glutMainLoop();
