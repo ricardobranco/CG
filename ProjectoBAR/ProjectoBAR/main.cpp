@@ -62,7 +62,8 @@ void changeSize(int w, int h) {
 
 void renderScene(void) {
 
-	float pos[4] = {1.0, 1.0, 1.0, 0.0};
+	float pos[4] = {1.0, 1.0, 1.0, 1};
+	float dif[] = {0.3,0.3,0.3,1};
 
 	glClearColor(0.0f,0.0f,0.0f,0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -74,6 +75,7 @@ void renderScene(void) {
 			  0.0f,1.0f,0.0f);
 
 	glLightfv(GL_LIGHT0, GL_POSITION, pos);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, dif);
 
 // Desenhar Cilindro
 	float cor[]={1.0,0.3,0.3};
@@ -156,8 +158,8 @@ void main(int argc, char **argv) {
 // init
 	converte();
 	
-	e=new Esfera(1,50,60);
-	c = new Cubo(1,500);
+	e=new Esfera(1,200,400);
+	c = new Cubo(1,100);
 	p = new Plano(2,2,100,100);
 
 // entrar no ciclo do GLUT 
