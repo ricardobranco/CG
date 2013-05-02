@@ -3,7 +3,7 @@
 #include <math.h>
 #include <GL/glew.h>
 #include <GL/glut.h>
-#include "primitivas.h"
+#include "Plano.h"
 
 void chao_params(float comp, float larg){
 
@@ -31,15 +31,21 @@ void chao_params(float comp, float larg){
 	glPushMatrix();
 		glTranslatef(comp/2-cateto,0.0f,larg/2-cateto);
 		glRotatef(45,0,1,0);
-		plano(hipotnusa,hipotnusa,camadas,camadas);
+		Plano* p1 = new Plano(hipotnusa,hipotnusa,camadas,camadas);
+		p1->desenhar();
+		//plano(hipotnusa,hipotnusa,camadas,camadas);
 	glPopMatrix();
 	glPushMatrix();
 		glTranslatef(comp/2-cateto,0.0f,-(larg/2-dir/2));
-		plano(cateto*2,dir,camadas,camadas);
+		Plano* p2 = new Plano(cateto*2,dir,camadas,camadas);
+		p2->desenhar();
+		//plano(cateto*2,dir,camadas,camadas);
 	glPopMatrix();
 	glPushMatrix();
-	glTranslatef(-(comp/2-(cateto+sul)/2),0.0f,larg/2-cateto/2);
-	plano(cateto+sul,cateto,camadas,camadas);
+		glTranslatef(-(comp/2-(cateto+sul)/2),0.0f,larg/2-cateto/2);
+		Plano* p3 = new Plano(cateto+sul,cateto,camadas,camadas);
+		p3->desenhar();
+	//plano(cateto+sul,cateto,camadas,camadas);
 	glPopMatrix();
 
 
@@ -79,35 +85,47 @@ void paredes_params(float comp,float larg,float altura){
 		glRotatef(90,0,0,1);
 		glRotatef(90,1,0,0);
 		glTranslatef(altura/2,hipotnusa/2,0);
-		plano(altura,hipotnusa,camadas,camadas);
+		Plano* p1 = new Plano(altura,hipotnusa,camadas,camadas);
+		p1->desenhar();
+		//plano(altura,hipotnusa,camadas,camadas);
 		glRotatef(180,1,0,0);
-		plano(altura,hipotnusa,camadas,camadas);
+		p1->desenhar();
+		//plano(altura,hipotnusa,camadas,camadas);
 	glPopMatrix();
 
 	glPushMatrix();//PAREDE NORTE
 	glTranslatef(comp/2-cateto,altura/2,-larg/2);
 		glRotatef(90,0,0,1);
 		glRotatef(90,1,0,0);
-		plano(altura,cateto*2,camadas,camadas);
+		//plano(altura,cateto*2,camadas,camadas);
+		Plano* p2 = new Plano(altura,cateto*2,camadas,camadas);
+		p2->desenhar();
 		glRotatef(180,1,0,0);
-		plano(altura,cateto*2,camadas,camadas);
+		p2->desenhar();
+		//plano(altura,cateto*2,camadas,camadas);
 	glPopMatrix();
 	
 	glPushMatrix();//PAREDE DIR
 	glTranslatef(comp/2,altura/2,-(larg/2-dir/2));
 		glRotatef(90,0,0,1);
-		plano(altura,dir,camadas,camadas);
+		Plano* p3 = new Plano(altura,dir,camadas,camadas);
+		p3->desenhar();
+		//plano(altura,dir,camadas,camadas);
 		glRotatef(180,1,0,0);
-		plano(altura,dir,camadas,camadas);
+		p3->desenhar();
+		//plano(altura,dir,camadas,camadas);
 	glPopMatrix();
 	
 	
 	glPushMatrix();//PAREDE ESQ
 	glTranslatef(-comp/2+sul,altura/2,-(larg/2-dir/2));
 		glRotatef(90,0,0,1);
-		plano(altura,dir,camadas,camadas);
+		p3->desenhar();
+		
+		//plano(altura,dir,camadas,camadas);
 		glRotatef(180,1,0,0);
-		plano(altura,dir,camadas,camadas);
+		p3->desenhar();
+		//plano(altura,dir,camadas,camadas);
 	glPopMatrix();
 	
 	glPushMatrix(); //PAREDE SULNORTE
@@ -115,9 +133,12 @@ void paredes_params(float comp,float larg,float altura){
 	glTranslatef(-comp/2+aux,altura/2,larg/2-cateto);
 		glRotatef(90,0,0,1);
 		glRotatef(90,1,0,0);
-		plano(altura,sul,camadas,camadas);
+		Plano* p4 = new Plano(altura,sul,camadas,camadas);
+		p4->desenhar();
+		//plano(altura,sul,camadas,camadas);
 		glRotatef(180,1,0,0);
-		plano(altura,sul,camadas,camadas);
+		p4->desenhar();
+		//plano(altura,sul,camadas,camadas);
 	glPopMatrix();
 	
 	glPushMatrix(); //PAREDE SULESQ
@@ -125,9 +146,11 @@ void paredes_params(float comp,float larg,float altura){
 	glTranslatef(-comp/2+aux,altura/2,larg/2);
 		glRotatef(90,0,0,1);
 		glRotatef(90,1,0,0);
-		plano(altura,sul,camadas,camadas);
+		p4->desenhar();
+		//plano(altura,sul,camadas,camadas);
 		glRotatef(180,1,0,0);
-		plano(altura,sul,camadas,camadas);
+		p4->desenhar();
+		//plano(altura,sul,camadas,camadas);
 	glPopMatrix();
 	
 
@@ -135,9 +158,12 @@ void paredes_params(float comp,float larg,float altura){
 	glTranslatef(comp/2-cateto-cateto/2,altura/2,larg/2);
 		glRotatef(90,0,0,1);
 		glRotatef(90,1,0,0);
-		plano(altura,cateto,camadas,camadas);
+		Plano* p5  = new Plano(altura,cateto,camadas,camadas);
+		p5->desenhar();
+		//plano(altura,cateto,camadas,camadas);
 		glRotatef(180,1,0,0);
-		plano(altura,cateto,camadas,camadas);
+		p5->desenhar();
+		//plano(altura,cateto,camadas,camadas);
 	glPopMatrix();
 
 	glPushMatrix(); //PAREDE SULESQ
@@ -145,10 +171,11 @@ void paredes_params(float comp,float larg,float altura){
 		glRotatef(90,0,1,0);
 		glRotatef(90,0,0,1);
 		glRotatef(90,1,0,0);
-		
-		plano(altura,cateto,camadas,camadas);
+		p5->desenhar();
+		//plano(altura,cateto,camadas,camadas);
 		glRotatef(180,1,0,0);
-		plano(altura,cateto,camadas,camadas);
+		p5->desenhar();
+		//plano(altura,cateto,camadas,camadas);
 	glPopMatrix();
 
 	glPushMatrix();//PAREDESWCDIR
@@ -157,26 +184,35 @@ void paredes_params(float comp,float larg,float altura){
 		glRotatef(90,0,0,1);
 		glRotatef(90,1,0,0);
 		glPushMatrix();
-			plano(altura,2*base_porta,camadas,camadas);
+			Plano* p6 = new Plano(altura,2*base_porta,camadas,camadas);
+			p6->desenhar();
+			//plano(altura,2*base_porta,camadas,camadas);
 			glRotatef(180,1,0,0);
-			plano(altura,2*base_porta,camadas,camadas);
+			p6->desenhar();
+			//plano(altura,2*base_porta,camadas,camadas);
 		glPopMatrix();
 		
 		glPushMatrix();
 		glTranslatef(altura/2-(altura-altura_porta)/2,0,0);
-			plano(altura-altura_porta,cateto,camadas,camadas);
+			Plano* p7 = new Plano(altura-altura_porta,cateto,camadas,camadas);
+			p7->desenhar();
+			//plano(altura-altura_porta,cateto,camadas,camadas);
 			glRotatef(180,1,0,0);
-			plano(altura-altura_porta,cateto,camadas,camadas);
+			p7->desenhar();
+			//plano(altura-altura_porta,cateto,camadas,camadas);
 		glPopMatrix();
 		glPushMatrix();
 			glTranslatef(0,-0.15,-base_porta);
 			glRotatef(-90,1,0,0);
-			plano(altura,0.30,camadas,camadas);
+			Plano*p8 = new Plano(altura,0.30f,camadas,camadas);
+			p8->desenhar();
+			//plano(altura,0.30,camadas,camadas);
 			glPopMatrix();
 		glPushMatrix();
 			glTranslatef(0,-0.15,base_porta);
 			glRotatef(90,1,0,0);
-			plano(altura,0.30,camadas,camadas);
+			p8->desenhar();
+			//plano(altura,0.30,camadas,camadas);
 		glPopMatrix();
 	glPopMatrix();
 
@@ -186,16 +222,21 @@ void paredes_params(float comp,float larg,float altura){
 		glRotatef(90,0,0,1);
 		glRotatef(90,1,0,0);
 		glPushMatrix();
-			plano(altura,2*base_porta,camadas,camadas);
+			Plano* p9 = new Plano(altura,2*base_porta,camadas,camadas);
+			p9->desenhar();
+			//plano(altura,2*base_porta,camadas,camadas);
 			glRotatef(180,1,0,0);
-			plano(altura,2*base_porta,camadas,camadas);
+			p9->desenhar();
+			//plano(altura,2*base_porta,camadas,camadas);
 		glPopMatrix();
 		
 		glPushMatrix();
 		glTranslatef(altura/2-(altura-altura_porta)/2,0,0);
-			plano(altura-altura_porta,cateto,camadas,camadas);
+			p7->desenhar();
+			//plano(altura-altura_porta,cateto,camadas,camadas);
 			glRotatef(180,1,0,0);
-			plano(altura-altura_porta,cateto,camadas,camadas);
+			p7->desenhar();
+			//plano(altura-altura_porta,cateto,camadas,camadas);
 		glPopMatrix();
 	glPopMatrix();
 	
@@ -232,24 +273,31 @@ void tecto_params(float comp, float larg,float altura){
 			glTranslatef(comp/2-cateto,0.0f,larg/2-cateto);
 			glRotatef(180,1,0,0);
 			glRotatef(45,0,1,0);
-			plano(hipotnusa,hipotnusa,camadas,camadas);
+			Plano* p1 = new Plano(hipotnusa,hipotnusa,camadas,camadas);
+			p1->desenhar();
+			//plano(hipotnusa,hipotnusa,camadas,camadas);
 		glPopMatrix();
 		glPushMatrix();
 			glTranslatef(comp/2-cateto,0.0f,-(larg/2-dir/2));
 			glRotatef(180,1,0,0);
-			plano(cateto*2,dir,camadas,camadas);
+			Plano* p2 = new Plano(cateto*2,dir,camadas,camadas);
+			p2->desenhar();
+			//plano(cateto*2,dir,camadas,camadas);
 		glPopMatrix();
 		glPushMatrix();
 			glTranslatef(-(comp/2-(cateto+sul)/2),0.0f,larg/2-cateto/2);
 			glRotatef(180,0,0,1);
-			plano(cateto+sul,cateto,camadas,camadas);
+			Plano* p3 = new Plano(cateto+sul,cateto,camadas,camadas);
+			p3->desenhar();
+			//plano(cateto+sul,cateto,camadas,camadas);
 		glPopMatrix();
 	glPopMatrix();
 	glPushMatrix(); //WCENTRADA
 		glTranslatef(0,0.7*altura,0);
 		glTranslatef(-comp/2+sul-0.15,0,larg/2-cateto/2);
 		glRotated(180,1,0,0);
-		plano(0.3,cateto,camadas,camadas);
+		Plano* p4 = new Plano(0.3f,cateto,camadas,camadas);
+		//plano(0.3,cateto,camadas,camadas);
 	glPopMatrix();
 	
 } 
