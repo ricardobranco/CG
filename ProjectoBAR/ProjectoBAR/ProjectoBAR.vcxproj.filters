@@ -45,6 +45,9 @@
     <ClCompile Include="Plano.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Cilindro.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="primitivas.h">
@@ -72,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Plano.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cilindro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

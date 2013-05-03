@@ -90,6 +90,7 @@
   <ItemGroup>
     <ClCompile Include="Bar.cpp" />
     <ClCompile Include="cadeira.cpp" />
+    <ClCompile Include="Cilindro.cpp" />
     <ClCompile Include="Cubo.cpp" />
     <ClCompile Include="Esfera.cpp" />
     <ClCompile Include="mesa.cpp" />
@@ -101,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bar.h" />
+    <ClInclude Include="Cilindro.h" />
     <ClInclude Include="copo.h" />
     <ClInclude Include="cadeira.h" />
     <ClInclude Include="Cubo.h" />
