@@ -7,6 +7,7 @@
 #include "Esfera.h"
 #include "Cubo.h"
 #include "Plano.h"
+#include "Cilindro.h"
 
 #define _PI_ 3.14159
 
@@ -16,6 +17,7 @@ float camX, camY, camZ;
 Esfera *e;
 Cubo *c;
 Plano *p;
+Cilindro *cil;
 
 
 // declarar variáveis para armazenar os VBOs e número de vértices total
@@ -83,7 +85,7 @@ void renderScene(void) {
 	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,cor);
 	glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,spec);
 	glMateriali(GL_FRONT_AND_BACK,GL_SHININESS,128);
-	c->desenhar();
+	cil->desenhar();
 	/*glTranslatef(3,0,0);*/
 	//e->desenhar();
 
