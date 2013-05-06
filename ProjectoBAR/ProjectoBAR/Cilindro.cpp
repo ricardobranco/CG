@@ -1,94 +1,110 @@
 #define _USE_MATH_DEFINES
 #include "Cilindro.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <GL/glew.h>
 #include <GL/glut.h>
 #include <math.h>
 
-Cilindro::Cilindro(float raio, float altura, int divf, int divc){
-	float ang,ang_inc,alt,alt_inc;
+Cilindro::Cilindro(float raio, float altura, int div, int fat,int divr){
+	float ang,ang_inc,alt,alt_inc,raio_inc,rd;
 	ang=0;
-	ang_inc=2*M_PI/divc;
-	alt=alt/2;
-	alt_inc=altura/divf;
-	int i=0;
+	ang_inc=2*M_PI/(float)div;
+	alt=0;
+	rd=0;
+	alt_inc=altura/(float)fat;
+	raio_inc=raio/(float)divr;
+	int i=0,j=0;
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
 
-	count=20*divf*divc;
-	int arraySize = 20*(divf+1)*(divc+1)*sizeof(float);
+	count=(divr*1)*(div+1)*(fat+1);
+	int arraySize = (divr+1)*(fat+1)*(div+1)*sizeof(float);
 
 	float* vertexB= (float*) malloc(arraySize);
 	float* normalB= (float*) malloc(arraySize);
 
 	indices=(int*) malloc(count*sizeof(int));
-
-	for(int bi=0;bi<divc;bi++,ang=ang+ang_inc){
-		vertexB[i]=cos(ang)*raio;
-		normalB[i]=0;
-		i++;
-		vertexB[i]=-alt;
-		normalB[i]=-1;
-		i++;
-		vertexB[i]=-sin(ang)*raio;
-		normalB[i]=0;
-		i++;
-	}
-
-	for(int bi=0;bi<divc;bi++,ang=ang+ang_inc){
-		vertexB[i]=cos(ang)*raio;
-		normalB[i]=0;
-		i++;
-		vertexB[i]=alt;
-		normalB[i]=1;
-		i++;
-		vertexB[i]=sin(ang)*raio;
-		normalB[i]=0;
-		i++;
-	}
-
-	for (int f = 0; f < divf; f++)
+		//lateral
+	for (int d = 0; d <=div; d++)
 	{
-		ang=0;
-		alt=alt-alt_inc*f;
-		for (int fi = 0; fi < divc; fi++,ang=ang+ang_inc)
-		{
-			vertexB[i]=cos(ang)*raio;
+		ang=d*ang_inc;
+		for(int f=0;f<=fat;f++){
+			alt=altura/2-(f*alt_inc);
+
+			vertexB[i]=raio*sin(ang);
+			normalB[i]=sin(ang);
+			i++;
+			vertexB[i]=alt;
 			normalB[i]=0;
 			i++;
-			vertexB[i]=alt-alt_inc;
-			normalB[i]=0;
+			vertexB[i]=raio*cos(ang);
+			normalB[i]=cos(ang);
 			i++;
-			vertexB[i]=sin(ang);
-			normalB[i]=0;
-			i++;
+
 		}
 	}
-		i=0;
 
-	for(int ih=0; ih<divc;ih++){
+		for(int ih=0; ih<div;ih++){
 
-		for(int iv=0; iv<divf;iv++){
+			for(int iv=0; iv<fat;iv++){
 
 			int c1,c2,c3,c4;
-			c1=(divf+1)*((ih)%divc)+iv;
-			c2=(divf+1)*((ih)%divc)+iv+1;
-			c3=(divf+1)*((ih+1)%(divc+1))+iv;
-			c4=(divf+1)*((ih+1)%(divc+1))+iv+1;
-			
-			indices[i]=c1; i++;
-			indices[i]=c3; i++;
-			indices[i]=c2; i++;
-			
-			indices[i]=c3; i++;
-			indices[i]=c4; i++;
-			indices[i]=c2; i++;
+			c1=(fat+1)*(iv)+ih;
+			c2=(fat+1)*(iv)+ih+1;
+			c3=(fat+1)*(iv+1)+ih+1;
+			c4=(fat+1)*(iv+1)+ih;
+
+			indices[j]=c1; j++;
+			indices[j]=c2; j++;
+			indices[j]=c3; j++;
+			indices[j]=c3; j++;
+			indices[j]=c4; j++;
+			indices[j]=c1; j++;
 
 		}
 
 	}
+		//base superior
+			for(int r=0;r<=divr;r++){
+				rd=raio_inc*r;
+
+			for (int d = 0; d<=div; d++)
+			{
+				ang=d*ang_inc;
+				vertexB[i]=rd*sin(ang);
+				normalB[i]=0;
+				i++;
+				vertexB[i]=altura/2;
+				normalB[i]=1;
+				i++;
+				vertexB[i]=rd*cos(ang);
+				normalB[i]=0;
+				i++;
+			}
+			}
+			for(int r=0;r<divr;r++){
+
+			for (int d= 0; d <div; d++)
+			{
+				int c1,c2,c3,c4;
+				c1=((div+1)*(d+1)+r+1);
+				c2=((div+1)*(d)+r+1);
+				c3=((div+1)*(d)+r);
+				c4=((div+1)*(d+1)+r);
+
+				indices[j]=c1;	j++;
+				indices[j]=c2;	j++;
+				indices[j]=c3;	j++;
+				indices[j]=c1;	j++;
+				indices[j]=c3;	j++;
+				indices[j]=c4;	j++;
+				
+			}
+			}
+
 
 	glGenBuffers(2, buffers);
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[0]);
@@ -114,7 +130,7 @@ void Cilindro::desenhar(){
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[1]);
 	glNormalPointer(GL_FLOAT,0,0);
 
-	glDrawElements(GL_TRIANGLES, count ,GL_UNSIGNED_INT, indices);
+	glDrawElements(GL_TRIANGLES, count ,GL_UNSIGNED_INT,indices);
 
 }
 
