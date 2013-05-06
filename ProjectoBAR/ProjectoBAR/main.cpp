@@ -163,7 +163,7 @@ void main(int argc, char **argv) {
 	e=new Esfera(1,200,400);
 	c = new Cubo(1,100);
 	p = new Plano(2,2,100,100);
-	cil = new Cilindro(1,1,110,100,20);
+	cil = new Cilindro(0.5,1,110,200,200);
 
 // entrar no ciclo do GLUT 
 	glutMainLoop();

@@ -86,7 +86,7 @@ Cilindro::Cilindro(float raio, float altura, int div, int fat,int divr){
 			}
 			}
 
-			int b1= (fat+1)*(div)+fat+1;
+			int b1= (fat+1)*(div+1);
 			for(int r=0;r<divr;r++){
 
 			for (int d= 0; d <div; d++)
@@ -103,6 +103,46 @@ Cilindro::Cilindro(float raio, float altura, int div, int fat,int divr){
 				indices[j]=c1;	j++;
 				indices[j]=c3;	j++;
 				indices[j]=c4;	j++;
+				
+			}
+			}
+
+			//base inferior
+			for(int r=0;r<=divr;r++){
+				rd=raio_inc*r;
+
+			for (int d = 0; d<=div; d++)
+			{
+				ang=d*ang_inc;
+				vertexB[i]=rd*sin(ang);
+				normalB[i]=0;
+				i++;
+				vertexB[i]=-altura/2;
+				normalB[i]=-1;
+				i++;
+				vertexB[i]=rd*cos(ang);
+				normalB[i]=0;
+				i++;
+			}
+			}
+
+			int b2= b1+(div+1)*(divr+1);
+			for(int r=0;r<divr;r++){
+
+			for (int d= 0; d <div; d++)
+			{
+				int c1,c2,c3,c4;
+				c1=((div+1)*(r+1)+d+1)+b2;
+				c2=((div+1)*(r)+d+1)+b2;
+				c3=((div+1)*(r)+d)+b2;
+				c4=((div+1)*(r+1)+d)+b2;
+
+				indices[j]=c3;	j++;
+				indices[j]=c2;	j++;
+				indices[j]=c1;	j++;
+				indices[j]=c1;	j++;
+				indices[j]=c4;	j++;
+				indices[j]=c3;	j++;
 				
 			}
 			}
