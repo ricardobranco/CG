@@ -52,10 +52,10 @@ Cilindro::Cilindro(float raio, float altura, int div, int fat,int divr){
 			for(int iv=0; iv<fat;iv++){
 
 			int c1,c2,c3,c4;
-			c1=(fat+1)*(iv)+ih;
-			c2=(fat+1)*(iv)+ih+1;
-			c3=(fat+1)*(iv+1)+ih+1;
-			c4=(fat+1)*(iv+1)+ih;
+			c1=(fat+1)*(ih)+iv;
+			c2=(fat+1)*(ih)+iv+1;
+			c3=(fat+1)*(ih+1)+iv+1;
+			c4=(fat+1)*(ih+1)+iv;
 
 			indices[j]=c1; j++;
 			indices[j]=c2; j++;
@@ -85,15 +85,17 @@ Cilindro::Cilindro(float raio, float altura, int div, int fat,int divr){
 				i++;
 			}
 			}
+
+			int b1= (fat+1)*(div)+fat+1;
 			for(int r=0;r<divr;r++){
 
 			for (int d= 0; d <div; d++)
 			{
 				int c1,c2,c3,c4;
-				c1=((div+1)*(d+1)+r+1);
-				c2=((div+1)*(d)+r+1);
-				c3=((div+1)*(d)+r);
-				c4=((div+1)*(d+1)+r);
+				c1=((div+1)*(r+1)+d+1)+b1;
+				c2=((div+1)*(r)+d+1)+b1;
+				c3=((div+1)*(r)+d)+b1;
+				c4=((div+1)*(r+1)+d)+b1;
 
 				indices[j]=c1;	j++;
 				indices[j]=c2;	j++;
