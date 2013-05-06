@@ -91,6 +91,7 @@
     <ClCompile Include="Bar.cpp" />
     <ClCompile Include="cadeira.cpp" />
     <ClCompile Include="Cilindro.cpp" />
+    <ClCompile Include="Cone.cpp" />
     <ClCompile Include="Cubo.cpp" />
     <ClCompile Include="Esfera.cpp" />
     <ClCompile Include="mesa.cpp" />
@@ -107,6 +108,7 @@
     <ClInclude Include="cadeira.h" />
     <ClInclude Include="Cubo.h" />
     <ClInclude Include="Esfera.h" />
+    <ClInclude Include="Cone.h" />
     <ClInclude Include="mesa.h" />
     <ClInclude Include="Objetos.h" />
     <ClInclude Include="Plano.h" />
