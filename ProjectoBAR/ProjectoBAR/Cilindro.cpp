@@ -20,9 +20,9 @@ Cilindro::Cilindro(float raio, float altura, int div, int fat,int divr){
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
 
-	count=(divr*1)*(div+1)*(fat+1);
-	int arraySize = (divr+1)*(fat+1)*(div+1)*sizeof(float);
-
+	count=6*div*fat+12*divr*div;
+	int arraySize = 3*((div+1)*(fat+1)+2*(divr+1)*(div+1))*sizeof(float);
+	
 	float* vertexB= (float*) malloc(arraySize);
 	float* normalB= (float*) malloc(arraySize);
 
