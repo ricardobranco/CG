@@ -16,15 +16,22 @@ Cilindro::Cilindro(float raio, float altura, int div, int fat,int divr){
 	alt_inc=altura/(float)fat;
 	raio_inc=raio/(float)divr;
 	int i=0,j=0;
+	int texI=0;
+
+	float texIncD=1/(float)div;
+	float texIncR=1/(float)divr;
+	float texIncF=1/(float)fat;
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	count=6*div*fat+12*divr*div;
 	int arraySize = 3*((div+1)*(fat+1)+2*(divr+1)*(div+1))*sizeof(float);
-	
+	int textSize=2*((div+1)*(fat+1)+2*(divr+1)*(div+1))*sizeof(float);
 	float* vertexB= (float*) malloc(arraySize);
 	float* normalB= (float*) malloc(arraySize);
+	float* textureB= (float*) malloc(textSize);
 
 	indices=(int*) malloc(count*sizeof(int));
 		//lateral
@@ -43,6 +50,12 @@ Cilindro::Cilindro(float raio, float altura, int div, int fat,int divr){
 			vertexB[i]=raio*cos(ang);
 			normalB[i]=cos(ang);
 			i++;
+						
+			textureB[texI]=d*texIncD;
+			texI++;
+
+			textureB[texI]=f*texIncF;
+			texI++;
 
 		}
 	}
@@ -83,6 +96,16 @@ Cilindro::Cilindro(float raio, float altura, int div, int fat,int divr){
 				vertexB[i]=rd*cos(ang);
 				normalB[i]=0;
 				i++;
+
+				textureB[texI]=r*texIncR;
+				texI++;
+							
+				textureB[texI]=d*texIncD;
+				texI++;
+
+				
+
+
 			}
 			}
 
@@ -123,6 +146,12 @@ Cilindro::Cilindro(float raio, float altura, int div, int fat,int divr){
 				vertexB[i]=rd*cos(ang);
 				normalB[i]=0;
 				i++;
+
+				textureB[texI]=r*texIncR;
+				texI++;
+							
+				textureB[texI]=d*texIncD;
+				texI++;
 			}
 			}
 
@@ -148,15 +177,17 @@ Cilindro::Cilindro(float raio, float altura, int div, int fat,int divr){
 			}
 
 
-	glGenBuffers(2, buffers);
+	glGenBuffers(3, buffers);
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[0]);
 	glBufferData(GL_ARRAY_BUFFER, arraySize, vertexB, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[1]);
 	glBufferData(GL_ARRAY_BUFFER, arraySize, normalB, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER,buffers[2]);
+	glBufferData(GL_ARRAY_BUFFER, textSize, textureB, GL_STATIC_DRAW);
 
 	free(vertexB);
 	free(normalB);
-	
+	free(textureB);
 
 }
 
@@ -171,6 +202,8 @@ void Cilindro::desenhar(){
 	glVertexPointer(3,GL_FLOAT,0,0);
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[1]);
 	glNormalPointer(GL_FLOAT,0,0);
+	glBindBuffer(GL_ARRAY_BUFFER,buffers[2]);
+	glTexCoordPointer(2,GL_FLOAT,0,0);
 
 	glDrawElements(GL_TRIANGLES, count ,GL_UNSIGNED_INT,indices);
 

@@ -7,10 +7,7 @@ public:
 	~Cilindro(void);
 	void desenhar();
 protected:
-	unsigned int buffers[2];
+	unsigned int buffers[3];
 	int count;
-	int count2;
 	int *indices;
-	int *indices2;
-	int *indices3;
 };

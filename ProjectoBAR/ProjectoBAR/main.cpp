@@ -85,7 +85,7 @@ void renderScene(void) {
 	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,cor);
 	glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,spec);
 	glMateriali(GL_FRONT_AND_BACK,GL_SHININESS,128);
-	cil->desenhar();
+	e->desenhar();
 	/*glTranslatef(3,0,0);*/
 	//e->desenhar();
 
