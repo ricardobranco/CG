@@ -8,6 +8,7 @@
 #include "Cubo.h"
 #include "Plano.h"
 #include "Cilindro.h"
+#include "copo.h"
 
 #define _PI_ 3.14159
 
@@ -18,6 +19,7 @@ Esfera *e;
 Cubo *c;
 Plano *p;
 Cilindro *cil;
+Copo *cop;
 
 
 // declarar variáveis para armazenar os VBOs e número de vértices total
@@ -64,7 +66,7 @@ void changeSize(int w, int h) {
 
 void renderScene(void) {
 
-	float pos[4] = {1.0, 1.0, 1.0, 1};
+	float pos[4] = {1.0, 4.0, 1.0, 1};
 	float dif[] = {0.3,0.3,0.3,1};
 
 	glClearColor(0.0f,0.0f,0.0f,0.0f);
@@ -80,12 +82,12 @@ void renderScene(void) {
 	glLightfv(GL_LIGHT0, GL_AMBIENT, dif);
 
 // Desenhar Cilindro
-	float cor[]={1.0,0.3,0.3};
+	float cor[]={1.0,1.0,1.0,1.0};
 	float spec[]={1,1,1,1.0};
 	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,cor);
 	glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,spec);
 	glMateriali(GL_FRONT_AND_BACK,GL_SHININESS,128);
-	cil->desenhar();
+	cop->desenhar();
 	/*glTranslatef(3,0,0);*/
 	//e->desenhar();
 
@@ -164,7 +166,7 @@ void main(int argc, char **argv) {
 	c = new Cubo(1,100);
 	p = new Plano(2,2,100,100);
 	cil = new Cilindro(0.5,1,40,40,20);
-
+	cop=copo_vinho(1);
 // entrar no ciclo do GLUT 
 	glutMainLoop();
 }

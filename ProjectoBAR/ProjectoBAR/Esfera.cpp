@@ -32,11 +32,13 @@ Esfera::Esfera(float raio, int divv, int divh)
 	float inch=2*M_PI/divh;
 	float incv=M_PI/divv;
 
-	for(int ih=0; ih<=divh;ih++){
-		angh=inch*ih;
+	
 
-		for(int iv=0; iv<=divv;iv++){
-			angv=incv*iv;
+	for(int iv=0; iv<=divv;iv++){
+		angv=incv*iv;
+
+		for(int ih=0; ih<=divh;ih++){
+			angh=inch*ih;
 
 			vertexB[i]=raio*sin(angv)*sin(angh);
 			normalB[i]=sin(angv)*sin(angh);
@@ -61,22 +63,26 @@ Esfera::Esfera(float raio, int divv, int divh)
 	}
 
 	i=0;
+	
+	
+	for(int iv=0; iv<divv;iv++){
+		
+		for(int ih=0; ih<divh;ih++){
 
-	for(int ih=0; ih<divh;ih++){
-
-		for(int iv=0; iv<divv;iv++){
+		
 
 			int c1,c2,c3,c4;
-			c1=(divv+1)*(ih)+iv;
-			c2=(divv+1)*(ih)+iv+1;
-			c3=(divv+1)*(ih+1)+iv;
-			c4=(divv+1)*(ih+1)+iv+1;
+			c1=(divh+1)*(iv)+ih;
+			c2=(divh+1)*(iv)+ih+1;
+			c3=(divh+1)*(iv+1)+ih;
+			c4=(divh+1)*(iv+1)+ih+1;
 
 			indices[i]=c1; i++;
-			indices[i]=c2; i++;
 			indices[i]=c3; i++;
 			indices[i]=c2; i++;
+			
 			indices[i]=c4; i++;
+			indices[i]=c2; i++;
 			indices[i]=c3; i++;
 
 		}

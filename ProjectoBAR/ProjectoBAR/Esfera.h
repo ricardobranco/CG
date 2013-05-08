@@ -10,5 +10,8 @@ protected:
 	unsigned int buffers[3];
 	int count;
 	int *indices;
+	
+	
+	friend class Copo;
 };
 
