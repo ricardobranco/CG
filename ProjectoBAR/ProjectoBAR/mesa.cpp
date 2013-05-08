@@ -204,8 +204,12 @@ void mesa_quadrada(float ms,float alt){
 	glPopMatrix();
 }
 
-void balcao (){
-	Cubo *c = new Cubo();
+void balcao(){
+	Cubo *c = new Cubo(1,50);
+
+	glTranslatef(0,0.5,0);
+	glScalef(2,1,0.5);
+	c->desenhar();
 
 }
 

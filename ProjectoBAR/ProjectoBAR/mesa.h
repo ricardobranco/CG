@@ -7,8 +7,9 @@
 #include "Cubo.h"
 
 
-void desenha_mesa(float size);
-void desenha_mesa1(float size);
+void desenha_mesa_redonda(float size);
+void desenha_mesa_quadrada(float size);
+void desenha_balcao(float size);
 
 
 #endif
