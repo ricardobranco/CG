@@ -53,14 +53,14 @@ Cone::Cone(float raio,float altura,float div,float divh,float divr)
 
 	for(int ih=0; ih<divh;ih++){
 
-			for(int iv=0; iv<div;iv++){
+			for(int ivh=0; ivh<div;ivh++){
 
 				//Entender estes c1/c2/c3/c4
 			int c1,c2,c3,c4;
-			c1=(div+1)*(ih)+iv;
-			c2=(div+1)*(ih)+iv+1;
-			c3=(div+1)*(ih+1)+iv+1;
-			c4=(div+1)*(ih+1)+iv;
+			c1=(div+1)*(ih)+ivh;
+			c2=(div+1)*(ih)+ivh+1;
+			c3=(div+1)*(ih+1)+ivh+1;
+			c4=(div+1)*(ih+1)+ivh;
 
 			indices[nj]=c1; nj++;
 			indices[nj]=c2; nj++;
@@ -71,6 +71,7 @@ Cone::Cone(float raio,float altura,float div,float divh,float divr)
 
 			}
 	}
+	/*
 	//base inferior
 			for(int r=0;r<=divr;r++){
 				r2=r2_inc*r;
@@ -88,19 +89,23 @@ Cone::Cone(float raio,float altura,float div,float divh,float divr)
 				normalB[iv]=0;
 				iv++;
 
+				
+				
+
+
 			}
 			}
 
-			int b2= (divh+1)*(div+1);
+			int b1= (divh+1)*(div+1);
 			for(int r=0;r<divr;r++){
 
 			for (int d= 0; d <div; d++)
 			{
 				int c1,c2,c3,c4;
-				c1=((div+1)*(r+1)+d+1)+b2;
-				c2=((div+1)*(r)+d+1)+b2;
-				c3=((div+1)*(r)+d)+b2;
-				c4=((div+1)*(r+1)+d)+b2;
+				c1=((div+1)*(r+1)+d+1)+b1;
+				c2=((div+1)*(r)+d+1)+b1;
+				c3=((div+1)*(r)+d)+b1;
+				c4=((div+1)*(r+1)+d)+b1;
 
 				indices[nj]=c3;	nj++;
 				indices[nj]=c2;	nj++;
@@ -112,7 +117,7 @@ Cone::Cone(float raio,float altura,float div,float divh,float divr)
 			}
 			}
 
-
+			*/
 	glGenBuffers(2, buffers);
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[0]);
 	glBufferData(GL_ARRAY_BUFFER,count,vertexC, GL_STATIC_DRAW);
