@@ -11,37 +11,39 @@ Cone::Cone(float raio,float altura,float div,float divh,float divr)
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	float csize=3*4*div*divh;
-	float *vertexC=(float*)malloc(csize*sizeof(float));
-	float* normalB= (float*) malloc(csize*sizeof(float));
-	float alf=0.0,dalf=(2*M_PI)/div;
-	float draio=raio/divh;
-	float h=0,dh=altura/divh;
+	float arraySize=3*(divh+1)*(div+1)+3*(div+1)*(divr+1);
+	float *vertexC=(float*)malloc(arraySize*sizeof(float));
+	float* normalB= (float*) malloc(arraySize*sizeof(float));
+	float alf=0.0,dalf=(2*M_PI)/(float)div;
+	float draio=raio/(float)divh;
+	float r1,r2=0;
+	float r2_inc=raio/(float)divr;
+	float h=0,dh=altura/(float)divh;
 	//incremento no array
 	int iv=0;
 	int nj=0;
-	count=csize;
+	count=6*(div)*(divh)+6*(divr)*div;
 	//falta o valor
 	indices=(int*)malloc(count*sizeof(int));
 
-	for(int idivh=0;idivh<divh;idivh++)
+	for(int i=0;i<=divh;i++)
 	{
-		raio-=(draio);
+		r1=raio-(i*draio);
+		h=i*dh;
+		
 
-		alf=idivh*dalf;
-
-		for(int idiv=0;idiv<div;idiv++)
+		for(int j=0;j<=div;j++)
 		{ 
-			h=altura/2-(idiv*dh);
-			vertexC[iv]=raio*sin(alf);
+			alf=j*dalf;
+
+			vertexC[iv]=r1*sin(alf);
 			normalB[iv]=sin(alf);
 			iv++;
 			vertexC[iv]=h;
 			normalB[iv]=0;
 			iv++;
-			vertexC[iv]=raio*cos(alf);
+			vertexC[iv]=r1*cos(alf);
 			normalB[iv]=cos(alf);
 			iv++;
 		}
@@ -69,6 +71,46 @@ Cone::Cone(float raio,float altura,float div,float divh,float divr)
 
 			}
 	}
+	//base inferior
+			for(int r=0;r<=divr;r++){
+				r2=r2_inc*r;
+
+			for (int d = 0; d<=div; d++)
+			{
+				alf=d*dalf;
+				vertexC[iv]=r2*sin(alf);
+				normalB[iv]=0;
+				iv++;
+				vertexC[iv]=0;
+				normalB[iv]=-1;
+				iv++;
+				vertexC[iv]=r2*cos(alf);
+				normalB[iv]=0;
+				iv++;
+
+			}
+			}
+
+			int b2= (divh+1)*(div+1);
+			for(int r=0;r<divr;r++){
+
+			for (int d= 0; d <div; d++)
+			{
+				int c1,c2,c3,c4;
+				c1=((div+1)*(r+1)+d+1)+b2;
+				c2=((div+1)*(r)+d+1)+b2;
+				c3=((div+1)*(r)+d)+b2;
+				c4=((div+1)*(r+1)+d)+b2;
+
+				indices[nj]=c3;	nj++;
+				indices[nj]=c2;	nj++;
+				indices[nj]=c1;	nj++;
+				indices[nj]=c1;	nj++;
+				indices[nj]=c4;	nj++;
+				indices[nj]=c3;	nj++;
+				
+			}
+			}
 
 
 	glGenBuffers(2, buffers);
