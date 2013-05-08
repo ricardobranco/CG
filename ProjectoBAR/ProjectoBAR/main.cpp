@@ -9,7 +9,11 @@
 #include "Plano.h"
 #include "Cilindro.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "copo.h"
+=======
+#include "Cone.h"
+>>>>>>> 0dfb48b9a326f66aa4bad2ac5e7dd22aeb0fa7fc
 =======
 #include "Cone.h"
 >>>>>>> 0dfb48b9a326f66aa4bad2ac5e7dd22aeb0fa7fc
@@ -24,8 +28,12 @@ Cubo *c;
 Plano *p;
 Cilindro *cil;
 <<<<<<< HEAD
+<<<<<<< HEAD
 Copo *cop;
 
+=======
+Cone *cone;
+>>>>>>> 0dfb48b9a326f66aa4bad2ac5e7dd22aeb0fa7fc
 =======
 Cone *cone;
 >>>>>>> 0dfb48b9a326f66aa4bad2ac5e7dd22aeb0fa7fc
@@ -96,7 +104,11 @@ void renderScene(void) {
 	glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,spec);
 	glMateriali(GL_FRONT_AND_BACK,GL_SHININESS,128);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cop->desenhar();
+=======
+	cone->desenhar();
+>>>>>>> 0dfb48b9a326f66aa4bad2ac5e7dd22aeb0fa7fc
 =======
 	cone->desenhar();
 >>>>>>> 0dfb48b9a326f66aa4bad2ac5e7dd22aeb0fa7fc
@@ -178,8 +190,13 @@ void main(int argc, char **argv) {
 	c = new Cubo(1,100);
 	p = new Plano(2,2,100,100);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cil = new Cilindro(0.5,1,40,40,20);
 	cop=copo_vinho(1);
+=======
+	cil = new Cilindro(0.5,1,100,100,100);
+	cone = new Cone(0.5,1,100,100,100);
+>>>>>>> 0dfb48b9a326f66aa4bad2ac5e7dd22aeb0fa7fc
 =======
 	cil = new Cilindro(0.5,1,100,100,100);
 	cone = new Cone(0.5,1,100,100,100);
