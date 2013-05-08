@@ -8,7 +8,11 @@
 #include "Cubo.h"
 #include "Plano.h"
 #include "Cilindro.h"
+<<<<<<< HEAD
 #include "copo.h"
+=======
+#include "Cone.h"
+>>>>>>> 0dfb48b9a326f66aa4bad2ac5e7dd22aeb0fa7fc
 
 #define _PI_ 3.14159
 
@@ -19,8 +23,12 @@ Esfera *e;
 Cubo *c;
 Plano *p;
 Cilindro *cil;
+<<<<<<< HEAD
 Copo *cop;
 
+=======
+Cone *cone;
+>>>>>>> 0dfb48b9a326f66aa4bad2ac5e7dd22aeb0fa7fc
 
 // declarar variáveis para armazenar os VBOs e número de vértices total
 //...
@@ -87,7 +95,11 @@ void renderScene(void) {
 	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,cor);
 	glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,spec);
 	glMateriali(GL_FRONT_AND_BACK,GL_SHININESS,128);
+<<<<<<< HEAD
 	cop->desenhar();
+=======
+	cone->desenhar();
+>>>>>>> 0dfb48b9a326f66aa4bad2ac5e7dd22aeb0fa7fc
 	/*glTranslatef(3,0,0);*/
 	//e->desenhar();
 
@@ -165,8 +177,13 @@ void main(int argc, char **argv) {
 	e=new Esfera(1,200,400);
 	c = new Cubo(1,100);
 	p = new Plano(2,2,100,100);
+<<<<<<< HEAD
 	cil = new Cilindro(0.5,1,40,40,20);
 	cop=copo_vinho(1);
+=======
+	cil = new Cilindro(0.5,1,100,100,100);
+	cone = new Cone(0.5,1,100,100,100);
+>>>>>>> 0dfb48b9a326f66aa4bad2ac5e7dd22aeb0fa7fc
 // entrar no ciclo do GLUT 
 	glutMainLoop();
 }
