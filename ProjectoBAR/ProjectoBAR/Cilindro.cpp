@@ -20,10 +20,10 @@ Cilindro::Cilindro(float raio, float altura, int div, int fat,int divr){
 
 	float texIncDLat=0.5/(float)div;
 	float texIncFLat=1/(float)fat;
-	float texIncRBaseS=(raio/(float)divr)*cos(ang);
-	float texIncDBaseS=(raio/(float)divr)*sin(ang);
-	float texIncRBaseI=(raio/(float)divr)*cos(ang);
-	float texIncDBaseI=(raio/(float)divr)*sin(ang);
+	float texIncRBaseS=(raio/(float)divr);
+	float texIncDBaseS=(raio/(float)divr);
+	float texIncRBaseI=(raio/(float)divr);
+	float texIncDBaseI=(raio/(float)divr);
 
 
 	glEnableClientState(GL_VERTEX_ARRAY);
@@ -101,10 +101,10 @@ Cilindro::Cilindro(float raio, float altura, int div, int fat,int divr){
 				normalB[i]=0;
 				i++;
 
-				textureB[texI]=r*texIncRBaseS+0.25;
+				textureB[texI]=r*texIncRBaseS*cos(ang)+0.25;
 				texI++;
 							
-				textureB[texI]=d*texIncDBaseS+0.75;
+				textureB[texI]=d*texIncDBaseS*sin(ang)+0.75;
 				texI++;
 
 				
@@ -151,10 +151,10 @@ Cilindro::Cilindro(float raio, float altura, int div, int fat,int divr){
 				normalB[i]=0;
 				i++;
 
-				textureB[texI]=r*texIncRBaseI+0.75;
+				textureB[texI]=r*texIncRBaseI*cos(ang)+0.75;
 				texI++;
 							
-				textureB[texI]=d*texIncDBaseI+0.75;
+				textureB[texI]=d*texIncDBaseI*sin(ang)+0.75;
 				texI++;
 			}
 			}
