@@ -103,9 +103,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bar.h" />
+    <ClInclude Include="cadeira.h" />
     <ClInclude Include="Cilindro.h" />
     <ClInclude Include="copo.h" />
-    <ClInclude Include="cadeira.h" />
+    <ClInclude Include="cadeiras.h" />
     <ClInclude Include="Cubo.h" />
     <ClInclude Include="Esfera.h" />
     <ClInclude Include="Cone.h" />

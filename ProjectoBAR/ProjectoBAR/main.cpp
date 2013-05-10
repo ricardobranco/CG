@@ -11,6 +11,8 @@
 
 #include "copo.h"
 #include "Cone.h"
+#include "cadeira.h"
+
 
 
 #define _PI_ 3.14159
@@ -24,6 +26,7 @@ Plano *p;
 Cilindro *cil;
 Cone *cone;
 Copo *cop;
+Cadeira *cad;
 
 
 
@@ -93,7 +96,9 @@ void renderScene(void) {
 	glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,spec);
 	glMateriali(GL_FRONT_AND_BACK,GL_SHININESS,128);
 
-	cone->desenhar();
+	cad->setSize(4);
+	cad->bancoSofa();
+	//cone->desenhar();
 	/*glTranslatef(3,0,0);*/
 	//e->desenhar();
 
@@ -174,7 +179,7 @@ void main(int argc, char **argv) {
 
 	cil = new Cilindro(0.5,1,40,40,20);
 	cop=copo_vinho(1);
-	cone = new Cone(0.5,1,100,100,100);
+	cad=new Cadeira(1);
 
 // entrar no ciclo do GLUT 
 	glutMainLoop();

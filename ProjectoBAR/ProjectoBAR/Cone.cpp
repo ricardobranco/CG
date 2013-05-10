@@ -153,7 +153,6 @@ Cone::~Cone(void)
 {
 }
 
-
 void Cone::desenhar(){
 
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[0]);
