@@ -21,11 +21,12 @@ Cone::Cone(float raio, float altura, int divh, int divc,int divr){
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
 
-	count=(divr*1)*(divc+1)*(divh+1);
-	int arraySize = (divr+1)*(divc+1)*(divh+1)*sizeof(float);
+	count=6*divh*divc+6*divh*divr;
+	int arraySize = 3*((divr+1)*(divh+1)+(divc+1)*(divh+1))*sizeof(float);
 
 	float* vertexB= (float*) malloc(arraySize);
 	float* normalB= (float*) malloc(arraySize);
+	
 
 	indices=(int*) malloc(count*sizeof(int));
 		//lateral
@@ -37,13 +38,13 @@ Cone::Cone(float raio, float altura, int divh, int divc,int divr){
 			ang=f*ang_inc;
 
 			vertexB[i]=r1*sin(ang);
-			normalB[i]=sin(ang);
+			normalB[i]=altura/sqrt(pow(raio,2)+pow(altura,2))*sin(ang);
 			i++;
 			vertexB[i]=alt;
-			normalB[i]=0;
+			normalB[i]=raio/sqrt(pow(raio,2)+pow(altura,2));
 			i++;
 			vertexB[i]=r1*cos(ang);
-			normalB[i]=cos(ang);
+			normalB[i]=altura/sqrt(pow(raio,2)+pow(altura,2))*cos(ang);
 			i++;
 
 		}
@@ -105,11 +106,11 @@ Cone::Cone(float raio, float altura, int divh, int divc,int divr){
 				indices[j]=c1;	j++;
 				indices[j]=c4;	j++;
 				indices[j]=c3;	j++;
-				
+
 			}
 			}
 
-			
+
 
 
 	glGenBuffers(2, buffers);
@@ -120,7 +121,7 @@ Cone::Cone(float raio, float altura, int divh, int divc,int divr){
 
 	free(vertexB);
 	free(normalB);
-	
+
 
 }
 
@@ -130,7 +131,7 @@ Cone::~Cone(void)
 
 
 void Cone::desenhar(){
-		
+
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[0]);
 	glVertexPointer(3,GL_FLOAT,0,0);
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[1]);
