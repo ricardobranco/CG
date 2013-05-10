@@ -12,6 +12,7 @@
 #include "copo.h"
 #include "Cone.h"
 #include "cadeiraVBO.h"
+#include "CandeeirosVBO.h"
 
 
 
@@ -26,7 +27,7 @@ Plano *p;
 Cilindro *cil;
 Cone *cone;
 Copo *cop;
-
+CandeeirosVBO *candi;
 CadeiraVBO *cad;
 
 
@@ -97,8 +98,8 @@ void renderScene(void) {
 	glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,spec);
 	glMateriali(GL_FRONT_AND_BACK,GL_SHININESS,128);
 
-	cad->setSize(4);
-	cad->bancoSofa();
+	candi->setSize(2);
+	candi->Candi3();
 	//cone->desenhar();
 	/*glTranslatef(3,0,0);*/
 	//e->desenhar();
@@ -181,6 +182,7 @@ void main(int argc, char **argv) {
 	cil = new Cilindro(0.5,1,40,40,20);
 	cop=copo_vinho(1);
 	cad=new CadeiraVBO(1);
+	candi=new CandeeirosVBO(1);
 
 // entrar no ciclo do GLUT 
 	glutMainLoop();
