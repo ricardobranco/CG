@@ -101,8 +101,8 @@ void renderScene(void) {
 	glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,spec);
 	glMateriali(GL_FRONT_AND_BACK,GL_SHININESS,128);
 
-	candi->setSize(2);
-	candi->Candi3();
+	
+
 	//cone->desenhar();
 	/*glTranslatef(3,0,0);*/
 	//e->desenhar();
@@ -148,6 +148,8 @@ void processKeys(int key, int xx, int yy)
 }
 
 
+
+
 void main(int argc, char **argv) {
 
 // inicialização
@@ -178,14 +180,14 @@ void main(int argc, char **argv) {
 // init
 	converte();
 	
-	e=new Esfera(1,200,400);
-	c = new Cubo(1,100);
-	p = new Plano(2,2,100,100);
+	esfera=new Esfera(1,200,400);
+	cubo = new Cubo(1,100);
+	plano = new Plano(2,2,100,100);
 
-	cil = new Cilindro(0.5,1,40,40,20);
-	cop=copo_vinho(1);
-	cad=new CadeiraVBO(1);
-	candi=new CandeeirosVBO(1);
+	cilindro = new Cilindro(0.5,1,40,40,20);
+	copo=copo_vinho(1);
+	cadeira=new CadeiraVBO(1);
+	candieiro=new CandeeirosVBO(1);
 
 // entrar no ciclo do GLUT 
 	glutMainLoop();
