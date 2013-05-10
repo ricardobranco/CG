@@ -21,14 +21,17 @@
 float alfa = 0.0f, beta = 0.0f, raio = 5.0f;
 float camX, camY, camZ;
 
-Esfera *e;
-Cubo *c;
-Plano *p;
-Cilindro *cil;
+//Primitivas em VBO
+Esfera *esfera;
+Cubo *cubo;
+Plano *plano;
+Cilindro *cilindro;
 Cone *cone;
-Copo *cop;
-CandeeirosVBO *candi;
-CadeiraVBO *cad;
+
+//Objecto de bar
+Copo *copo;
+CandeeirosVBO *candieiro;
+CadeiraVBO *cadeira;
 
 
 
