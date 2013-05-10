@@ -13,7 +13,7 @@
 #include "Cone.h"
 #include "cadeiraVBO.h"
 #include "CandeeirosVBO.h"
-
+#include "BarVBO.h"
 
 
 #define _PI_ 3.14159
@@ -33,6 +33,7 @@ Copo *copo;
 CandeeirosVBO *candieiro;
 CadeiraVBO *cadeira;
 
+BarVBO* bar;
 
 
 // declarar variáveis para armazenar os VBOs e número de vértices total
@@ -188,6 +189,8 @@ void main(int argc, char **argv) {
 	copo=copo_vinho(1);
 	cadeira=new CadeiraVBO(1);
 	candieiro=new CandeeirosVBO(1);
+	bar = new BarVBO(1);
+
 
 // entrar no ciclo do GLUT 
 	glutMainLoop();
