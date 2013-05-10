@@ -10,13 +10,18 @@ Plano::Plano(float ladoX, float ladoZ, int divX, int divZ){
 	
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
 	
 	count=6*divX*divZ;
 	int arraySize = 3*(divX+1)*(divZ+1)*sizeof(float);
 	float* vertexB= (float*) malloc(arraySize);
 	float* normalB= (float*) malloc(arraySize);
+	float* texturaB = (float*) malloc(arraySize);
+
 	indices=(int*) malloc(count*sizeof(int));
 	int i = 0;
+	int texI = 0;
 
 	float divladoX = ladoX/divX;
 	float divladoZ = ladoZ/divZ;
@@ -24,6 +29,11 @@ Plano::Plano(float ladoX, float ladoZ, int divX, int divZ){
 	float y = 0;
 	float z = -ladoZ/2;
 	float x= -ladoX/2;
+
+	float incTextS = 1/(float)divZ;
+	float incTextT = 1/(float)divX;
+
+
 
 	for(int iv=0; iv<=divZ; iv++ , x=-ladoX/2,z+=divladoZ){
 		for(int ih=0; ih<=divX; ih++,x+=divladoX){
@@ -35,7 +45,10 @@ Plano::Plano(float ladoX, float ladoZ, int divX, int divZ){
 			i++;
 			vertexB[i]=z; 
 			normalB[i]=0;
-			i++;		
+			i++;
+
+			texturaB[texI] = iv * incTextS; texI++;
+			texturaB[texI] = ih * incTextT; texI++;
 		}
 		//z+=divladoZ;
 	} 
@@ -68,14 +81,17 @@ Plano::Plano(float ladoX, float ladoZ, int divX, int divZ){
 
 
 
-	glGenBuffers(2, buffers);
+	glGenBuffers(3, buffers);
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[0]);
 	glBufferData(GL_ARRAY_BUFFER, arraySize, vertexB, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[1]);
 	glBufferData(GL_ARRAY_BUFFER, arraySize, normalB, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER,buffers[2]);
+	glBufferData(GL_ARRAY_BUFFER,arraySize,texturaB,GL_STATIC_DRAW);
 
 	free(vertexB);
 	free(normalB);
+	free(texturaB);
 	
 }
 
@@ -91,6 +107,9 @@ void Plano::desenhar(){
 	glVertexPointer(3,GL_FLOAT,0,0);
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[1]);
 	glNormalPointer(GL_FLOAT,0,0);
+	glBindBuffer(GL_ARRAY_BUFFER,buffers[2]);
+	glTexCoordPointer(2,GL_FLOAT,0,0);
+
 
 	glDrawElements(GL_TRIANGLES, count ,GL_UNSIGNED_INT, indices);
 }
