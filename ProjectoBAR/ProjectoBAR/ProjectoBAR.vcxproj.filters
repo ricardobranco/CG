@@ -33,9 +33,6 @@
     <ClCompile Include="mesa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cadeira.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Esfera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -49,6 +46,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Cone.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cadeiraVBO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,7 +86,7 @@
     <ClInclude Include="cadeiras.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cadeira.h">
+    <ClInclude Include="cadeiraVBO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

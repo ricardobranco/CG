@@ -1,11 +1,11 @@
 #pragma once
-class Cadeira
+class CadeiraVBO
 {
 public:
 	//constructor vazio
-	Cadeira(void){};
-	Cadeira(float size);
-	~Cadeira(void);
+	CadeiraVBO(void){};
+	CadeiraVBO(float size);
+	~CadeiraVBO(void);
 	void bancoAlto();
 	void bancoBalcao();
 	void bancoSofa();

@@ -11,7 +11,7 @@
 
 #include "copo.h"
 #include "Cone.h"
-#include "cadeira.h"
+#include "cadeiraVBO.h"
 
 
 
@@ -26,7 +26,8 @@ Plano *p;
 Cilindro *cil;
 Cone *cone;
 Copo *cop;
-Cadeira *cad;
+
+CadeiraVBO *cad;
 
 
 
@@ -179,7 +180,7 @@ void main(int argc, char **argv) {
 
 	cil = new Cilindro(0.5,1,40,40,20);
 	cop=copo_vinho(1);
-	cad=new Cadeira(1);
+	cad=new CadeiraVBO(1);
 
 // entrar no ciclo do GLUT 
 	glutMainLoop();

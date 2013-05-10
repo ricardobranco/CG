@@ -13,12 +13,12 @@
 #define DR 50
 
 
-Cadeira:: Cadeira(float sizes){
+CadeiraVBO:: CadeiraVBO(float sizes){
 	size=sizes;
 
 }
 
-void Cadeira::banco_alto_parametros(float altura, float raio){
+void CadeiraVBO::banco_alto_parametros(float altura, float raio){
 
 	
 	Cone* cc;
@@ -48,7 +48,7 @@ void Cadeira::banco_alto_parametros(float altura, float raio){
 	c2->desenhar();
 }
 
-void Cadeira::bancoAlto(){
+void CadeiraVBO::bancoAlto(){
 
 	float altura=0.6, raio=0.3;
 	glPushMatrix();
@@ -57,7 +57,7 @@ void Cadeira::bancoAlto(){
 	glPopMatrix();
 }
 
-void Cadeira::banco_balcao_parametros(float altura,float raio){
+void CadeiraVBO::banco_balcao_parametros(float altura,float raio){
 
 
 	Cilindro *c1;
@@ -86,7 +86,7 @@ void Cadeira::banco_balcao_parametros(float altura,float raio){
 
 }
 
-void Cadeira::bancoBalcao()
+void CadeiraVBO::bancoBalcao()
 {
 	float altura=0.6, raio=0.3;
 
@@ -98,7 +98,7 @@ void Cadeira::bancoBalcao()
 }
 
 
-void Cadeira::banco_sofa_parametros(float altura,float raio){
+void CadeiraVBO::banco_sofa_parametros(float altura,float raio){
 
 	Cilindro *c1,*c2,*c3;
 	Esfera*e;
@@ -131,7 +131,7 @@ void Cadeira::banco_sofa_parametros(float altura,float raio){
 	c3->desenhar();
 }
 
-void Cadeira::bancoSofa(){
+void CadeiraVBO::bancoSofa(){
 
 	float altura=0.1, raio=0.3;
 
@@ -141,6 +141,6 @@ void Cadeira::bancoSofa(){
 	glPopMatrix();
 }
 
-void Cadeira::setSize(float sizes){
+void CadeiraVBO::setSize(float sizes){
 	size=sizes;
 }
