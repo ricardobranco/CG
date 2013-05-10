@@ -93,7 +93,7 @@ void renderScene(void) {
 	glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,spec);
 	glMateriali(GL_FRONT_AND_BACK,GL_SHININESS,128);
 
-	cil->desenhar();
+	cone->desenhar();
 	/*glTranslatef(3,0,0);*/
 	//e->desenhar();
 

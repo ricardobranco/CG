@@ -7,7 +7,7 @@ public:
 	~Cone(void);
 	void desenhar();
 protected:
-	unsigned int buffers[2];
+	unsigned int buffers[3];
 	int count;
 	int *indices;
 };

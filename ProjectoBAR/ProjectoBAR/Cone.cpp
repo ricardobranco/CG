@@ -7,6 +7,12 @@
 #include <math.h>
 
 Cone::Cone(float raio, float altura, int divh, int divc,int divr){
+	
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+
 	float ang,ang_inc,alt,alt_inc,r1,r2,r1_inc,r2_inc;
 	ang=0;
 	alt=0;
@@ -16,16 +22,19 @@ Cone::Cone(float raio, float altura, int divh, int divc,int divr){
 	r2=0;
 	r1_inc=raio/(float)divh;
 	r2_inc=raio/(float)divr;
-	int i=0,j=0;
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_NORMAL_ARRAY);
+	int i=0,j=0,itex=0;
+	float texIncDLat=0.5/(float)divh;
+	float texIncFLat=1/(float)divc;
+	float texIncRBase=(raio/(float)divr);
+	float texIncDBase=(raio/(float)divr);
 
 	count=6*divh*divc+6*divh*divr;
 	int arraySize = 3*((divr+1)*(divh+1)+(divc+1)*(divh+1))*sizeof(float);
+	int textSize=2*((divr+1)*(divh+1)+(divc+1)*(divh+1))*sizeof(float);
 
 	float* vertexB= (float*) malloc(arraySize);
 	float* normalB= (float*) malloc(arraySize);
+	float* textB= (float*) malloc(textSize);
 	
 
 	indices=(int*) malloc(count*sizeof(int));
@@ -47,6 +56,11 @@ Cone::Cone(float raio, float altura, int divh, int divc,int divr){
 			normalB[i]=altura/sqrt(pow(raio,2)+pow(altura,2))*cos(ang);
 			i++;
 
+			textB[itex]=(float)d*texIncDLat;
+			itex++;
+
+			textB[itex]=(float)f*texIncFLat;
+			itex++;
 		}
 	}
 
@@ -86,6 +100,12 @@ Cone::Cone(float raio, float altura, int divh, int divc,int divr){
 				vertexB[i]=r2*cos(ang);
 				normalB[i]=0;
 				i++;
+				
+				textB[itex]=(float)r*texIncRBase*cos(ang);
+				itex++;
+
+				textB[itex]=(float)d*texIncDLat*sin(ang)+0.75;
+				itex++;
 			}
 			}
 
@@ -113,14 +133,18 @@ Cone::Cone(float raio, float altura, int divh, int divc,int divr){
 
 
 
-	glGenBuffers(2, buffers);
+	glGenBuffers(3, buffers);
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[0]);
 	glBufferData(GL_ARRAY_BUFFER, arraySize, vertexB, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[1]);
 	glBufferData(GL_ARRAY_BUFFER, arraySize, normalB, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER,buffers[2]);
+	glBufferData(GL_ARRAY_BUFFER, textSize, textB, GL_STATIC_DRAW);
+
 
 	free(vertexB);
 	free(normalB);
+	free(textB);
 
 
 }
@@ -136,6 +160,8 @@ void Cone::desenhar(){
 	glVertexPointer(3,GL_FLOAT,0,0);
 	glBindBuffer(GL_ARRAY_BUFFER,buffers[1]);
 	glNormalPointer(GL_FLOAT,0,0);
+	glBindBuffer(GL_ARRAY_BUFFER,buffers[2]);
+	glTexCoordPointer(2,GL_FLOAT,0,0);
 
 	glDrawElements(GL_TRIANGLES, count ,GL_UNSIGNED_INT,indices);
 
