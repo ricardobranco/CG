@@ -8,12 +8,13 @@
 #include "Cubo.h"
 #include "Plano.h"
 #include "Cilindro.h"
-
-#include "copo.h"
 #include "Cone.h"
-#include "cadeiraVBO.h"
-#include "CandeeirosVBO.h"
 
+#define ESFERA 1
+#define PLANO 2
+#define CUBO 3
+#define CILINDRO 4
+#define CONE 5
 
 
 #define _PI_ 3.14159
@@ -28,11 +29,9 @@ Plano *plano;
 Cilindro *cilindro;
 Cone *cone;
 
-//Objecto de bar
-Copo *copo;
-CandeeirosVBO *candieiro;
-CadeiraVBO *cadeira;
 
+
+int solido=ESFERA;
 
 
 // declarar variáveis para armazenar os VBOs e número de vértices total
@@ -101,11 +100,22 @@ void renderScene(void) {
 	glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,spec);
 	glMateriali(GL_FRONT_AND_BACK,GL_SHININESS,128);
 
+	switch (solido)
+	{
+	case ESFERA:
+		
+		esfera->desenhar(); break;
 	
+	case PLANO :
+		plano->desenhar(); break;
+	case CUBO :
+		cubo->desenhar(); break;
+	case CILINDRO :
+		cilindro->desenhar(); break;
+	case CONE :
+		cone->desenhar(); break;
+	}
 
-	//cone->desenhar();
-	/*glTranslatef(3,0,0);*/
-	//e->desenhar();
 
 // End of frame
 	glutSwapBuffers();
@@ -148,6 +158,13 @@ void processKeys(int key, int xx, int yy)
 }
 
 
+void teclas(unsigned char key, int x, int y){
+
+	if((key>='1')&&(key<='5')){
+		solido=key-'0';
+	}
+
+}
 
 
 void main(int argc, char **argv) {
@@ -163,9 +180,11 @@ void main(int argc, char **argv) {
 	glutDisplayFunc(renderScene);
 	glutIdleFunc(renderScene);
 	glutReshapeFunc(changeSize);
+	
 
 // registo da funções do teclado e rato
 	glutSpecialFunc(processKeys);
+	glutKeyboardFunc(teclas);
 
 	glewInit();
 	
@@ -183,11 +202,9 @@ void main(int argc, char **argv) {
 	esfera=new Esfera(1,200,400);
 	cubo = new Cubo(1,100);
 	plano = new Plano(2,2,100,100);
-
+	cone= new Cone(1,2,50,50,50);
 	cilindro = new Cilindro(0.5,1,40,40,20);
-	copo=copo_vinho(1);
-	cadeira=new CadeiraVBO(1);
-	candieiro=new CandeeirosVBO(1);
+	
 
 // entrar no ciclo do GLUT 
 	glutMainLoop();
