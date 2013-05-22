@@ -9,12 +9,18 @@
 #include "Plano.h"
 #include "Cilindro.h"
 #include "Cone.h"
+<<<<<<< HEAD
 
 #define ESFERA 1
 #define PLANO 2
 #define CUBO 3
 #define CILINDRO 4
 #define CONE 5
+=======
+#include "cadeiraVBO.h"
+#include "CandeeirosVBO.h"
+#include "BarVBO.h"
+>>>>>>> 27d214daa79baea5b1545dc636a9fa2bc71177be
 
 
 #define _PI_ 3.14159
@@ -30,6 +36,7 @@ Cilindro *cilindro;
 Cone *cone;
 
 
+BarVBO* bar;
 
 int solido=ESFERA;
 
@@ -204,7 +211,15 @@ void main(int argc, char **argv) {
 	plano = new Plano(2,2,100,100);
 	cone= new Cone(1,2,50,50,50);
 	cilindro = new Cilindro(0.5,1,40,40,20);
+<<<<<<< HEAD
 	
+=======
+	copo=copo_vinho(1);
+	cadeira=new CadeiraVBO(1);
+	candieiro=new CandeeirosVBO(1);
+	bar = new BarVBO(1);
+
+>>>>>>> 27d214daa79baea5b1545dc636a9fa2bc71177be
 
 // entrar no ciclo do GLUT 
 	glutMainLoop();
