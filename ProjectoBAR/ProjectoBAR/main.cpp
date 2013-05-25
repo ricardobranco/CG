@@ -9,18 +9,18 @@
 #include "Plano.h"
 #include "Cilindro.h"
 #include "Cone.h"
-<<<<<<< HEAD
 
 #define ESFERA 1
 #define PLANO 2
 #define CUBO 3
 #define CILINDRO 4
 #define CONE 5
-=======
+
 #include "cadeiraVBO.h"
 #include "CandeeirosVBO.h"
-#include "BarVBO.h"
->>>>>>> 27d214daa79baea5b1545dc636a9fa2bc71177be
+#include "Extras.h"
+
+
 
 
 #define _PI_ 3.14159
@@ -34,9 +34,10 @@ Cubo *cubo;
 Plano *plano;
 Cilindro *cilindro;
 Cone *cone;
+CadeiraVBO *sofa;
+Extras *ext;
 
-
-BarVBO* bar;
+//BarVBO* bar;
 
 int solido=ESFERA;
 
@@ -106,7 +107,7 @@ void renderScene(void) {
 	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,cor);
 	glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,spec);
 	glMateriali(GL_FRONT_AND_BACK,GL_SHININESS,128);
-
+	/*
 	switch (solido)
 	{
 	case ESFERA:
@@ -123,7 +124,9 @@ void renderScene(void) {
 		cone->desenhar(); break;
 	}
 
-
+	*/
+	ext->setSize(1);
+	ext->bilhar();
 // End of frame
 	glutSwapBuffers();
 }
@@ -211,15 +214,11 @@ void main(int argc, char **argv) {
 	plano = new Plano(2,2,100,100);
 	cone= new Cone(1,2,50,50,50);
 	cilindro = new Cilindro(0.5,1,40,40,20);
-<<<<<<< HEAD
-	
-=======
-	copo=copo_vinho(1);
-	cadeira=new CadeiraVBO(1);
-	candieiro=new CandeeirosVBO(1);
-	bar = new BarVBO(1);
+	ext=new Extras(1);
+	sofa=new CadeiraVBO(1);
+	//bar = new BarVBO(1);
 
->>>>>>> 27d214daa79baea5b1545dc636a9fa2bc71177be
+
 
 // entrar no ciclo do GLUT 
 	glutMainLoop();
