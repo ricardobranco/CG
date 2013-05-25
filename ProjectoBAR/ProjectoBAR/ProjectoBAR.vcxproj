@@ -95,6 +95,7 @@
     <ClCompile Include="Cone.cpp" />
     <ClCompile Include="Cubo.cpp" />
     <ClCompile Include="Esfera.cpp" />
+    <ClCompile Include="Extras.cpp" />
     <ClCompile Include="mesa.cpp" />
     <ClCompile Include="Objetos.cpp" />
     <ClCompile Include="main.cpp" />
@@ -112,6 +113,7 @@
     <ClInclude Include="Cubo.h" />
     <ClInclude Include="Esfera.h" />
     <ClInclude Include="Cone.h" />
+    <ClInclude Include="Extras.h" />
     <ClInclude Include="mesa.h" />
     <ClInclude Include="Objetos.h" />
     <ClInclude Include="Plano.h" />

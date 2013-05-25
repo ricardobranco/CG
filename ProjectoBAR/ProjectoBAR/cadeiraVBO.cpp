@@ -7,6 +7,7 @@
 #include "Cilindro.h"
 #include "cadeiraVBO.h"
 #include "Esfera.h"
+#include "Cubo.h"
 
 #define CAM 50
 #define LAD 50
@@ -140,6 +141,54 @@ void CadeiraVBO::bancoSofa(){
 	banco_sofa_parametros(altura,raio);
 	glPopMatrix();
 }
+
+void paralel(float comp,float alt,float larg){
+	glPushMatrix();
+	glScalef(comp,alt,larg);
+	Cubo *c;
+	c=new Cubo(1,80);
+	c->desenhar();
+	glPopMatrix();
+}
+
+
+void CadeiraVBO::sofa_parametros(float comp, float alt,float larg){
+	Cilindro *c1,*c2;
+	c1=new Cilindro(alt*0.2,larg,80,80,80);
+	c2=new Cilindro(alt*0.25,larg,80,80,80);
+	paralel(comp,alt*0.4,larg);
+	glPushMatrix();
+	glTranslatef(comp*0.5,0,0);
+	glRotatef(90,1,0,0);
+	c1->desenhar();
+	glPopMatrix();
+	glTranslatef(-comp*0.5+comp*0.25,alt*0.2+alt*0.175,0);
+	paralel(comp*0.5,alt*0.35,larg);
+	glTranslatef(0,alt*0.175,0);
+	glRotatef(90,1,0,0);
+	c2->desenhar();
+
+}
+
+
+void CadeiraVBO::sofa1Pessoa(){
+
+	glPushMatrix();
+	glScalef(size,size,size);
+	sofa_parametros(1,1,1);
+	glPopMatrix();
+}
+
+
+void CadeiraVBO::sofa2Pessoa(){
+
+	glPushMatrix();
+	glScalef(size,size,size*2);
+	sofa_parametros(1,1,1);
+	glPopMatrix();
+}
+
+
 
 void CadeiraVBO::setSize(float sizes){
 	size=sizes;
