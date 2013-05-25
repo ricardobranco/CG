@@ -88,6 +88,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\GitHub\CG\ProjectoBAR\ProjectoBAR\Esfera.cpp" />
+    <ClCompile Include="..\..\ProjectoBAR\ProjectoBAR\Cone.cpp" />
     <ClCompile Include="cenario.cpp" />
     <ClCompile Include="D:\Documentos\CG\p02.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -117,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\GitHub\CG\ProjectoBAR\ProjectoBAR\Esfera.h" />
+    <ClInclude Include="..\..\ProjectoBAR\ProjectoBAR\Cone.h" />
     <ClInclude Include="Maths\COLOR.h" />
     <ClInclude Include="Maths\Maths.h" />
     <ClInclude Include="Maths\MATRIX4X4.h" />

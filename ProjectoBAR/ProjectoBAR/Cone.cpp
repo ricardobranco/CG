@@ -28,9 +28,9 @@ Cone::Cone(float raio, float altura, int divh, int divc,int divr){
 	float texIncRBase=(raio/(float)divr);
 	float texIncDBase=(raio/(float)divr);
 
-	count=6*divh*divc+6*divh*divr;
-	int arraySize = 3*((divr+1)*(divh+1)+(divc+1)*(divh+1))*sizeof(float);
-	int textSize=2*((divr+1)*(divh+1)+(divc+1)*(divh+1))*sizeof(float);
+	count=6*divh*divc+6*divc*divr;
+	int arraySize = 3*((divr+1)*(divc+1)+(divc+1)*(divh+1))*sizeof(float);
+	int textSize=2*((divr+1)*(divc+1)+(divc+1)*(divh+1))*sizeof(float);
 
 	float* vertexB= (float*) malloc(arraySize);
 	float* normalB= (float*) malloc(arraySize);

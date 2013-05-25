@@ -2,7 +2,7 @@
 #include <GL/glew.h>
 #include <GL/glut.h>
 #include "C:\Users\Cesar\documents\GitHub\CG\ProjectoBAR\ProjectoBAR\Esfera.h"
-
+#include "C:\Users\Cesar\Documents\GitHub\CG\ProjectoBAR\ProjectoBAR\Cone.h"
 #include "C:\Users\Cesar\documents\visual studio 2012\Projects\TesteCG\TesteCG\Maths\Maths.h"
 
 // include para a lib devil
@@ -56,6 +56,8 @@ float pos[4] = {-100, 100, 100, 1};
 
 
 Esfera *e;
+Cone *base;
+Cone *copa;
 
 int count;
 GLuint buffers[2];
@@ -174,19 +176,21 @@ void changeSize(int w, int h) {
 }
 
 
+
+
 void drawTree() {
 
 	glPushMatrix();
-	glRotatef(-90,1.0,0.0,0.0);
+	//glRotatef(-90,1.0,0.0,0.0);
 	float color[] = {1.0,1.0,0.5,1.0};
 	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color);
-	glutSolidCone(0.25,4,5,1);
-
+	base->desenhar();
+	
 	float color2[] = {0.0, 0.5 + rand() * 0.5f/RAND_MAX,0.0,1.0};
 	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color2);
 
-	glTranslatef(0.0,0.0,2.0);
-	glutSolidCone(2.0,5.0,5,1);
+	glTranslatef(0.0,2.0,0.0);
+	copa->desenhar();
 	glPopMatrix();
 }
 
@@ -303,9 +307,10 @@ void drawTerreno() {
 
 void drawScene() {
 
-	drawTerreno();
+	
 	placeTrees();
 	drawDonut();
+	drawTerreno();
 	// move teapots up so that they are placed on top of the ground plane
 	glPushMatrix();
 	glTranslatef(0.0,1.0,0.0);
@@ -532,6 +537,10 @@ void processMouseMotion(int xx, int yy)
 
 void init() {
 
+	e=new Esfera(3,10,50);
+	base=new Cone(0.25,4,1,5,1);
+	copa=new Cone(2.0,5.0,1,5,1);
+
 	ILuint ima[3];
 
 	ilInit();
@@ -621,7 +630,7 @@ void init() {
 	//glEnable(GL_LIGHT0);
 
 	//preparaCilindro(5,2,50);
-	e=new Esfera(3,200,400);
+	
 }
 
 

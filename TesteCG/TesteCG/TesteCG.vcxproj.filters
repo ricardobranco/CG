@@ -51,6 +51,9 @@
     <ClCompile Include="cenario.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ProjectoBAR\ProjectoBAR\Cone.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="terreno2.jpg">
@@ -93,6 +96,9 @@
     </ClInclude>
     <ClInclude Include="Maths\VECTOR4D.h">
       <Filter>Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ProjectoBAR\ProjectoBAR\Cone.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
