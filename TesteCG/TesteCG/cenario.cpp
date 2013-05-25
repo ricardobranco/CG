@@ -77,12 +77,13 @@ void initMatrix(){
 	glGetFloatv(GL_MODELVIEW_MATRIX, cameraViewMatrix);
 	
 	glLoadIdentity();
-	gluPerspective(85, 1, 50, 500);
+	gluPerspective(80, 1, 1, 500);
 	glGetFloatv(GL_MODELVIEW_MATRIX, lightProjectionMatrix);
 	
 	glLoadIdentity();
 	gluLookAt(	pos[0], pos[1], pos[2],
-				2500, 0,-690,
+				1100, 0,-280,
+			
 				0.0f, 1.0f, 0.0f);
 	glScalef(0.15,0.15,0.15);
 	glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix);
@@ -341,7 +342,7 @@ void renderScene(void) {
 	drawScene();
 
 	//Read the depth buffer into the shadow map texture
-	//glEnable(GL_TEXTURE31);
+	
 	glActiveTexture(GL_TEXTURE1);
 
 	glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
@@ -431,6 +432,7 @@ void renderScene(void) {
 	glActiveTexture(GL_TEXTURE0);
 
 	drawScene();
+
 	glDisable(GL_TEXTURE1);
 	glDisable(GL_TEXTURE0);
 	glActiveTexture(GL_TEXTURE1);
@@ -455,6 +457,7 @@ void renderScene(void) {
 	step++;
 // End of frame
 	glutSwapBuffers();
+	
 }
 
 
@@ -628,9 +631,9 @@ void main(int argc, char **argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
 	glutInitWindowPosition(100,100);
-	glutInitWindowSize(320,320);
-	wWidth=320;
-	wHeight=320;
+	glutInitWindowSize(512,512);
+	wWidth=512;
+	wHeight=512;
 	glutCreateWindow("CG@DI-UM");
 		
 
