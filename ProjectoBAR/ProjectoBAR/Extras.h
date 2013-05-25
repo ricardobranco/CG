@@ -12,6 +12,6 @@ public:
 protected:
 	float size;
 	void bilharPar(float comp, float alt, float larg);
-
+	void dbolas(float comp, float alt, float larg);
 
 };
