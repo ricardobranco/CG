@@ -93,153 +93,7 @@ void initMatrix(){
 
 
 
-/*----------------------------------------------------------------------------------- 
-	Função para desenhar um VBO 
------------------------------------------------------------------------------------*/
 
-void desenhaCilindro() {
-
-//	Bind e semântica
-	glBindBuffer(GL_ARRAY_BUFFER,buffers[0]);
-	glVertexPointer(3,GL_FLOAT,0,0);
-
-	glBindBuffer(GL_ARRAY_BUFFER,buffers[1]);
-	glNormalPointer(GL_FLOAT,0,0);
-
-//  Desenhar
-	glDrawArrays(GL_TRIANGLES, 0, count);
-}
-
-/*----------------------------------------------------------------------------------- 
-	Função para preparar os VBOs para o cilindro
-
-	  parametros:
-		lados : o número de fatias do objecto gerado
-		raio  : raio do cilindro
-		altura: altura do cilindro
------------------------------------------------------------------------------------*/
-
-void preparaCilindro(float altura,float raio,int lados) {
-
-//	Activar os buffers
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_NORMAL_ARRAY);
-// Alocar e preencher os arrays de vértices ( e índices)
-	
-	int arraySize=lados*4*3*3;
-	count=lados*4*3;
-	float *vertexB=(float*) malloc(arraySize*sizeof(float));
-	float *normalB=(float*) malloc(arraySize*sizeof(float));
-	float ang;
-	float ang_inc=2*M_PI/lados;
-	int ib=0;
-	int iN=0;
-	for(int i=0;i<lados;i++){
-		ang=i*ang_inc;
-
-		vertexB[ib]=0.0; ib++;
-		vertexB[ib]=altura/2; ib++;
-		vertexB[ib]=0.0; ib++;		
-		normalB[iN]=0; iN++;
-		normalB[iN]=1; iN++;
-		normalB[iN]=0; iN++;
-
-
-		vertexB[ib]=raio*sin(ang); ib++;
-		vertexB[ib]=altura/2; ib++;
-		vertexB[ib]=raio*cos(ang); ib++;
-		normalB[iN]=0; iN++;
-		normalB[iN]=1; iN++;
-		normalB[iN]=0; iN++;
-
-		vertexB[ib]=raio*sin(ang+ang_inc); ib++;
-		vertexB[ib]=altura/2; ib++;
-		vertexB[ib]=raio*cos(ang+ang_inc); ib++;
-		normalB[iN]=0; iN++;
-		normalB[iN]=1; iN++;
-		normalB[iN]=0; iN++;
-
-
-
-		vertexB[ib]=0.0; ib++;
-		vertexB[ib]=-altura/2; ib++;
-		vertexB[ib]=0.0; ib++;
-		normalB[iN]=0; iN++;
-		normalB[iN]=-1; iN++;
-		normalB[iN]=0; iN++;
-
-		vertexB[ib]=raio*sin(ang+ang_inc); ib++;
-		vertexB[ib]=-altura/2; ib++;
-		vertexB[ib]=raio*cos(ang+ang_inc); ib++;
-		normalB[iN]=0; iN++;
-		normalB[iN]=-1; iN++;
-		normalB[iN]=0; iN++;
-
-		vertexB[ib]=raio*sin(ang); ib++;
-		vertexB[ib]=-altura/2; ib++;
-		vertexB[ib]=raio*cos(ang); ib++;
-		normalB[iN]=0; iN++;
-		normalB[iN]=-1; iN++;
-		normalB[iN]=0; iN++;
-
-		
-		
-		vertexB[ib]=raio*sin(ang); ib++;
-		vertexB[ib]=altura/2; ib++;
-		vertexB[ib]=raio*cos(ang); ib++;
-		normalB[iN]=sin(ang); iN++;
-		normalB[iN]=0; iN++;
-		normalB[iN]=cos(ang); iN++;
-
-		vertexB[ib]=raio*sin(ang); ib++;
-		vertexB[ib]=-altura/2; ib++;
-		vertexB[ib]=raio*cos(ang); ib++;
-		normalB[iN]=sin(ang); iN++;
-		normalB[iN]=0; iN++;
-		normalB[iN]=cos(ang); iN++;
-
-		vertexB[ib]=raio*sin(ang+ang_inc); ib++;
-		vertexB[ib]=altura/2; ib++;
-		vertexB[ib]=raio*cos(ang+ang_inc); ib++;
-		normalB[iN]=sin(ang+ang_inc); iN++;
-		normalB[iN]=0; iN++;
-		normalB[iN]=cos(ang+ang_inc); iN++;
-
-
-		vertexB[ib]=raio*sin(ang+ang_inc); ib++;
-		vertexB[ib]=altura/2; ib++;
-		vertexB[ib]=raio*cos(ang+ang_inc); ib++;
-		normalB[iN]=sin(ang+ang_inc); iN++;
-		normalB[iN]=0; iN++;
-		normalB[iN]=cos(ang+ang_inc); iN++;
-
-		vertexB[ib]=raio*sin(ang); ib++;
-		vertexB[ib]=-altura/2; ib++;
-		vertexB[ib]=raio*cos(ang); ib++;
-		normalB[iN]=sin(ang); iN++;
-		normalB[iN]=0; iN++;
-		normalB[iN]=cos(ang); iN++;
-
-
-		vertexB[ib]=raio*sin(ang+ang_inc); ib++;
-		vertexB[ib]=-altura/2; ib++;
-		vertexB[ib]=raio*cos(ang+ang_inc); ib++;
-		normalB[iN]=sin(ang+ang_inc); iN++;
-		normalB[iN]=0; iN++;
-		normalB[iN]=cos(ang+ang_inc); iN++;
-	}
-
-// Gerar VBOs
-
-	glGenBuffers(2, buffers);
-	glBindBuffer(GL_ARRAY_BUFFER,buffers[0]);
-	glBufferData(GL_ARRAY_BUFFER,arraySize*sizeof(float), vertexB, GL_STATIC_DRAW);
-
-	glBindBuffer(GL_ARRAY_BUFFER,buffers[1]);
-	glBufferData(GL_ARRAY_BUFFER,arraySize*sizeof(float), normalB, GL_STATIC_DRAW);
-
-
-}
 
 
 
@@ -378,9 +232,9 @@ void drawDonut() {
 	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 100);
 	
 	//desenhaCilindro();
-	//glBindTexture(GL_TEXTURE_2D,tex[1]);
+	glBindTexture(GL_TEXTURE_2D,tex[1]);
 	e->desenhar();
-	//glBindTexture(GL_TEXTURE_2D, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 
 
 	glPopMatrix();
@@ -429,7 +283,7 @@ void drawTerreno() {
 	float spec[]={0.0,0.0,0.0};
 	glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,spec);
 	
-	//glBindTexture(GL_TEXTURE_2D,shadowMapTexture);
+	glBindTexture(GL_TEXTURE_2D,tex[0]);
 	for (int i = 1; i < imageWidth - 2 ; i++) {
 		glBegin(GL_TRIANGLE_STRIP);
 		for(int j = 1 ; j < imageWidth -1; j++) {
@@ -442,7 +296,7 @@ void drawTerreno() {
 		}	
 		glEnd();
 	}
-	//glBindTexture(GL_TEXTURE_2D, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 
@@ -487,6 +341,9 @@ void renderScene(void) {
 	drawScene();
 
 	//Read the depth buffer into the shadow map texture
+	//glEnable(GL_TEXTURE31);
+	glActiveTexture(GL_TEXTURE1);
+
 	glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
 	glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, shadowMapSize, shadowMapSize);
 
@@ -508,7 +365,7 @@ void renderScene(void) {
 	glLoadMatrixf(cameraViewMatrix);
 
 	glViewport(0, 0, wWidth, wHeight);
-
+	
 	//Use dim light to represent shadowed areas
 	glLightfv(GL_LIGHT1, GL_POSITION, pos);
 	glLightfv(GL_LIGHT1, GL_AMBIENT, white*0.2f);
@@ -517,10 +374,13 @@ void renderScene(void) {
 	glEnable(GL_LIGHT1);
 	glEnable(GL_LIGHTING);
 
-	drawScene();
 	
 
-
+	glActiveTexture(GL_TEXTURE0);
+	drawScene();
+	
+	
+	
 	//3rd pass
 	//Draw with bright light
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, white);
@@ -536,6 +396,10 @@ void renderScene(void) {
 	MATRIX4X4 textureMatrix=biasMatrix*lightProjectionMatrix*lightViewMatrix;
 
 	//Set up texture coordinate generation.
+	glEnable(GL_TEXTURE1);
+	glActiveTexture(GL_TEXTURE1);
+
+
 	glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
 	glTexGenfv(GL_S, GL_EYE_PLANE, textureMatrix.GetRow(0));
 	glEnable(GL_TEXTURE_GEN_S);
@@ -556,22 +420,21 @@ void renderScene(void) {
 	glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
 	glEnable(GL_TEXTURE_2D);
 
-	//Enable shadow comparison
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
-	//Shadow comparison should be true (ie not in shadow) if r<=texture
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
-	//Shadow comparison should generate an INTENSITY result
-	glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_INTENSITY);
+	
 	
 	//Set alpha test to discard false comparisons
 	glAlphaFunc(GL_GEQUAL, 0.99f);
 	glEnable(GL_ALPHA_TEST);
 	
-
-	
+	glEnable(GL_TEXTURE31);
+	glEnable(GL_TEXTURE0);
+	glActiveTexture(GL_TEXTURE0);
 
 	drawScene();
-	
+	glDisable(GL_TEXTURE1);
+	glDisable(GL_TEXTURE0);
+	glActiveTexture(GL_TEXTURE1);
+
 	//Disable textures and texgen
 	glDisable(GL_TEXTURE_2D);
 
@@ -584,7 +447,9 @@ void renderScene(void) {
 	glDisable(GL_LIGHTING);
 	glDisable(GL_ALPHA_TEST);
 
-	
+	glActiveTexture(GL_TEXTURE0);
+	glDisable(GL_TEXTURE1);
+
 	
 
 	step++;
@@ -717,7 +582,12 @@ void init() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	
+	//Enable shadow comparison
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
+	//Shadow comparison should be true (ie not in shadow) if r<=texture
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+	//Shadow comparison should generate an INTENSITY result
+	glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_INTENSITY);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, shadowMapSize, shadowMapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_INT, NULL);
 
 	//Load identity modelview
