@@ -331,11 +331,7 @@ void renderScene(void) {
 	
 	
 	glMatrixMode(GL_PROJECTION);
-	
-	
 	glLoadMatrixf(lightProjectionMatrix);
-
-
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -346,27 +342,13 @@ void renderScene(void) {
 
 	//Draw back faces into the shadow map
 	glCullFace(GL_FRONT);
-
-	//Disable color writes, and use flat shading for speed
-	
-	glColorMask(0, 0, 0, 0);
 	
 	//Draw the scene
 	drawScene();
 
-	//Read the depth buffer into the shadow map texture
-	
-	glActiveTexture(GL_TEXTURE1);
-
-	glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
-	//glCopyTexSubImage2D(GL_TEXTURE_2D,0,0,0,0,0,wWidth,wHeight);
-
 	//restore states
 	glCullFace(GL_BACK);
 	
-	glColorMask(1, 1, 1, 1);
-	
-
 	glBindFramebuffer(GL_FRAMEBUFFER,0);
 
 	//2nd pass - Draw from camera's point of view
@@ -389,8 +371,11 @@ void renderScene(void) {
 	glEnable(GL_LIGHTING);
 
 	
+	
 	glEnable(GL_TEXTURE0);
 	glActiveTexture(GL_TEXTURE0);
+	glEnable(GL_TEXTURE_2D);
+
 	drawScene();
 	
 	
@@ -412,6 +397,10 @@ void renderScene(void) {
 	//Set up texture coordinate generation.
 	glEnable(GL_TEXTURE1);
 	glActiveTexture(GL_TEXTURE1);
+	
+
+	glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
+
 
 
 	glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
@@ -440,7 +429,7 @@ void renderScene(void) {
 	glAlphaFunc(GL_GEQUAL, 0.99f);
 	glEnable(GL_ALPHA_TEST);
 	
-	glEnable(GL_TEXTURE31);
+	
 	
 	glActiveTexture(GL_TEXTURE0);
 
@@ -608,7 +597,7 @@ void init() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
 	//Shadow comparison should generate an INTENSITY result
 	glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_INTENSITY);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, shadowMapSize, shadowMapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_INT, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowMapSize, shadowMapSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 
 	//Load identity modelview
 	glMatrixMode(GL_MODELVIEW);
@@ -645,7 +634,7 @@ void init() {
 	//glEnable(GL_LIGHT0);
 
 	//preparaCilindro(5,2,50);
-	
+	glBindTexture(GL_TEXTURE_2D,0);
 }
 
 
@@ -655,9 +644,9 @@ void main(int argc, char **argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
 	glutInitWindowPosition(0,0);
-	glutInitWindowSize(1280,768);
-	wWidth=1280;
-	wHeight=768;
+	wWidth=350;
+	wHeight=350;
+	glutInitWindowSize(wWidth,wHeight);
 	glutCreateWindow("CG@DI-UM");
 		
 
