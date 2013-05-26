@@ -3,7 +3,7 @@
 #include <GL/glut.h>
 #include "C:\Users\Cesar\documents\GitHub\CG\ProjectoBAR\ProjectoBAR\Esfera.h"
 #include "C:\Users\Cesar\Documents\GitHub\CG\ProjectoBAR\ProjectoBAR\Cone.h"
-#include "C:\Users\Cesar\documents\visual studio 2012\Projects\TesteCG\TesteCG\Maths\Maths.h"
+#include "Maths\Maths.h"
 #include "C:\Users\Cesar\Documents\GitHub\CG\ProjectoBAR\ProjectoBAR\copo.h"
 
 // include para a lib devil
@@ -22,7 +22,9 @@
 #define ARVORES 700
 #define STEP_COWBOY 1.0f
 #define STEP_INDIO 0.5f
-
+#define SENS_RATO 0.001
+#define ANG 0.05
+#define MOV 1
 
 float step = 0.0;
 
@@ -31,10 +33,12 @@ float x = 0.0f;
 float z = 0.0f;
 
 
-float camX = 00, camY = 30, camZ = 40;
+float camX = 00, camY = 10, camZ = 0;
+float camDir[3]={1,0,0};
+float ang=0;
 int startX, startY, tracking = 0;
 
-int alpha = 0, beta = 45, r = 50;
+float alpha = 0.0f, beta = 45;
 
 int imageWidth;
 unsigned char *imageData;
@@ -45,7 +49,7 @@ unsigned int tex[2];
 
 unsigned int shadowMapTexture;
 unsigned int mFBO;
-unsigned int shadowMapSize=4096;
+unsigned int shadowMapSize=4098;
 
 int wHeight;
 int wWidth;
@@ -82,14 +86,17 @@ void initMatrix(){
 	
 	glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix);
 	
+	camDir[0]=cos((float)alpha);
+	camDir[2]=sin((float)alpha);
+
 	glLoadIdentity();
 	gluPerspective(45,(float)wWidth/wHeight,1,500);
 	glGetFloatv(GL_MODELVIEW_MATRIX, cameraProjectionMatrix);
 	
 	glLoadIdentity();
 	gluLookAt(	camX,camY,camZ,
-				0,0,0,
-				0.0f, 1.0f, 0.0f);
+		camX+camDir[0],camY+camDir[1],camZ+camDir[2],
+		0.0f, 1.0f, 0.0f);
 	glGetFloatv(GL_MODELVIEW_MATRIX, cameraViewMatrix);
 	
 	glPopMatrix();
@@ -371,7 +378,7 @@ void renderScene(void) {
 	glLightfv(GL_LIGHT1, GL_POSITION, pos);
 	glLightfv(GL_LIGHT1, GL_AMBIENT, white*ambLight);
 	
-	if(!GLEW_ARB_shadow_ambient){
+	
 	
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, white*ambLight);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, black);
@@ -386,7 +393,7 @@ void renderScene(void) {
 	drawScene();
 	
 	
-	}
+	
 	//3rd pass
 	//Draw with bright light
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, white);
@@ -434,15 +441,15 @@ void renderScene(void) {
 	
 	glActiveTexture(GL_TEXTURE0);
 
-	if(!GLEW_ARB_shadow_ambient){
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-	}
+	
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+	
 
 
 	drawScene();
-	if(!GLEW_ARB_shadow_ambient)
-		glDisable(GL_BLEND);
+	
+	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE1);
 	glDisable(GL_TEXTURE0);
 	glActiveTexture(GL_TEXTURE1);
@@ -474,69 +481,26 @@ void renderScene(void) {
 
 void processMouseButtons(int button, int state, int xx, int yy) 
 {
-	if (state == GLUT_DOWN)  {
-		startX = xx;
-		startY = yy;
-		if (button == GLUT_LEFT_BUTTON)
-			tracking = 1;
-		else if (button == GLUT_RIGHT_BUTTON)
-			tracking = 2;
-		else
-			tracking = 0;
+	if(button==GLUT_LEFT_BUTTON){
+		startX=xx;
+		startY=yy;
 	}
-	else if (state == GLUT_UP) {
-		if (tracking == 1) {
-			alpha += (xx - startX);
-			beta += (yy - startY);
-		}
-		else if (tracking == 2) {
-			
-			r -= yy - startY;
-			if (r < 3)
-				r = 3.0;
-		}
-		tracking = 0;
-	}
+	glutPostRedisplay();
 }
 
 
 void processMouseMotion(int xx, int yy)
 {
 
-	int deltaX, deltaY;
-	int alphaAux, betaAux;
-	int rAux;
+	int deltaX=startX-xx;
+	int deltaY=startY-yy;
+	startX=xx;
+	startY=yy;
 
-	if (!tracking)
-		return;
+	beta-=deltaY*SENS_RATO;
+	alpha+=deltaX*SENS_RATO;
 
-	deltaX = xx - startX;
-	deltaY = yy - startY;
-
-	if (tracking == 1) {
-
-
-		alphaAux = alpha - deltaX;
-		betaAux = beta + deltaY;
-
-		if (betaAux > 85.0)
-			betaAux = 85.0;
-		else if (betaAux < -85.0)
-			betaAux = -85.0;
-
-		rAux = r;
-	}
-	else if (tracking == 2) {
-
-		alphaAux = alpha;
-		betaAux = beta;
-		rAux = r - deltaY;
-		if (rAux < 3)
-			rAux = 3;
-	}
-	camX = rAux * sin(alphaAux * 3.14 / 180.0) * cos(betaAux * 3.14 / 180.0);
-	camZ = rAux * cos(alphaAux * 3.14 / 180.0) * cos(betaAux * 3.14 / 180.0);
-	camY = rAux * 							     sin(betaAux * 3.14 / 180.0);
+	glutPostRedisplay();
 }
 
 
@@ -604,16 +568,7 @@ void init() {
 	//Shadow comparison should be true (ie not in shadow) if r<=texture
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC_ARB, GL_LEQUAL);
 	
-	printf("%d", GLEW_ARB_shadow_ambient);
-	
-	if(GLEW_ARB_shadow_ambient){
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FAIL_VALUE_ARB,0.5);
-		glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_INTENSITY);
-	}
-	else{
-		glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_ALPHA);
-	}
-	
+	glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_ALPHA);
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowMapSize, shadowMapSize, 0,GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
 
@@ -655,6 +610,36 @@ void init() {
 	glBindTexture(GL_TEXTURE_2D,0);
 }
 
+void teclado(unsigned char key, int x, int y){
+
+	switch(key){
+
+	case 'a': 
+	case'A':
+		alpha-=ANG;
+		break;
+	case 'd':
+	case 'D':
+		alpha+=ANG;
+		break;
+	case 'w':
+	case 'W':
+		camX+=MOV*camDir[0];
+		camY+=MOV*camDir[1];
+		camZ+=MOV*camDir[2];
+		break;
+
+	case 's':
+	case 'S':
+		camX-=MOV*camDir[0];
+		camY-=MOV*camDir[1];
+		camZ-=MOV*camDir[2];
+		break;
+
+	}
+	glutPostRedisplay();
+}
+
 
 void main(int argc, char **argv) {
 
@@ -676,6 +661,8 @@ void main(int argc, char **argv) {
 // registo da funções do rato
 	glutMouseFunc(processMouseButtons);
 	glutMotionFunc(processMouseMotion);
+	glutKeyboardFunc(teclado);
+
 
 	glewInit();
 
