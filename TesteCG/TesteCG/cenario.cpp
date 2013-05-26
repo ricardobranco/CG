@@ -43,6 +43,7 @@ unsigned char *terraTex;
 unsigned int tex[2];
 
 unsigned int shadowMapTexture;
+unsigned int mFBO;
 unsigned int shadowMapSize=4096;
 
 int wHeight;
@@ -68,27 +69,26 @@ void initMatrix(){
 	glPushMatrix();
 	
 	glLoadIdentity();
-	gluPerspective(45.0f, (float)wWidth/wHeight, 1.0f, 500);
-	glGetFloatv(GL_MODELVIEW_MATRIX, cameraProjectionMatrix);
+	gluPerspective(101, 1, 70, 250);
 	
-	glLoadIdentity();
-	gluLookAt(camX, camY, camZ,
-				0.0f, 0.0f, 0.0f,
-				0.0f, 1.0f, 0.0f);
-
-	glGetFloatv(GL_MODELVIEW_MATRIX, cameraViewMatrix);
-	
-	glLoadIdentity();
-	gluPerspective(80, 1, 1, 500);
 	glGetFloatv(GL_MODELVIEW_MATRIX, lightProjectionMatrix);
 	
 	glLoadIdentity();
 	gluLookAt(	pos[0], pos[1], pos[2],
-				1100, 0,-280,
-			
+				-65.5f, 0.0f, 65.5f,
 				0.0f, 1.0f, 0.0f);
-	glScalef(0.15,0.15,0.15);
+	
 	glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix);
+	
+	glLoadIdentity();
+	gluPerspective(45,(float)wWidth/wHeight,1,500);
+	glGetFloatv(GL_MODELVIEW_MATRIX, cameraProjectionMatrix);
+	
+	glLoadIdentity();
+	gluLookAt(	camX,camY,camZ,
+				0,0,0,
+				0.0f, 1.0f, 0.0f);
+	glGetFloatv(GL_MODELVIEW_MATRIX, cameraViewMatrix);
 	
 	glPopMatrix();
 
@@ -169,7 +169,7 @@ void changeSize(int w, int h) {
 	glViewport(0, 0, w, h);
 
 	// Set the correct perspective
-	gluPerspective(45,ratio,1,1000);
+	gluPerspective(45,ratio,1,500);
 
 	// return to the model view matrix mode
 	glMatrixMode(GL_MODELVIEW);
@@ -324,13 +324,21 @@ void drawScene() {
 void renderScene(void) {
 	initMatrix();
 
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, mFBO);
+
 	//First pass - from light's point of view
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
+	
 	glMatrixMode(GL_PROJECTION);
+	
+	
 	glLoadMatrixf(lightProjectionMatrix);
 
+
+
 	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 	glLoadMatrixf(lightViewMatrix);
 
 	//Use viewport the same size as the shadow map
@@ -351,7 +359,7 @@ void renderScene(void) {
 	glActiveTexture(GL_TEXTURE1);
 
 	glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
-	glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, shadowMapSize, shadowMapSize);
+	//glCopyTexSubImage2D(GL_TEXTURE_2D,0,0,0,0,0,wWidth,wHeight);
 
 	//restore states
 	glCullFace(GL_BACK);
@@ -359,10 +367,10 @@ void renderScene(void) {
 	glColorMask(1, 1, 1, 1);
 	
 
-	
+	glBindFramebuffer(GL_FRAMEBUFFER,0);
 
 	//2nd pass - Draw from camera's point of view
-	glClear(GL_DEPTH_BUFFER_BIT);
+	glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixf(cameraProjectionMatrix);
@@ -381,7 +389,7 @@ void renderScene(void) {
 	glEnable(GL_LIGHTING);
 
 	
-
+	glEnable(GL_TEXTURE0);
 	glActiveTexture(GL_TEXTURE0);
 	drawScene();
 	
@@ -433,7 +441,7 @@ void renderScene(void) {
 	glEnable(GL_ALPHA_TEST);
 	
 	glEnable(GL_TEXTURE31);
-	glEnable(GL_TEXTURE0);
+	
 	glActiveTexture(GL_TEXTURE0);
 
 	drawScene();
@@ -612,6 +620,13 @@ void init() {
 	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
+	glGenFramebuffers(1,&mFBO);
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, mFBO);
+	glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapTexture, 0);
+
+	// Disable writes to the color buffer
+	glDrawBuffer(GL_NONE);
+
 	//Depth states
 	glClearDepth(1.0f);
 	glDepthFunc(GL_LEQUAL);
@@ -639,10 +654,10 @@ void main(int argc, char **argv) {
 // inicialização
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
-	glutInitWindowPosition(100,100);
-	glutInitWindowSize(512,512);
-	wWidth=512;
-	wHeight=512;
+	glutInitWindowPosition(0,0);
+	glutInitWindowSize(1280,768);
+	wWidth=1280;
+	wHeight=768;
 	glutCreateWindow("CG@DI-UM");
 		
 
