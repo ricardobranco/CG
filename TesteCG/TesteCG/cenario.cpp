@@ -603,6 +603,9 @@ void init() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE_ARB, GL_COMPARE_R_TO_TEXTURE);
 	//Shadow comparison should be true (ie not in shadow) if r<=texture
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC_ARB, GL_LEQUAL);
+	
+	printf("%d", GLEW_ARB_shadow_ambient);
+	
 	if(GLEW_ARB_shadow_ambient){
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FAIL_VALUE_ARB,0.5);
 		glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_INTENSITY);
