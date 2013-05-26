@@ -54,7 +54,7 @@ MATRIX4X4 lightProjectionMatrix, lightViewMatrix;
 MATRIX4X4 cameraProjectionMatrix, cameraViewMatrix;
 
 float pos[4] = {-100, 100, 100, 1};
-
+float ambLight=0.2;
 
 
 Esfera *e;
@@ -365,12 +365,17 @@ void renderScene(void) {
 	glViewport(0, 0, wWidth, wHeight);
 	
 	//Use dim light to represent shadowed areas
-	glLightfv(GL_LIGHT1, GL_POSITION, pos);
-	glLightfv(GL_LIGHT1, GL_AMBIENT, white*0.2f);
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, white*0.2f);
-	glLightfv(GL_LIGHT1, GL_SPECULAR, black);
 	glEnable(GL_LIGHT1);
 	glEnable(GL_LIGHTING);
+
+	glLightfv(GL_LIGHT1, GL_POSITION, pos);
+	glLightfv(GL_LIGHT1, GL_AMBIENT, white*ambLight);
+	
+	if(!GLEW_ARB_shadow_ambient){
+	
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, white*ambLight);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, black);
+	
 
 	
 	
@@ -378,10 +383,10 @@ void renderScene(void) {
 	glActiveTexture(GL_TEXTURE0);
 	glEnable(GL_TEXTURE_2D);
 
-	//drawScene();
+	drawScene();
 	
 	
-	
+	}
 	//3rd pass
 	//Draw with bright light
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, white);
@@ -429,8 +434,15 @@ void renderScene(void) {
 	
 	glActiveTexture(GL_TEXTURE0);
 
+	if(!GLEW_ARB_shadow_ambient){
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+	}
+
+
 	drawScene();
-	
+	if(!GLEW_ARB_shadow_ambient)
+		glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE1);
 	glDisable(GL_TEXTURE0);
 	glActiveTexture(GL_TEXTURE1);
@@ -591,10 +603,13 @@ void init() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE_ARB, GL_COMPARE_R_TO_TEXTURE);
 	//Shadow comparison should be true (ie not in shadow) if r<=texture
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC_ARB, GL_LEQUAL);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FAIL_VALUE_ARB,0.3);
-	printf("%d\n",__GLEW_ARB_shadow);
-	glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_INTENSITY);
-	
+	if(GLEW_ARB_shadow_ambient){
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FAIL_VALUE_ARB,0.5);
+		glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_INTENSITY);
+	}
+	else{
+		glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_ALPHA);
+	}
 	
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowMapSize, shadowMapSize, 0,GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
