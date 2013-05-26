@@ -424,19 +424,16 @@ void renderScene(void) {
 	//Bind & enable shadow map texture
 	glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
 	glEnable(GL_TEXTURE_2D);
+	
 
-	
-	
-	//Set alpha test to discard false comparisons
-	glAlphaFunc(GL_GEQUAL, 0.99f);
-	glEnable(GL_ALPHA_TEST);
-	
-	
-	
+	//Blend Images to get lit effect. Areas not in shadow have an alpha of 1 and are redrawn. The rest is kept as alpha is 0.
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+
 	glActiveTexture(GL_TEXTURE0);
 
 	drawScene();
-
+	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE1);
 	glDisable(GL_TEXTURE0);
 	glActiveTexture(GL_TEXTURE1);
@@ -597,8 +594,8 @@ void init() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
 	//Shadow comparison should be true (ie not in shadow) if r<=texture
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
-	//Shadow comparison should generate an INTENSITY result
-	glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_INTENSITY);
+	//Shadow comparison should generate an ALPHA result
+	glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_ALPHA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowMapSize, shadowMapSize, 0,GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
 
 	//Load identity modelview
