@@ -68,15 +68,12 @@
       <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <Optimization>MaxSpeed</Optimization>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <DebugInformationFormat>OldStyle</DebugInformationFormat>
-      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -88,7 +85,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\GitHub\CG\ProjectoBAR\ProjectoBAR\Esfera.cpp" />
+    <ClCompile Include="..\..\ProjectoBAR\ProjectoBAR\Cilindro.cpp" />
     <ClCompile Include="..\..\ProjectoBAR\ProjectoBAR\Cone.cpp" />
+    <ClCompile Include="..\..\ProjectoBAR\ProjectoBAR\copo.cpp" />
     <ClCompile Include="cenario.cpp" />
     <ClCompile Include="D:\Documentos\CG\p02.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -118,7 +117,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\GitHub\CG\ProjectoBAR\ProjectoBAR\Esfera.h" />
+    <ClInclude Include="..\..\ProjectoBAR\ProjectoBAR\Cilindro.h" />
     <ClInclude Include="..\..\ProjectoBAR\ProjectoBAR\Cone.h" />
+    <ClInclude Include="..\..\ProjectoBAR\ProjectoBAR\copo.h" />
     <ClInclude Include="Maths\COLOR.h" />
     <ClInclude Include="Maths\Maths.h" />
     <ClInclude Include="Maths\MATRIX4X4.h" />

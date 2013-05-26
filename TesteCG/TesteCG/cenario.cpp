@@ -4,6 +4,7 @@
 #include "C:\Users\Cesar\documents\GitHub\CG\ProjectoBAR\ProjectoBAR\Esfera.h"
 #include "C:\Users\Cesar\Documents\GitHub\CG\ProjectoBAR\ProjectoBAR\Cone.h"
 #include "C:\Users\Cesar\documents\visual studio 2012\Projects\TesteCG\TesteCG\Maths\Maths.h"
+#include "C:\Users\Cesar\Documents\GitHub\CG\ProjectoBAR\ProjectoBAR\copo.h"
 
 // include para a lib devil
 // não esquecer de adicionar a lib (devil.lib) ao projecto
@@ -15,10 +16,10 @@
 #define ANG2RAD 3.14159265358979323846/360.0 
 
 #define COWBOYS 8
-#define RAIO_COWBOYS 5
+#define RAIO_COWBOYS 10
 #define INDIOS 16
 #define RAIO_INDIOS 25
-#define ARVORES 1000
+#define ARVORES 700
 #define STEP_COWBOY 1.0f
 #define STEP_INDIO 0.5f
 
@@ -59,6 +60,7 @@ float pos[4] = {-100, 100, 100, 1};
 Esfera *e;
 Cone *base;
 Cone *copa;
+Copo *copo;
 
 int count;
 GLuint buffers[2];
@@ -182,11 +184,11 @@ void drawTree() {
 
 	glPushMatrix();
 	//glRotatef(-90,1.0,0.0,0.0);
-	float color[] = {1.0,1.0,0.5,1.0};
+	static float color[] = {1.0,1.0,0.5,1.0};
 	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color);
 	base->desenhar();
 	
-	float color2[] = {0.0, 0.5 + rand() * 0.5f/RAND_MAX,0.0,1.0};
+	static float color2[] = {0.0, 0.5 + rand() * 0.5f/RAND_MAX,0.0,1.0};
 	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color2);
 
 	glTranslatef(0.0,2.0,0.0);
@@ -257,7 +259,7 @@ void drawIndios() {
 		glPushMatrix();
 		glRotatef(angulo,0.0,1.0,0.0);
 		glTranslatef(0.0,0.0,RAIO_INDIOS);
-		glutSolidTeapot(1);
+		copo->desenhar();
 		glPopMatrix();
 	}
 }
@@ -274,7 +276,7 @@ void drawCowboys() {
 		glPushMatrix();
 		glRotatef(-angulo,0.0,1.0,0.0);
 		glTranslatef(RAIO_COWBOYS,0.0,0.0);
-		glutSolidTeapot(1);
+		copo->desenhar();
 		glPopMatrix();
 	}
 }
@@ -310,13 +312,13 @@ void drawScene() {
 	
 	placeTrees();
 	drawDonut();
-	drawTerreno();
 	// move teapots up so that they are placed on top of the ground plane
 	glPushMatrix();
 	glTranslatef(0.0,1.0,0.0);
 	drawCowboys();
 	drawIndios();
 	glPopMatrix();
+	drawTerreno();
 }
 
 
@@ -537,7 +539,7 @@ void init() {
 	e=new Esfera(3,10,50);
 	base=new Cone(0.25,4,1,5,1);
 	copa=new Cone(2.0,5.0,1,5,1);
-
+	copo=copo_vinho(2);
 	ILuint ima[3];
 
 	ilInit();
@@ -597,7 +599,7 @@ void init() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
 	//Shadow comparison should generate an INTENSITY result
 	glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_INTENSITY);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowMapSize, shadowMapSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowMapSize, shadowMapSize, 0,GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
 
 	//Load identity modelview
 	glMatrixMode(GL_MODELVIEW);

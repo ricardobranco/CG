@@ -6,7 +6,7 @@
 #include "primitivas.h"
 #include "copo.h"
 
-#define DIVH 70
+#define DIVH 20
 
 /*
 void desenha_copo(float size,float r, float along, float pe, float rbase, float hbase) {
@@ -117,8 +117,8 @@ void desenha_copo(float size,float r, float along, float pe, float rbase, float 
 Copo::Copo(float size,float r, float along, float hpe, float rbase, float hbase){
 
 
-	base=new Cilindro(rbase,hbase,50,3,50);
-	pe=new Cilindro(0.1,hpe+0.05*r,10,50,5);
+	base=new Cilindro(rbase,hbase,20,1,10);
+	pe=new Cilindro(0.1,hpe+0.05*r,5,10,1);
 
 	this->size=size;
 	this->raio=r;

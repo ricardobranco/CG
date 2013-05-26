@@ -54,6 +54,12 @@
     <ClCompile Include="..\..\ProjectoBAR\ProjectoBAR\Cone.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ProjectoBAR\ProjectoBAR\copo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ProjectoBAR\ProjectoBAR\Cilindro.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="terreno2.jpg">
@@ -98,6 +104,12 @@
       <Filter>Maths</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ProjectoBAR\ProjectoBAR\Cone.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ProjectoBAR\ProjectoBAR\copo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ProjectoBAR\ProjectoBAR\Cilindro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
