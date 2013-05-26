@@ -378,7 +378,7 @@ void renderScene(void) {
 	glActiveTexture(GL_TEXTURE0);
 	glEnable(GL_TEXTURE_2D);
 
-	drawScene();
+	//drawScene();
 	
 	
 	
@@ -426,14 +426,11 @@ void renderScene(void) {
 	glEnable(GL_TEXTURE_2D);
 	
 
-	//Blend Images to get lit effect. Areas not in shadow have an alpha of 1 and are redrawn. The rest is kept as alpha is 0.
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-
+	
 	glActiveTexture(GL_TEXTURE0);
 
 	drawScene();
-	glDisable(GL_BLEND);
+	
 	glDisable(GL_TEXTURE1);
 	glDisable(GL_TEXTURE0);
 	glActiveTexture(GL_TEXTURE1);
@@ -591,11 +588,15 @@ void init() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	//Enable shadow comparison
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE_ARB, GL_COMPARE_R_TO_TEXTURE);
 	//Shadow comparison should be true (ie not in shadow) if r<=texture
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
-	//Shadow comparison should generate an ALPHA result
-	glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_ALPHA);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC_ARB, GL_LEQUAL);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FAIL_VALUE_ARB,0.3);
+	printf("%d\n",__GLEW_ARB_shadow);
+	glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_INTENSITY);
+	
+	
+
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowMapSize, shadowMapSize, 0,GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
 
 	//Load identity modelview
