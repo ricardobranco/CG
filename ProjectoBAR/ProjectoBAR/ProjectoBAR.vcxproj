@@ -91,6 +91,7 @@
     <ClCompile Include="BancoBalcao.cpp" />
     <ClCompile Include="Bar.cpp" />
     <ClCompile Include="BarVBO.cpp" />
+    <ClCompile Include="Bilhar.cpp" />
     <ClCompile Include="cadeiraVBO.cpp" />
     <ClCompile Include="CandeeirosVBO.cpp" />
     <ClCompile Include="Cilindro.cpp" />
@@ -111,6 +112,7 @@
     <ClInclude Include="BancoBalcao.h" />
     <ClInclude Include="Bar.h" />
     <ClInclude Include="BarVBO.h" />
+    <ClInclude Include="Bilhar.h" />
     <ClInclude Include="cadeiraVBO.h" />
     <ClInclude Include="CandeeirosVBO.h" />
     <ClInclude Include="Cilindro.h" />
