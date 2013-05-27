@@ -90,6 +90,7 @@
   <ItemGroup>
     <ClCompile Include="BancoAlto.cpp" />
     <ClCompile Include="BancoBalcao.cpp" />
+    <ClCompile Include="BancoSofa.cpp" />
     <ClCompile Include="Bar.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -131,6 +132,7 @@
   <ItemGroup>
     <ClInclude Include="BancoAlto.h" />
     <ClInclude Include="BancoBalcao.h" />
+    <ClInclude Include="BancoSofa.h" />
     <ClInclude Include="Bar.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>

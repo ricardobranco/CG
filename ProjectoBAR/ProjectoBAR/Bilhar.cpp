@@ -29,22 +29,46 @@ void Bilhar::desenhar(){
 	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,cor5);
 	glPushMatrix();
 	glTranslatef(-comp*0.5+margem,0,-larg*0.5+margem);
+	glPushMatrix();
+	glTranslatef(0,alt*0.7,0);
+	glPushMatrix();
+	glRotatef(180,0,0,1);
 	cone->desenhar();
+	glPopMatrix();
+	glPopMatrix();
 	glPopMatrix();
 	//perna -+
 	glPushMatrix();
 	glTranslatef(-comp*0.5+margem,0,larg*0.5-margem);
+	glPushMatrix();
+	glTranslatef(0,alt*0.7,0);
+	glPushMatrix();
+	glRotatef(180,0,0,1);
 	cone->desenhar();
+	glPopMatrix();
+	glPopMatrix();
 	glPopMatrix();
 	//perna +-
 	glPushMatrix();
 	glTranslatef(comp*0.5-margem,0,-larg*0.5+margem);
+	glPushMatrix();
+	glTranslatef(0,alt*0.7,0);
+	glPushMatrix();
+	glRotatef(180,0,0,1);
 	cone->desenhar();
+	glPopMatrix();
+	glPopMatrix();
 	glPopMatrix();
 	//perna ++
 	glPushMatrix();
 	glTranslatef(comp*0.5-margem,0,larg*0.5-margem);
+	glPushMatrix();
+	glTranslatef(0,alt*0.7,0);
+	glPushMatrix();
+	glRotatef(180,0,0,1);
 	cone->desenhar();
+	glPopMatrix();
+	glPopMatrix();
 	glPopMatrix();
 	//Pano
 

@@ -3,7 +3,7 @@
 class BancoBalcao
 {
 public:
-	BancoBalcao(float r, float alt);
+	BancoBalcao(float size );
 	~BancoBalcao(void);
 	void desenhar();
 private:
