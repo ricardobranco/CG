@@ -3,7 +3,7 @@
 #include <GL/glut.h>
 
 #include <math.h>
-
+#include "Sofa.h"
 #include "Esfera.h"
 #include "Cubo.h"
 #include "Plano.h"
@@ -36,7 +36,7 @@ Cilindro *cilindro;
 Cone *cone;
 CadeiraVBO *sofa;
 Extras *ext;
-
+Sofa *s;
 //BarVBO* bar;
 
 int solido=ESFERA;
@@ -125,8 +125,10 @@ void renderScene(void) {
 	}
 
 	*/
-	ext->setSize(1);
-	ext->bilhar();
+	/*ext->setSize(1);
+	ext->bilhar();*/
+
+	s->desenhar();
 // End of frame
 	glutSwapBuffers();
 }
@@ -215,7 +217,7 @@ void main(int argc, char **argv) {
 	cone= new Cone(1,2,50,50,50);
 	cilindro = new Cilindro(0.5,1,40,40,20);
 	ext=new Extras(1);
-	sofa=new CadeiraVBO(1);
+	s=new Sofa(1,2);
 	//bar = new BarVBO(1);
 
 

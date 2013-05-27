@@ -102,6 +102,7 @@
     <ClCompile Include="Plano.cpp" />
     <ClCompile Include="primitivas.cpp" />
     <ClCompile Include="copo.cpp" />
+    <ClCompile Include="Sofa.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bar.h" />
@@ -118,6 +119,7 @@
     <ClInclude Include="Objetos.h" />
     <ClInclude Include="Plano.h" />
     <ClInclude Include="primitivas.h" />
+    <ClInclude Include="Sofa.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
