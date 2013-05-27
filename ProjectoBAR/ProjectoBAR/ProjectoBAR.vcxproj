@@ -88,44 +88,88 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BancoAlto.cpp" />
     <ClCompile Include="BancoBalcao.cpp" />
-    <ClCompile Include="Bar.cpp" />
+    <ClCompile Include="Bar.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="BarVBO.cpp" />
-    <ClCompile Include="cadeiraVBO.cpp" />
-    <ClCompile Include="CandeeirosVBO.cpp" />
+    <ClCompile Include="cadeiraVBO.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="CandeeirosVBO.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Cilindro.cpp" />
     <ClCompile Include="Cone.cpp" />
     <ClCompile Include="Cubo.cpp" />
     <ClCompile Include="Esfera.cpp" />
-    <ClCompile Include="mesa.cpp" />
+    <ClCompile Include="Maths\COLOR.cpp" />
+    <ClCompile Include="Maths\MATRIX4X4.cpp" />
+    <ClCompile Include="Maths\PLANE.cpp" />
+    <ClCompile Include="Maths\VECTOR2D.cpp" />
+    <ClCompile Include="Maths\VECTOR3D.cpp" />
+    <ClCompile Include="Maths\VECTOR4D.cpp" />
+    <ClCompile Include="mesa.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="MesaQuadrada.cpp" />
     <ClCompile Include="MesaRedonda.cpp" />
-    <ClCompile Include="Objetos.cpp" />
+    <ClCompile Include="Objetos.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Plano.cpp" />
-    <ClCompile Include="primitivas.cpp" />
+    <ClCompile Include="primitivas.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="copo.cpp" />
     <ClCompile Include="Sofa.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BancoAlto.h" />
     <ClInclude Include="BancoBalcao.h" />
-    <ClInclude Include="Bar.h" />
+    <ClInclude Include="Bar.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="BarVBO.h" />
-    <ClInclude Include="cadeiraVBO.h" />
-    <ClInclude Include="CandeeirosVBO.h" />
+    <ClInclude Include="cadeiraVBO.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="CandeeirosVBO.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Cilindro.h" />
     <ClInclude Include="copo.h" />
-    <ClInclude Include="cadeiras.h" />
+    <ClInclude Include="cadeiras.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Cubo.h" />
     <ClInclude Include="Esfera.h" />
     <ClInclude Include="Cone.h" />
-    <ClInclude Include="mesa.h" />
+    <ClInclude Include="Maths\COLOR.h" />
+    <ClInclude Include="Maths\Maths.h" />
+    <ClInclude Include="Maths\MATRIX4X4.h" />
+    <ClInclude Include="Maths\PLANE.h" />
+    <ClInclude Include="Maths\VECTOR2D.h" />
+    <ClInclude Include="Maths\VECTOR3D.h" />
+    <ClInclude Include="Maths\VECTOR4D.h" />
+    <ClInclude Include="mesa.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="MesaQuadrada.h" />
     <ClInclude Include="MesaRedonda.h" />
-    <ClInclude Include="Objetos.h" />
+    <ClInclude Include="Objetos.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Plano.h" />
-    <ClInclude Include="primitivas.h" />
+    <ClInclude Include="primitivas.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Sofa.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="madeira_tex.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
