@@ -1,4 +1,5 @@
 #pragma once
+#include "Plano.h"
 class BarVBO
 {
 public:
