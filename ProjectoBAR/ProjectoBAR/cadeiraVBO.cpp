@@ -82,8 +82,8 @@ void CadeiraVBO::banco_balcao_parametros(float altura,float raio){
 	glPopMatrix();
 	
 	//chão
-	c2=new Cilindro(raio*1/1.2,altura*1/20,CAM,LAD,DR);
-	c2->desenhar();
+	c3=new Cilindro(raio*1/1.2,altura*1/20,CAM,LAD,DR);
+	c3->desenhar();
 
 }
 

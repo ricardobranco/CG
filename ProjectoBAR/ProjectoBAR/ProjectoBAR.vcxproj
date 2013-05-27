@@ -88,6 +88,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BancoBalcao.cpp" />
     <ClCompile Include="Bar.cpp" />
     <ClCompile Include="cadeiraVBO.cpp" />
     <ClCompile Include="CandeeirosVBO.cpp" />
@@ -95,7 +96,6 @@
     <ClCompile Include="Cone.cpp" />
     <ClCompile Include="Cubo.cpp" />
     <ClCompile Include="Esfera.cpp" />
-    <ClCompile Include="Extras.cpp" />
     <ClCompile Include="mesa.cpp" />
     <ClCompile Include="MesaQuadrada.cpp" />
     <ClCompile Include="MesaRedonda.cpp" />
@@ -107,6 +107,7 @@
     <ClCompile Include="Sofa.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BancoBalcao.h" />
     <ClInclude Include="Bar.h" />
     <ClInclude Include="cadeiraVBO.h" />
     <ClInclude Include="CandeeirosVBO.h" />
@@ -116,7 +117,6 @@
     <ClInclude Include="Cubo.h" />
     <ClInclude Include="Esfera.h" />
     <ClInclude Include="Cone.h" />
-    <ClInclude Include="Extras.h" />
     <ClInclude Include="mesa.h" />
     <ClInclude Include="MesaQuadrada.h" />
     <ClInclude Include="MesaRedonda.h" />

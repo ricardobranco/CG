@@ -10,6 +10,8 @@
 #include "Cilindro.h"
 #include "Cone.h"
 
+
+
 #define ESFERA 1
 #define PLANO 2
 #define CUBO 3
@@ -18,9 +20,9 @@
 
 #include "cadeiraVBO.h"
 #include "CandeeirosVBO.h"
-#include "Extras.h"
 #include "MesaQuadrada.h"
 #include "MesaRedonda.h"
+#include "BancoBalcao.h"
 
 
 
@@ -36,10 +38,10 @@ Plano *plano;
 Cilindro *cilindro;
 Cone *cone;
 CadeiraVBO *sofa;
-Extras *ext;
 Sofa *s;
 MesaQuadrada *m;
 MesaRedonda *mr;
+BancoBalcao *bb;
 //BarVBO* bar;
 
 int solido=ESFERA;
@@ -131,7 +133,7 @@ void renderScene(void) {
 	/*ext->setSize(1);
 	ext->bilhar();*/
 
-	mr->desenhar();
+	esfera->desenhar();
 // End of frame
 	glutSwapBuffers();
 }
@@ -219,10 +221,10 @@ void main(int argc, char **argv) {
 	plano = new Plano(2,2,100,100);
 	cone= new Cone(1,2,50,50,50);
 	cilindro = new Cilindro(0.5,1,40,40,20);
-	ext=new Extras(1);
 	s=new Sofa(1,2);
 	m=new MesaQuadrada(1,0.4);
 	mr=new MesaRedonda(1);
+	bb= new BancoBalcao(1,1);
 	//bar = new BarVBO(1);
 
 
