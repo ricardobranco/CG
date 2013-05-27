@@ -98,6 +98,7 @@
     <ClCompile Include="Cone.cpp" />
     <ClCompile Include="Cubo.cpp" />
     <ClCompile Include="Esfera.cpp" />
+    <ClCompile Include="GarrafaAgua.cpp" />
     <ClCompile Include="mesa.cpp" />
     <ClCompile Include="MesaQuadrada.cpp" />
     <ClCompile Include="MesaRedonda.cpp" />
@@ -121,6 +122,7 @@
     <ClInclude Include="Cubo.h" />
     <ClInclude Include="Esfera.h" />
     <ClInclude Include="Cone.h" />
+    <ClInclude Include="GarrafaAgua.h" />
     <ClInclude Include="mesa.h" />
     <ClInclude Include="MesaQuadrada.h" />
     <ClInclude Include="MesaRedonda.h" />

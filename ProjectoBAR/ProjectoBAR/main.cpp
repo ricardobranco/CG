@@ -25,6 +25,7 @@
 #include "BancoBalcao.h"
 #include "BarVBO.h"
 #include "Bilhar.h"
+#include"GarrafaAgua.h"
 
 #define _PI_ 3.14159
 
@@ -44,6 +45,7 @@ MesaRedonda *mr;
 BancoBalcao *bb;
 BarVBO* bar;
 Bilhar *bilhar;
+GarrafaAgua *g;
 
 int solido=ESFERA;
 
@@ -135,7 +137,7 @@ void renderScene(void) {
 	ext->bilhar();*/
 
 	/*bar->desenhar();*/
-	bilhar->desenhar();
+	g->desenhar();
 
 // End of frame
 	glutSwapBuffers();
@@ -230,6 +232,7 @@ void main(int argc, char **argv) {
 	bb= new BancoBalcao(1,1);
 	bar = Bar(1);
 	bilhar=new Bilhar(1);
+	g=new GarrafaAgua(1);
 
 
 
