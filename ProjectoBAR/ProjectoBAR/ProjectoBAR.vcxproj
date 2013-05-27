@@ -97,6 +97,7 @@
     <ClCompile Include="Esfera.cpp" />
     <ClCompile Include="Extras.cpp" />
     <ClCompile Include="mesa.cpp" />
+    <ClCompile Include="MesaQuadrada.cpp" />
     <ClCompile Include="Objetos.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Plano.cpp" />
@@ -116,6 +117,7 @@
     <ClInclude Include="Cone.h" />
     <ClInclude Include="Extras.h" />
     <ClInclude Include="mesa.h" />
+    <ClInclude Include="MesaQuadrada.h" />
     <ClInclude Include="Objetos.h" />
     <ClInclude Include="Plano.h" />
     <ClInclude Include="primitivas.h" />
