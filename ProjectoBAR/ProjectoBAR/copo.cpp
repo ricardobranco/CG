@@ -235,6 +235,13 @@ Copo::Copo(float size,float r, float along, float hpe, float rbase, float hbase)
 
 void Copo::desenhar(){
 
+	static float cor[]={1,1,1,1};
+
+
+	glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,cor);
+	glMaterialfv(GL_FRONT,GL_SPECULAR,cor);
+	glMateriali(GL_FRONT,GL_SHININESS,128);
+
 	glPushMatrix();
 
 	glScalef(size,size,size);

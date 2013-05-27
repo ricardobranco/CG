@@ -10,6 +10,7 @@
 #include "MesaQuadrada.h"
 #include "MesaRedonda.h"
 #include "Sofa.h"
+#include "Bilhar.h"
 
 // include para a lib devil
 // não esquecer de adicionar a lib (devil.lib) ao projecto
@@ -54,7 +55,7 @@ int wWidth;
 MATRIX4X4 lightProjectionMatrix, lightViewMatrix;
 MATRIX4X4 cameraProjectionMatrix, cameraViewMatrix;
 
-float pos[4] = {4.95, 1.95, -7.45, 1};
+float pos[4] = {4.9, 1.9, -7.4, 1};
 float ambLight=0.2;
 
 
@@ -67,6 +68,7 @@ Copo *flt;
 MesaQuadrada *mesaQ;
 MesaRedonda *mesaR;
 Sofa *sofa;
+Bilhar *bil;
 
 int count;
 GLuint buffers[2];
@@ -77,7 +79,7 @@ void initMatrix(){
 	glPushMatrix();
 	
 	glLoadIdentity();
-	gluPerspective(100, 1, 0.1, 20);
+	gluPerspective(90, 1, 0.1, 20);
 	
 	glGetFloatv(GL_MODELVIEW_MATRIX, lightProjectionMatrix);
 	
@@ -146,6 +148,16 @@ void drawScene() {
 
 	bar->desenhar();
 	copoV->desenhar();
+	glPushMatrix();
+	glTranslatef(0,0,2);
+	sofa->desenhar();
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(-2.5,0,6);
+	bil->desenhar();
+	glPopMatrix();
+
+
 }
 
 
@@ -326,12 +338,13 @@ void init() {
 	bancAlto  = new BancoAlto(0.6);
 	bancBalc = new BancoBalcao(0.3,0.4);
 	bar = Bar(1);
-	copoV=copo_vinho(0.1);
-	copoL=copo_largo(0.1);
-	flt=flute(0.1);
+	copoV=copo_vinho(0.05);
+	copoL=copo_largo(0.05);
+	flt=flute(0.05);
 	mesaQ=new MesaQuadrada(0.5,0.4);
 	mesaR=new MesaRedonda(0.4);
 	sofa=new Sofa(0.7,2);
+	bil=new Bilhar(0.7);
 	
 
 	ILuint ima[N_TEX];

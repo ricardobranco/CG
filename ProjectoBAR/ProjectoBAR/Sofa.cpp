@@ -22,7 +22,7 @@ Sofa::~Sofa(void)
 }
 void Sofa::desenhar(){
 	glPushMatrix();
-	glTranslatef(0,alt/2,0);
+	glTranslatef(0,alt*0.2,0);
 	glPushMatrix();
 	glScalef(comp,alt*0.4,larg);
 	cub1->desenhar();

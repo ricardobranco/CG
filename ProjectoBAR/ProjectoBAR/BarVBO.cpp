@@ -60,7 +60,7 @@ void  BarVBO::setSize(float size){
 
 
 void  BarVBO::desenhar(){
-	static float cor[]={0.3,0.3,0.3,1.0};
+	static float cor[]={1,0.3,0.3,1.0};
 	static float spec[]={0.0,0.0,0.0,1.0};
 	glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,cor);
 	glMaterialfv(GL_FRONT,GL_SPECULAR,spec);
