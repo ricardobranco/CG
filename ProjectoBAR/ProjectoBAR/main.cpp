@@ -225,7 +225,7 @@ void main(int argc, char **argv) {
 	m=new MesaQuadrada(1,0.4);
 	mr=new MesaRedonda(1);
 	bb= new BancoBalcao(1,1);
-	bar = new BarVBO(1,3,10,15);
+	bar = Bar(1);
 
 
 

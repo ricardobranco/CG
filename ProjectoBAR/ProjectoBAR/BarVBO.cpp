@@ -86,10 +86,8 @@ void  BarVBO::desenhar(){
 		glRotatef(90,0,0,1);
 		glRotatef(90,1,0,0);
 		glTranslatef(altura/2,hipotnusa/2,0);
-		parDIAG->desenhar();
-		//plano(altura,hipotnusa,CAMADAS,CAMADAS);
 		glRotatef(180,1,0,0);
-		//parDIAG->desenhar();
+		parDIAG->desenhar();
 		
 	glPopMatrix();
 
@@ -114,9 +112,9 @@ void  BarVBO::desenhar(){
 	glPushMatrix();//PAREDE ESQ
 	glTranslatef(-comp/2+sul,altura/2,-(larg/2-dir/2));
 		glRotatef(90,0,0,1);
-		parDIR->desenhar();
-		glRotatef(180,1,0,0);
 		//parDIR->desenhar();
+		glRotatef(180,1,0,0);
+		parDIR->desenhar();
 	glPopMatrix();
 	
 	glPushMatrix(); //PAREDE SULNORTE
@@ -124,9 +122,8 @@ void  BarVBO::desenhar(){
 	glTranslatef(-comp/2+aux,altura/2,larg/2-cateto);
 		glRotatef(90,0,0,1);
 		glRotatef(90,1,0,0);
+		//glRotatef(180,1,0,0);
 		parESQTOP->desenhar();
-		glRotatef(180,1,0,0);
-		//parESQTOP->desenhar();
 	glPopMatrix();
 	
 	glPushMatrix(); //PAREDE SULESQ
@@ -134,9 +131,9 @@ void  BarVBO::desenhar(){
 	glTranslatef(-comp/2+aux,altura/2,larg/2);
 		glRotatef(90,0,0,1);
 		glRotatef(90,1,0,0);
-		parESQTOP->desenhar();
-		glRotatef(180,1,0,0);
 		//parESQTOP->desenhar();
+		glRotatef(180,1,0,0);
+		parESQTOP->desenhar();
 	glPopMatrix();
 	
 
@@ -144,9 +141,8 @@ void  BarVBO::desenhar(){
 	glTranslatef(comp/2-cateto-cateto/2,altura/2,larg/2);
 		glRotatef(90,0,0,1);
 		glRotatef(90,1,0,0);
-		parSULDIR->desenhar();
 		glRotatef(180,1,0,0);
-		//parSULDIR->desenhar();
+		parSULDIR->desenhar();
 	glPopMatrix();
 
 	glPushMatrix(); //PAREDE SULESQ
@@ -154,11 +150,8 @@ void  BarVBO::desenhar(){
 		glRotatef(90,0,1,0);
 		glRotatef(90,0,0,1);
 		glRotatef(90,1,0,0);
+		//glRotatef(180,1,0,0);
 		parSULDIR->desenhar();
-		//plano(altura,cateto,CAMADAS,CAMADAS);
-		glRotatef(180,1,0,0);
-		//parSULDIR->desenhar();
-		//plano(altura,cateto,CAMADAS,CAMADAS);
 	glPopMatrix();
 
 	//TECTO
