@@ -377,9 +377,6 @@ void renderScene(void) {
 
 	glLightfv(GL_LIGHT1, GL_POSITION, pos);
 	glLightfv(GL_LIGHT1, GL_AMBIENT, white*ambLight);
-	
-	
-	
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, white*ambLight);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, black);
 	
