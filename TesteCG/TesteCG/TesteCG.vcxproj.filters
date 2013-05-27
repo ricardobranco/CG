@@ -18,15 +18,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="D:\Documentos\CG\p02.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="p01.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\Documentos\CG\p5.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\GitHub\CG\ProjectoBAR\ProjectoBAR\Esfera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -79,9 +70,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\GitHub\CG\ProjectoBAR\ProjectoBAR\Esfera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Maths\COLOR.h">
       <Filter>Maths</Filter>
     </ClInclude>
@@ -103,13 +91,16 @@
     <ClInclude Include="Maths\VECTOR4D.h">
       <Filter>Maths</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ProjectoBAR\ProjectoBAR\Cone.h">
+    <ClInclude Include="Cilindro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ProjectoBAR\ProjectoBAR\copo.h">
+    <ClInclude Include="Cone.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ProjectoBAR\ProjectoBAR\Cilindro.h">
+    <ClInclude Include="copo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Esfera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

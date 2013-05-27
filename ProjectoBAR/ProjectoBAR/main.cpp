@@ -23,7 +23,7 @@
 #include "MesaQuadrada.h"
 #include "MesaRedonda.h"
 #include "BancoBalcao.h"
-
+#include "BarVBO.h"
 
 
 #define _PI_ 3.14159
@@ -42,7 +42,7 @@ Sofa *s;
 MesaQuadrada *m;
 MesaRedonda *mr;
 BancoBalcao *bb;
-//BarVBO* bar;
+BarVBO* bar;
 
 int solido=ESFERA;
 
@@ -133,7 +133,7 @@ void renderScene(void) {
 	/*ext->setSize(1);
 	ext->bilhar();*/
 
-	esfera->desenhar();
+	bar->desenhar();
 // End of frame
 	glutSwapBuffers();
 }
@@ -225,7 +225,7 @@ void main(int argc, char **argv) {
 	m=new MesaQuadrada(1,0.4);
 	mr=new MesaRedonda(1);
 	bb= new BancoBalcao(1,1);
-	//bar = new BarVBO(1);
+	bar = new BarVBO(1,3,10,15);
 
 
 

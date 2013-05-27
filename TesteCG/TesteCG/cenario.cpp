@@ -1,10 +1,10 @@
 #include <stdlib.h>
 #include <GL/glew.h>
 #include <GL/glut.h>
-#include "C:\Users\Cesar\documents\GitHub\CG\ProjectoBAR\ProjectoBAR\Esfera.h"
-#include "C:\Users\Cesar\Documents\GitHub\CG\ProjectoBAR\ProjectoBAR\Cone.h"
+#include "Esfera.h"
+#include "Cone.h"
 #include "Maths\Maths.h"
-#include "C:\Users\Cesar\Documents\GitHub\CG\ProjectoBAR\ProjectoBAR\copo.h"
+#include "copo.h"
 
 // include para a lib devil
 // não esquecer de adicionar a lib (devil.lib) ao projecto

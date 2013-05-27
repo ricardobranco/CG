@@ -289,3 +289,7 @@ void tecto(float scale){
 	glPopMatrix();
 
 }
+
+
+
+
