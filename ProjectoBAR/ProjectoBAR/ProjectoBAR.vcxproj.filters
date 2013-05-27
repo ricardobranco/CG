@@ -63,6 +63,9 @@
     <ClCompile Include="MesaQuadrada.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MesaRedonda.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="primitivas.h">
@@ -111,6 +114,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MesaQuadrada.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MesaRedonda.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

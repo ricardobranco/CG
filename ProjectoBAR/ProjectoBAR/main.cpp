@@ -20,7 +20,7 @@
 #include "CandeeirosVBO.h"
 #include "Extras.h"
 #include "MesaQuadrada.h"
-
+#include "MesaRedonda.h"
 
 
 
@@ -39,6 +39,7 @@ CadeiraVBO *sofa;
 Extras *ext;
 Sofa *s;
 MesaQuadrada *m;
+MesaRedonda *mr;
 //BarVBO* bar;
 
 int solido=ESFERA;
@@ -130,7 +131,7 @@ void renderScene(void) {
 	/*ext->setSize(1);
 	ext->bilhar();*/
 
-	m->desenhar();
+	mr->desenhar();
 // End of frame
 	glutSwapBuffers();
 }
@@ -221,6 +222,7 @@ void main(int argc, char **argv) {
 	ext=new Extras(1);
 	s=new Sofa(1,2);
 	m=new MesaQuadrada(1,0.4);
+	mr=new MesaRedonda(1);
 	//bar = new BarVBO(1);
 
 
