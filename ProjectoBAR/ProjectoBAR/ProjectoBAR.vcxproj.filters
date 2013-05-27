@@ -93,6 +93,12 @@
     <ClCompile Include="BancoAlto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Bilhar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GarrafaAgua.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="primitivas.h">
@@ -171,6 +177,12 @@
       <Filter>Maths</Filter>
     </ClInclude>
     <ClInclude Include="BancoAlto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bilhar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GarrafaAgua.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
