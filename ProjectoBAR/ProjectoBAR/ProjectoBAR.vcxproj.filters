@@ -105,6 +105,9 @@
     <ClCompile Include="CandeeiroLuz.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CandeeiroBilhar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="primitivas.h">
@@ -195,6 +198,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CandeeiroLuz.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CandeeiroBilhar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
