@@ -88,6 +88,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Balcao.cpp" />
     <ClCompile Include="BancoAlto.cpp" />
     <ClCompile Include="BancoBalcao.cpp" />
     <ClCompile Include="BancoSofa.cpp" />
@@ -132,6 +133,7 @@
     <ClCompile Include="Sofa.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Balcao.h" />
     <ClInclude Include="BancoAlto.h" />
     <ClInclude Include="BancoBalcao.h" />
     <ClInclude Include="BancoSofa.h" />
