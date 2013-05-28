@@ -28,6 +28,7 @@
 #define MOV 0.1
 
 
+
 float height = 2.0f;
 float x = 0.0f;
 float z = 0.0f;
@@ -90,8 +91,9 @@ void initMatrix(){
 	
 	glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix);
 	
-	camDir[0]=cos((float)alpha);
-	camDir[2]=sin((float)alpha);
+	camDir[0]=cos(alpha)*sin(beta);
+	camDir[1]=cos(beta);
+	camDir[2]=sin(alpha)*sin(beta);
 
 	glLoadIdentity();
 	gluPerspective(45,(float)wWidth/wHeight,0.1,20);
@@ -145,9 +147,9 @@ void changeSize(int w, int h) {
 
 
 void drawScene() {
-
+	
 	bar->desenhar();
-	copoV->desenhar();
+	
 	glPushMatrix();
 	glTranslatef(0,0,2);
 	sofa->desenhar();
@@ -156,8 +158,11 @@ void drawScene() {
 	glTranslatef(-2.5,0,6);
 	bil->desenhar();
 	glPopMatrix();
-
-
+	
+	copoV->desenhar();
+	
+	
+	
 }
 
 
@@ -203,7 +208,8 @@ void renderScene(void) {
 	glLoadMatrixf(cameraViewMatrix);
 
 	glViewport(0, 0, wWidth, wHeight);
-	
+
+
 	//Use dim light to represent shadowed areas
 	glEnable(GL_LIGHT1);
 	glEnable(GL_LIGHTING);
@@ -336,7 +342,7 @@ void processMouseMotion(int xx, int yy)
 void init() {
 
 	bancAlto  = new BancoAlto(0.6);
-	bancBalc = new BancoBalcao(0.3,0.4);
+	bancBalc = new BancoBalcao(0.5);
 	bar = Bar(1);
 	copoV=copo_vinho(0.05);
 	copoL=copo_largo(0.05);
