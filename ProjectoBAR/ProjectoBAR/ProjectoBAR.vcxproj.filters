@@ -111,6 +111,9 @@
     <ClCompile Include="Balcao.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GarrafaWhisky.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="primitivas.h">
@@ -207,6 +210,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Balcao.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GarrafaWhisky.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
