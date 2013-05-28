@@ -26,14 +26,16 @@ void CandeeiroBilhar:: desenhar(){
 	glPushMatrix();
 	glTranslatef(0,raio*0.25,0);
 	glPushMatrix();
-	float cor[]={1,1,0.5,1.0};
-	float spec[]={0.0,0.0,0.0,1.0};
+	static float cor[]={1,1,0.5,1.0};
+	static float spec[]={0.0,0.0,0.0,1.0};
+	static float spec2[]={1,1,1,1};
 	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,cor);
 	glMaterialfv(GL_FRONT,GL_SPECULAR,spec);
 	lamp->desenhar();
 	float cor1[]={0.4,0.4,0.4,1.0};
 	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,cor1);
-	glMaterialfv(GL_FRONT,GL_SPECULAR,spec);
+	glMaterialfv(GL_FRONT,GL_SPECULAR,spec2);
+	glMateriali(GL_FRONT,GL_SHININESS,128);
 	cone->desenhar();
 
 	glPushMatrix();
@@ -49,7 +51,8 @@ void CandeeiroBilhar:: desenhar(){
 	glMaterialfv(GL_FRONT,GL_SPECULAR,spec);
 	lamp->desenhar();
 	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,cor1);
-	glMaterialfv(GL_FRONT,GL_SPECULAR,spec);
+	glMaterialfv(GL_FRONT,GL_SPECULAR,spec2);
+	glMateriali(GL_FRONT,GL_SHININESS,128);
 	cone->desenhar();
 
 
@@ -67,7 +70,8 @@ void CandeeiroBilhar:: desenhar(){
 	glMaterialfv(GL_FRONT,GL_SPECULAR,spec);
 	lamp->desenhar();
 	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,cor1);
-	glMaterialfv(GL_FRONT,GL_SPECULAR,spec);
+	glMaterialfv(GL_FRONT,GL_SPECULAR,spec2);
+	glMateriali(GL_FRONT,GL_SHININESS,128);
 	cone->desenhar();
 
 	glPushMatrix();

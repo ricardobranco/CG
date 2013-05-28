@@ -6,7 +6,7 @@ class Balcao
 public:
 	Balcao(float comp,float alt,float larg);
 	~Balcao(void);
-	void desenhar();
+	void desenhar(int tampo_tex, int base_tex);
 private:
 	float comprimento;
 	float altura;

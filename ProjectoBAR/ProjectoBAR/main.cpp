@@ -11,6 +11,11 @@
 #include "MesaRedonda.h"
 #include "Sofa.h"
 #include "Bilhar.h"
+#include "CandeeiroBilhar.h"
+#include "CandeeiroLuz.h"
+#include "Balcao.h"
+#include "GarrafaAgua.h"
+
 
 // include para a lib devil
 // não esquecer de adicionar a lib (devil.lib) ao projecto
@@ -20,12 +25,13 @@
 #include <math.h>
 
 #define ANG2RAD 3.14159265358979323846/360.0 
-#define N_TEX 5
+#define N_TEX 6
 #define MADEIRA_TEX 0
 #define TECIDO_SOFA_TEX 1
 #define CHAO_TEX 2
 #define PAREDES_TEX 3
 #define TECTO_TEX 4
+#define BALCAO_TAMPO_TEX 5
 
 
 #define SENS_RATO 0.001
@@ -62,6 +68,7 @@ MATRIX4X4 lightProjectionMatrix, lightViewMatrix;
 MATRIX4X4 cameraProjectionMatrix, cameraViewMatrix;
 
 float pos[4] = {4.9, 1.9, -7.4, 1};
+float spotDir[]={-1,-1,1};
 float ambLight=0.2;
 
 
@@ -75,6 +82,9 @@ MesaQuadrada *mesaQ;
 MesaRedonda *mesaR;
 Sofa *sofa;
 Bilhar *bil;
+CandeeiroBilhar *cBilhar;
+Balcao *balcao;
+CandeeiroLuz *cLuz;
 
 int count;
 GLuint buffers[2];
@@ -91,8 +101,8 @@ void initMatrix(){
 	
 	glLoadIdentity();
 	gluLookAt(	pos[0], pos[1], pos[2],
-				pos[0]-1, 1,pos[2]+1,
-				0.0f, 1.0f, 0.0f);
+		pos[0]+spotDir[0], pos[1]+spotDir[1],pos[2]+spotDir[2],
+		0.0f, 1.0f, 0.0f);
 	
 	glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix);
 	
@@ -154,7 +164,18 @@ void changeSize(int w, int h) {
 void drawScene() {
 	
 	bar->desenhar(tex[CHAO_TEX],tex[PAREDES_TEX],0);
-	
+
+	glPushMatrix();
+	glTranslatef(4.9,1.9,-7.4);
+	glRotatef(-45,1,0,1);
+	cLuz->desenhar();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0,0,-3);
+	glRotatef(90,0,1,0);
+	balcao->desenhar(tex[BALCAO_TAMPO_TEX],tex[MADEIRA_TEX]);
+	glPopMatrix();
 	glPushMatrix();
 	glTranslatef(4.3,0,-7.15);
 	
@@ -216,12 +237,34 @@ void drawScene() {
 	sofa->desenharTex(tex[TECIDO_SOFA_TEX]);
 	glPopMatrix();
 
+	glTranslatef(0,0,0.7);
+
+	glPushMatrix();
+	glRotatef(-90,0,1,0);
+	sofa->desenharTex(tex[TECIDO_SOFA_TEX]);
+	glPopMatrix();
+	glTranslatef(0,0,1);
+	mesaQ->desenharTex(tex[MADEIRA_TEX]);
+	glPushMatrix();
+	glTranslatef(0.0,0.425,0);
+	copoV->desenhar();
+	glTranslatef(0.07,0,0.07);
+	copoL->desenhar();
+	glPopMatrix();
+	glTranslatef(0,0,1);
+	glPushMatrix();
+	glRotatef(90,0,1,0);
+	sofa->desenharTex(tex[TECIDO_SOFA_TEX]);
+	glPopMatrix();
+
 	glPopMatrix();
 
 
 	glPushMatrix();
 	glTranslatef(-2.5,0,6);
 	bil->desenhar(tex[MADEIRA_TEX],tex[TECIDO_SOFA_TEX]);
+	glTranslatef(0,1.5,0);
+	cBilhar->desenhar();
 	glPopMatrix();
 	
 	
@@ -281,7 +324,6 @@ void renderScene(void) {
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, white*ambLight);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, black);
 	
-
 	
 	
 	glEnable(GL_TEXTURE0);
@@ -296,6 +338,10 @@ void renderScene(void) {
 	//Draw with bright light
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, white);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, white);
+	glLightf(GL_LIGHT1,GL_SPOT_CUTOFF,80.0);
+	glLightf(GL_LIGHT1,GL_SPOT_EXPONENT,1.0);
+	glLightfv(GL_LIGHT1,GL_SPOT_DIRECTION,spotDir);
+
 
 	//Calculate texture matrix for projection
 	//This matrix takes us from eye space to the light's clip space
@@ -413,7 +459,12 @@ void init() {
 	mesaR=new MesaRedonda(0.4);
 	sofa=new Sofa(0.7,2);
 	bil=new Bilhar(0.7);
+	cBilhar=new CandeeiroBilhar(2,0.3);
+	balcao=new Balcao(5,1,2);
+	cLuz=new CandeeiroLuz(0.1);
 	
+	GLfloat fLargest;
+	glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &fLargest);
 
 	ILuint ima[N_TEX];
 
@@ -434,6 +485,7 @@ void init() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, fLargest);
 	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imagew, imageh, GL_RGBA, GL_UNSIGNED_BYTE, imageData[MADEIRA_TEX]);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAX_LEVEL,10);
@@ -449,6 +501,7 @@ void init() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, fLargest);
 	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imagew, imageh, GL_RGBA, GL_UNSIGNED_BYTE, imageData[TECIDO_SOFA_TEX]);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAX_LEVEL,10);
@@ -464,6 +517,7 @@ void init() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, fLargest);
 	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imagew, imageh, GL_RGBA, GL_UNSIGNED_BYTE, imageData[CHAO_TEX]);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAX_LEVEL,10);
@@ -479,7 +533,24 @@ void init() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, fLargest);
 	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imagew, imageh, GL_RGBA, GL_UNSIGNED_BYTE, imageData[PAREDES_TEX]);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAX_LEVEL,10);
+
+	ilBindImage(ima[BALCAO_TAMPO_TEX]);
+	ilLoadImage((ILstring)"balcao_tampo_tex.jpg");
+	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+	imagew=ilGetInteger(IL_IMAGE_WIDTH);
+	imageh=ilGetInteger(IL_IMAGE_HEIGHT);
+	imageData[BALCAO_TAMPO_TEX]=ilGetData();
+	glBindTexture(GL_TEXTURE_2D,tex[BALCAO_TAMPO_TEX]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, fLargest);
+	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imagew, imageh, GL_RGBA, GL_UNSIGNED_BYTE, imageData[BALCAO_TAMPO_TEX]);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAX_LEVEL,10);
 
