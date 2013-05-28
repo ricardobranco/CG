@@ -1,7 +1,7 @@
 #include "CandeeiroBilhar.h"
 #include <GL/glut.h>
 
-#define DIV 80
+#define DIV 20
 
 CandeeiroBilhar::CandeeiroBilhar(float comp, float tam)
 {

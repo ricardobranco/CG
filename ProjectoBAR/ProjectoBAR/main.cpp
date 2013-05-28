@@ -338,7 +338,7 @@ void renderScene(void) {
 	//Draw with bright light
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, white);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, white);
-	glLightf(GL_LIGHT1,GL_SPOT_CUTOFF,80.0);
+	glLightf(GL_LIGHT1,GL_SPOT_CUTOFF,90.0);
 	glLightf(GL_LIGHT1,GL_SPOT_EXPONENT,1.0);
 	glLightfv(GL_LIGHT1,GL_SPOT_DIRECTION,spotDir);
 

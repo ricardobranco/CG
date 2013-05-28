@@ -1,5 +1,6 @@
 #include "Balcao.h"
 #include <GL/glut.h>
+#include "Maths\COLOR.h"
 
 #define DIV 20
 
@@ -19,8 +20,14 @@ Balcao::~Balcao(void)
 }
 
 void Balcao::desenhar(int tampo_tex, int base_tex){
+	
+
+	
 	glPushMatrix();
 	glTranslatef(0,altura*0.5,0);
+	
+	glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,white);
+	glMaterialfv(GL_FRONT,GL_SPECULAR,black);
 
 	glPushMatrix();
 	glTranslatef(comprimento*0.5-espComp*0.5,0,0);
@@ -32,7 +39,8 @@ void Balcao::desenhar(int tampo_tex, int base_tex){
 
 	glPushMatrix();
 	glTranslatef(espComp*0.25,altura*0.5+altura*0.05*0.5,espLarg*0.25);
-	
+	glMaterialfv(GL_FRONT,GL_SPECULAR,white);
+	glMateriali(GL_FRONT,GL_SHININESS,128);
 	glBindTexture(GL_TEXTURE_2D,tampo_tex);
 	glPushMatrix();
 	glScalef(espComp*1.5,altura*0.05,largura+espLarg*0.5);
@@ -42,6 +50,7 @@ void Balcao::desenhar(int tampo_tex, int base_tex){
 	glPopMatrix();
 	
 	
+	glMaterialfv(GL_FRONT,GL_SPECULAR,black);
 	glBindTexture(GL_TEXTURE_2D,base_tex);
 	glPushMatrix();
 	glTranslatef(-espComp*0.5,0,largura*0.5-espLarg*0.5);
@@ -49,7 +58,7 @@ void Balcao::desenhar(int tampo_tex, int base_tex){
 	glScalef(comprimento-espComp,altura,espLarg);
 	cubo->desenhar();
 	glPopMatrix();
-
+	glMaterialfv(GL_FRONT,GL_SPECULAR,white);
 	glPushMatrix();
 	glTranslatef(0,altura*0.5+altura*0.05*0.5,espLarg*0.25);
 	glBindTexture(GL_TEXTURE_2D,tampo_tex);

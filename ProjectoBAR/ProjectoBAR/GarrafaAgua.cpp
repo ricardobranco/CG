@@ -1,7 +1,7 @@
 #include "GarrafaAgua.h"
 #include <GL/glut.h>
 
-#define DIV 80
+#define DIV 20
 
 GarrafaAgua::GarrafaAgua(float alt)
 {
