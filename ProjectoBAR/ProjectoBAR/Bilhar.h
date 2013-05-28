@@ -8,7 +8,7 @@ class Bilhar
 {
 public:
 	Bilhar(float s);
-	void desenhar();
+	void desenhar(int texPernas, int texMesa);
 	~Bilhar(void);
 private:
 	float size;

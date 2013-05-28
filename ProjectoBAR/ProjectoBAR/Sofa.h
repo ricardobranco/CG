@@ -6,6 +6,7 @@ class Sofa
 public:
 	Sofa(float size,int nlugares);
 	void desenhar();
+	void desenharTex(int texture);
 	~Sofa(void);
 private:
 	Cilindro *c1,*c2;

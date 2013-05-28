@@ -59,15 +59,15 @@ void  BarVBO::setSize(float size){
 }
 
 
-void  BarVBO::desenhar(){
-	static float cor[]={1,0.3,0.3,1.0};
+void  BarVBO::desenhar(int chao_tex, int paredes_tex,int tecto_tex){
+	static float cor[]={0.6,0.6,0.6,1.0};
 	static float spec[]={0.0,0.0,0.0,1.0};
 	glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,cor);
 	glMaterialfv(GL_FRONT,GL_SPECULAR,spec);
 	glPushMatrix();
 	glScalef(size,size,size);
 	//CHAO
-
+	glBindTexture(GL_TEXTURE_2D,chao_tex);
 	glPushMatrix();
 	glTranslatef(comp/2-cateto,0.0f,larg/2-cateto);
 		glRotatef(45,0,1,0);
@@ -83,7 +83,7 @@ void  BarVBO::desenhar(){
 	glPopMatrix();
 
 	//PAREDES
-
+	glBindTexture(GL_TEXTURE_2D,paredes_tex);
 	glPushMatrix(); //PAREDE DIAGONAL
 		glTranslatef(comp/2-cateto,0.0f,larg/2-cateto);
 		glRotatef(45,0,1,0);
@@ -160,6 +160,8 @@ void  BarVBO::desenhar(){
 
 	//TECTO
 
+	glBindTexture(GL_TEXTURE_2D,tecto_tex);
+
 	glPushMatrix();
 
 		glTranslatef(0,altura,0);
@@ -185,6 +187,8 @@ void  BarVBO::desenhar(){
 		glPopMatrix();
 	glPopMatrix();
 	glPopMatrix();
+
+	glBindTexture(GL_TEXTURE_2D,0);
 
 }
 	

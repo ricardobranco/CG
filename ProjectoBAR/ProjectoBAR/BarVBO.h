@@ -6,7 +6,7 @@ public:
 	//constructor vazio
 	BarVBO(void){};
 	BarVBO(float size,float altura,float comp,float larg);
-	void desenhar();
+	void desenhar(int chao_tex, int paredes_tex,int tecto_tex);
 	~BarVBO(void);
 
 private:

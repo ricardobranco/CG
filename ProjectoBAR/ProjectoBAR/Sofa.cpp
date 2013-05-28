@@ -3,7 +3,7 @@
 #include <math.h>
 #include <GL/glut.h>
 
-#define DIV 40
+#define DIV 20
 
 Sofa::Sofa(float size,int nlugares)
 {
@@ -17,10 +17,17 @@ Sofa::Sofa(float size,int nlugares)
 }
 
 
+
+
 Sofa::~Sofa(void)
 {
 }
 void Sofa::desenhar(){
+	static float cor[]={1,1,1,1};
+	static float spec[]={0.0,0.0,0.0,1};
+	glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,cor);
+	glMaterialfv(GL_FRONT,GL_SPECULAR,spec);
+
 	glPushMatrix();
 	glTranslatef(0,alt*0.2,0);
 	glPushMatrix();
@@ -71,3 +78,9 @@ void Sofa::desenhar(){
 //void CadeiraVBO::setSize(float sizes){
 //	size=sizes;
 //}
+
+void Sofa::desenharTex(int texture){
+	glBindTexture(GL_TEXTURE_2D,texture);
+	this->desenhar();
+	glBindTexture(GL_TEXTURE_2D,0);
+}

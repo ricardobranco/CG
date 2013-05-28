@@ -20,8 +20,13 @@
 #include <math.h>
 
 #define ANG2RAD 3.14159265358979323846/360.0 
-#define N_TEX 1
+#define N_TEX 5
 #define MADEIRA_TEX 0
+#define TECIDO_SOFA_TEX 1
+#define CHAO_TEX 2
+#define PAREDES_TEX 3
+#define TECTO_TEX 4
+
 
 #define SENS_RATO 0.001
 #define ANG 0.05
@@ -80,7 +85,7 @@ void initMatrix(){
 	glPushMatrix();
 	
 	glLoadIdentity();
-	gluPerspective(90, 1, 0.1, 20);
+	gluPerspective(107, 1, 0.1, 20);
 	
 	glGetFloatv(GL_MODELVIEW_MATRIX, lightProjectionMatrix);
 	
@@ -148,19 +153,76 @@ void changeSize(int w, int h) {
 
 void drawScene() {
 	
-	bar->desenhar();
+	bar->desenhar(tex[CHAO_TEX],tex[PAREDES_TEX],0);
 	
 	glPushMatrix();
-	glTranslatef(0,0,2);
-	sofa->desenhar();
+	glTranslatef(4.3,0,-7.15);
+	
+	glPushMatrix();
+	glRotatef(-90,0,1,0);
+	sofa->desenharTex(tex[TECIDO_SOFA_TEX]);
 	glPopMatrix();
+	glTranslatef(0,0,1);
+	mesaQ->desenharTex(tex[MADEIRA_TEX]);
+	glPushMatrix();
+	glTranslatef(0.0,0.425,0);
+	copoV->desenhar();
+	glTranslatef(0.07,0,0.07);
+	copoL->desenhar();
+	glPopMatrix();
+	glTranslatef(0,0,1);
+	glPushMatrix();
+	glRotatef(90,0,1,0);
+	sofa->desenharTex(tex[TECIDO_SOFA_TEX]);
+	glPopMatrix();
+	
+	glTranslatef(0,0,0.7);
+
+	glPushMatrix();
+	glRotatef(-90,0,1,0);
+	sofa->desenharTex(tex[TECIDO_SOFA_TEX]);
+	glPopMatrix();
+	glTranslatef(0,0,1);
+	mesaQ->desenharTex(tex[MADEIRA_TEX]);
+	glPushMatrix();
+	glTranslatef(0.0,0.425,0);
+	copoV->desenhar();
+	glTranslatef(0.07,0,0.07);
+	copoL->desenhar();
+	glPopMatrix();
+	glTranslatef(0,0,1);
+	glPushMatrix();
+	glRotatef(90,0,1,0);
+	sofa->desenharTex(tex[TECIDO_SOFA_TEX]);
+	glPopMatrix();
+	
+	glTranslatef(0,0,0.7);
+
+	glPushMatrix();
+	glRotatef(-90,0,1,0);
+	sofa->desenharTex(tex[TECIDO_SOFA_TEX]);
+	glPopMatrix();
+	glTranslatef(0,0,1);
+	mesaQ->desenharTex(tex[MADEIRA_TEX]);
+	glPushMatrix();
+	glTranslatef(0.0,0.425,0);
+	copoV->desenhar();
+	glTranslatef(0.07,0,0.07);
+	copoL->desenhar();
+	glPopMatrix();
+	glTranslatef(0,0,1);
+	glPushMatrix();
+	glRotatef(90,0,1,0);
+	sofa->desenharTex(tex[TECIDO_SOFA_TEX]);
+	glPopMatrix();
+
+	glPopMatrix();
+
+
 	glPushMatrix();
 	glTranslatef(-2.5,0,6);
-	bil->desenhar();
+	bil->desenhar(tex[MADEIRA_TEX],tex[TECIDO_SOFA_TEX]);
 	glPopMatrix();
-	
-	copoV->desenhar();
-	
 	
 	
 }
@@ -344,10 +406,10 @@ void init() {
 	bancAlto  = new BancoAlto(0.6);
 	bancBalc = new BancoBalcao(0.5);
 	bar = Bar(1);
-	copoV=copo_vinho(0.05);
-	copoL=copo_largo(0.05);
-	flt=flute(0.05);
-	mesaQ=new MesaQuadrada(0.5,0.4);
+	copoV=copo_vinho(0.025);
+	copoL=copo_largo(0.025);
+	flt=flute(0.025);
+	mesaQ=new MesaQuadrada(0.5,0.2);
 	mesaR=new MesaRedonda(0.4);
 	sofa=new Sofa(0.7,2);
 	bil=new Bilhar(0.7);
@@ -370,12 +432,58 @@ void init() {
 	glBindTexture(GL_TEXTURE_2D,tex[MADEIRA_TEX]);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imagew, imageh, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData[MADEIRA_TEX]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imagew, imageh, GL_RGBA, GL_UNSIGNED_BYTE, imageData[MADEIRA_TEX]);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAX_LEVEL,10);
 
+	ilBindImage(ima[TECIDO_SOFA_TEX]);
+	ilLoadImage((ILstring)"tecido_sofa_tex.jpg");
+	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+	imagew=ilGetInteger(IL_IMAGE_WIDTH);
+	imageh=ilGetInteger(IL_IMAGE_HEIGHT);
+	imageData[TECIDO_SOFA_TEX]=ilGetData();
+	glBindTexture(GL_TEXTURE_2D,tex[TECIDO_SOFA_TEX]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imagew, imageh, GL_RGBA, GL_UNSIGNED_BYTE, imageData[TECIDO_SOFA_TEX]);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAX_LEVEL,10);
+
+	ilBindImage(ima[CHAO_TEX]);
+	ilLoadImage((ILstring)"madeira_tex_alt.jpg");
+	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+	imagew=ilGetInteger(IL_IMAGE_WIDTH);
+	imageh=ilGetInteger(IL_IMAGE_HEIGHT);
+	imageData[CHAO_TEX]=ilGetData();
+	glBindTexture(GL_TEXTURE_2D,tex[CHAO_TEX]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imagew, imageh, GL_RGBA, GL_UNSIGNED_BYTE, imageData[CHAO_TEX]);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAX_LEVEL,10);
 	
-	
+	ilBindImage(ima[PAREDES_TEX]);
+	ilLoadImage((ILstring)"parede_tex.jpg");
+	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+	imagew=ilGetInteger(IL_IMAGE_WIDTH);
+	imageh=ilGetInteger(IL_IMAGE_HEIGHT);
+	imageData[PAREDES_TEX]=ilGetData();
+	glBindTexture(GL_TEXTURE_2D,tex[PAREDES_TEX]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imagew, imageh, GL_RGBA, GL_UNSIGNED_BYTE, imageData[PAREDES_TEX]);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAX_LEVEL,10);
+
+
 	//Create the shadow map texture
 	glGenTextures(1, &shadowMapTexture);
 	glBindTexture(GL_TEXTURE_2D, shadowMapTexture);

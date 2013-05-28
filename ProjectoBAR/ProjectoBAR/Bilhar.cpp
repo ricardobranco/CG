@@ -16,7 +16,7 @@ Bilhar::~Bilhar(void)
 {
 }
 
-void Bilhar::desenhar(){
+void Bilhar::desenhar(int texPernas, int texMesa){
 	float comp,alt,larg,margem,tabelasEsp,raioEsf;
 	comp=3.1*size;
 	alt=size;
@@ -27,6 +27,7 @@ void Bilhar::desenhar(){
 	//perna --
 	float cor5[]={0.7,0.5,0.25,1.0};
 	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,cor5);
+	glBindTexture(GL_TEXTURE_2D,texPernas);
 	glPushMatrix();
 	glTranslatef(-comp*0.5+margem,0,-larg*0.5+margem);
 	glPushMatrix();
@@ -71,7 +72,7 @@ void Bilhar::desenhar(){
 	glPopMatrix();
 	glPopMatrix();
 	//Pano
-
+	glBindTexture(GL_TEXTURE_2D,texMesa);
 	glPushMatrix();
 	glTranslatef(0,alt*0.75,0);
 	glPushMatrix();
@@ -111,6 +112,7 @@ void Bilhar::desenhar(){
 	glPopMatrix();
 	glPopMatrix();
 	//bolas
+	glBindTexture(GL_TEXTURE_2D,0);
 	glPushMatrix();
 	glTranslatef(0,alt*0.9+raioEsf,0);
 	float cor3[]={1.0,0,0,1.0};

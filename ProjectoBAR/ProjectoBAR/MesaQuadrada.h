@@ -5,6 +5,7 @@ class MesaQuadrada
 public:
 	MesaQuadrada(float ms, float alt);
 	~MesaQuadrada(void);
+	void desenharTex(int texture);
 	void desenhar();
 private:
 	float mesa;
