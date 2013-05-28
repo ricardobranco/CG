@@ -7,7 +7,7 @@
 #include "Plano.h"
 
 
-#define CAMADAS 60
+#define CAMADAS 30
 
 BarVBO:: BarVBO(float size,float altura,float comp,float larg){
 	this->size=size;
