@@ -5,7 +5,7 @@ class BancoBalcao
 public:
 	BancoBalcao(float size );
 	~BancoBalcao(void);
-	void desenhar();
+	void desenhar(int texture);
 private:
 	float raio;
 	float altura;

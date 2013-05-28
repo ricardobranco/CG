@@ -39,7 +39,7 @@ void CandeeiroBilhar:: desenhar(){
 	cone->desenhar();
 
 	glPushMatrix();
-	glTranslatef(0,altura*comprimento*0.5,0);
+	glTranslatef(0,comprimento*0.125,0);
 	float cor2[]={0,0,0,1.0};
 	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,cor2);
 	glMaterialfv(GL_FRONT,GL_SPECULAR,spec);
@@ -57,7 +57,7 @@ void CandeeiroBilhar:: desenhar(){
 
 
 	glPushMatrix();
-	glTranslatef(0,altura*comprimento*0.5,0);
+	glTranslatef(0,comprimento*0.125,0);
 	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,cor2);
 	glMaterialfv(GL_FRONT,GL_SPECULAR,spec);
 	cil2->desenhar();
@@ -75,7 +75,7 @@ void CandeeiroBilhar:: desenhar(){
 	cone->desenhar();
 
 	glPushMatrix();
-	glTranslatef(0,altura*comprimento*0.5,0);
+	glTranslatef(0,comprimento*0.125,0);
 	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,cor2);
 	glMaterialfv(GL_FRONT,GL_SPECULAR,spec);
 	cil2->desenhar();

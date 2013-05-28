@@ -2,7 +2,8 @@
 #include <GL/glew.h>
 #include <GL/glut.h>
 #include "Maths\Maths.h"
-
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include "BancoAlto.h"
 #include "BancoBalcao.h"
 #include "BarVBO.h"
@@ -25,13 +26,14 @@
 #include <math.h>
 
 #define ANG2RAD 3.14159265358979323846/360.0 
-#define N_TEX 6
+#define N_TEX 7
 #define MADEIRA_TEX 0
 #define TECIDO_SOFA_TEX 1
 #define CHAO_TEX 2
 #define PAREDES_TEX 3
 #define TECTO_TEX 4
 #define BALCAO_TAMPO_TEX 5
+#define BANCO_TAMPO_TEX 6
 
 
 #define SENS_RATO 0.001
@@ -45,12 +47,12 @@ float x = 0.0f;
 float z = 0.0f;
 
 
-float camX = 00, camY = 1, camZ = 0;
+float camX = 2, camY = 1, camZ = 2;
 float camDir[3]={1,0,0};
 float ang=0;
 int startX, startY;
 
-float alpha = 0.0f, beta = 45;
+float alpha = M_PI/4, beta = M_PI/2;
 
 unsigned char *imageData[N_TEX];
 
@@ -67,7 +69,7 @@ int wWidth;
 MATRIX4X4 lightProjectionMatrix, lightViewMatrix;
 MATRIX4X4 cameraProjectionMatrix, cameraViewMatrix;
 
-float pos[4] = {4.9, 1.9, -7.4, 1};
+float pos[4] = {4.9, 1.2, -7.4, 1};
 float spotDir[]={-1,-1,1};
 float ambLight=0.2;
 
@@ -85,6 +87,7 @@ Bilhar *bil;
 CandeeiroBilhar *cBilhar;
 Balcao *balcao;
 CandeeiroLuz *cLuz;
+GarrafaAgua *garr;
 
 int count;
 GLuint buffers[2];
@@ -109,6 +112,8 @@ void initMatrix(){
 	camDir[0]=cos(alpha)*sin(beta);
 	camDir[1]=cos(beta);
 	camDir[2]=sin(alpha)*sin(beta);
+
+	
 
 	glLoadIdentity();
 	gluPerspective(45,(float)wWidth/wHeight,0.1,20);
@@ -166,7 +171,7 @@ void drawScene() {
 	bar->desenhar(tex[CHAO_TEX],tex[PAREDES_TEX],0);
 
 	glPushMatrix();
-	glTranslatef(4.9,1.9,-7.4);
+	glTranslatef(4.9,1.2,-7.4);
 	glRotatef(-45,1,0,1);
 	cLuz->desenhar();
 	glPopMatrix();
@@ -175,6 +180,41 @@ void drawScene() {
 	glTranslatef(0,0,-3);
 	glRotatef(90,0,1,0);
 	balcao->desenhar(tex[BALCAO_TAMPO_TEX],tex[MADEIRA_TEX]);
+	
+	glPushMatrix();
+	glTranslatef(0,0,1.5);
+	
+	glPushMatrix();
+	bancBalc->desenhar(tex[BANCO_TAMPO_TEX]);
+	glTranslatef(0.6,0,0);
+	bancBalc->desenhar(tex[BANCO_TAMPO_TEX]);
+	glTranslatef(0.6,0,0);
+	bancBalc->desenhar(tex[BANCO_TAMPO_TEX]);
+	glTranslatef(0.6,0,0);
+	bancBalc->desenhar(tex[BANCO_TAMPO_TEX]);
+	glPopMatrix();
+	
+	
+	glPushMatrix();
+	bancBalc->desenhar(tex[BANCO_TAMPO_TEX]);
+	glTranslatef(-0.6,0,0);
+	bancBalc->desenhar(tex[BANCO_TAMPO_TEX]);
+	glTranslatef(-0.6,0,0);
+	bancBalc->desenhar(tex[BANCO_TAMPO_TEX]);
+	glTranslatef(-0.6,0,0);
+	bancBalc->desenhar(tex[BANCO_TAMPO_TEX]);
+	glPopMatrix();
+
+	glPopMatrix();
+
+	glTranslatef(0,0.63,0.75);
+	
+	glPushMatrix();
+	copoV->desenhar();
+	glTranslatef(0.2,0,0);
+	garr->desenhar();
+	glPopMatrix();
+
 	glPopMatrix();
 	glPushMatrix();
 	glTranslatef(4.3,0,-7.15);
@@ -263,7 +303,7 @@ void drawScene() {
 	glPushMatrix();
 	glTranslatef(-2.5,0,6);
 	bil->desenhar(tex[MADEIRA_TEX],tex[TECIDO_SOFA_TEX]);
-	glTranslatef(0,1.5,0);
+	glTranslatef(0,1,0);
 	cBilhar->desenhar();
 	glPopMatrix();
 	
@@ -274,7 +314,7 @@ void drawScene() {
 
 void renderScene(void) {
 	initMatrix();
-	printf("%f-%f-%f\n",camX,camY,camZ);
+	//printf("%f-%f-%f\n",camX,camY,camZ);
 	
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, mFBO);
 
@@ -338,7 +378,7 @@ void renderScene(void) {
 	//Draw with bright light
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, white);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, white);
-	glLightf(GL_LIGHT1,GL_SPOT_CUTOFF,90.0);
+	glLightf(GL_LIGHT1,GL_SPOT_CUTOFF,80.0);
 	glLightf(GL_LIGHT1,GL_SPOT_EXPONENT,1.0);
 	glLightfv(GL_LIGHT1,GL_SPOT_DIRECTION,spotDir);
 
@@ -440,8 +480,13 @@ void processMouseMotion(int xx, int yy)
 	startX=xx;
 	startY=yy;
 
-	beta-=deltaY*SENS_RATO;
+	beta+=deltaY*SENS_RATO;
 	alpha+=deltaX*SENS_RATO;
+
+	if(beta<0.05)
+		beta=0.05;
+	if(beta>M_PI-0.05)
+		beta=M_PI-0.05;
 
 	glutPostRedisplay();
 }
@@ -450,7 +495,7 @@ void processMouseMotion(int xx, int yy)
 void init() {
 
 	bancAlto  = new BancoAlto(0.6);
-	bancBalc = new BancoBalcao(0.5);
+	bancBalc = new BancoBalcao(0.8);
 	bar = Bar(1);
 	copoV=copo_vinho(0.025);
 	copoL=copo_largo(0.025);
@@ -459,9 +504,10 @@ void init() {
 	mesaR=new MesaRedonda(0.4);
 	sofa=new Sofa(0.7,2);
 	bil=new Bilhar(0.7);
-	cBilhar=new CandeeiroBilhar(2,0.3);
-	balcao=new Balcao(5,1,2);
+	cBilhar=new CandeeiroBilhar(2,0.2);
+	balcao=new Balcao(5,0.6,2);
 	cLuz=new CandeeiroLuz(0.1);
+	garr=new GarrafaAgua(0.2);
 	
 	GLfloat fLargest;
 	glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &fLargest);
@@ -554,6 +600,22 @@ void init() {
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAX_LEVEL,10);
 
+	ilBindImage(ima[BANCO_TAMPO_TEX]);
+	ilLoadImage((ILstring)"banco_tampo_tex.png");
+	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+	imagew=ilGetInteger(IL_IMAGE_WIDTH);
+	imageh=ilGetInteger(IL_IMAGE_HEIGHT);
+	imageData[BANCO_TAMPO_TEX]=ilGetData();
+	glBindTexture(GL_TEXTURE_2D,tex[BANCO_TAMPO_TEX]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, fLargest);
+	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imagew, imageh, GL_RGBA, GL_UNSIGNED_BYTE, imageData[BANCO_TAMPO_TEX]);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAX_LEVEL,10);
+
 
 	//Create the shadow map texture
 	glGenTextures(1, &shadowMapTexture);
@@ -639,8 +701,8 @@ void main(int argc, char **argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
 	glutInitWindowPosition(0,0);
-	wWidth=350;
-	wHeight=350;
+	wWidth=1000;
+	wHeight=500;
 	glutInitWindowSize(wWidth,wHeight);
 	glutCreateWindow("CG@DI-UM");
 		

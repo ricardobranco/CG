@@ -194,7 +194,7 @@ void  BarVBO::desenhar(int chao_tex, int paredes_tex,int tecto_tex){
 	
 
 BarVBO* Bar(float size){
-	BarVBO* bar = new BarVBO(size,2,10,15);
+	BarVBO* bar = new BarVBO(size,1.3,10,15);
 	return bar;
 }
 
