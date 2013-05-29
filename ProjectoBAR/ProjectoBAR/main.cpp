@@ -313,7 +313,7 @@ void drawScene() {
 
 
 void renderScene(void) {
-	initMatrix();
+	
 	//printf("%f-%f-%f\n",camX,camY,camZ);
 	
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, mFBO);
@@ -454,7 +454,7 @@ void renderScene(void) {
 	glDisable(GL_TEXTURE1);
 
 	
-
+	initMatrix();
 // End of frame
 	glutSwapBuffers();
 	
@@ -721,7 +721,7 @@ void main(int argc, char **argv) {
 	glewInit();
 
 	init();	
-
+	initMatrix();
 // entrar no ciclo do GLUT 
 	glutMainLoop();
 }
