@@ -16,7 +16,8 @@
 #include "CandeeiroLuz.h"
 #include "Balcao.h"
 #include "GarrafaAgua.h"
-
+#include "GarrafaWhisky.h"
+#include "Plano.h"
 
 // include para a lib devil
 // não esquecer de adicionar a lib (devil.lib) ao projecto
@@ -26,7 +27,7 @@
 #include <math.h>
 
 #define ANG2RAD 3.14159265358979323846/360.0 
-#define N_TEX 7
+#define N_TEX 8
 #define MADEIRA_TEX 0
 #define TECIDO_SOFA_TEX 1
 #define CHAO_TEX 2
@@ -34,6 +35,7 @@
 #define TECTO_TEX 4
 #define BALCAO_TAMPO_TEX 5
 #define BANCO_TAMPO_TEX 6
+#define PORTA_TEX 7
 
 
 #define SENS_RATO 0.001
@@ -88,6 +90,8 @@ CandeeiroBilhar *cBilhar;
 Balcao *balcao;
 CandeeiroLuz *cLuz;
 GarrafaAgua *garr;
+GarrafaWhisky *garW;
+Plano *porta;
 
 int count;
 GLuint buffers[2];
@@ -168,12 +172,17 @@ void changeSize(int w, int h) {
 
 void drawScene() {
 	
+	
+
 	bar->desenhar(tex[CHAO_TEX],tex[PAREDES_TEX],0);
 
 	glPushMatrix();
 	glTranslatef(4.9,1.2,-7.4);
 	glRotatef(-45,1,0,1);
 	cLuz->desenhar();
+	glPopMatrix();
+
+	
 	glPopMatrix();
 
 	glPushMatrix();
@@ -211,8 +220,32 @@ void drawScene() {
 	
 	glPushMatrix();
 	copoV->desenhar();
-	glTranslatef(0.2,0,0);
+	glTranslatef(0.1,0,0);
 	garr->desenhar();
+	glTranslatef(0.2,0,0.1);
+	garW->desenhar();
+	glTranslatef(0.15,0,0);
+	copoL->desenhar();
+	
+	glTranslatef(0.2,0,-0.1);
+	copoV->desenhar();
+	glTranslatef(0.1,0,0);
+	garr->desenhar();
+	glTranslatef(0.2,0,0.1);
+	garW->desenhar();
+	glTranslatef(0.15,0,0);
+	copoL->desenhar();
+
+	glTranslatef(0.2,0,-0.1);
+	copoV->desenhar();
+	glTranslatef(0.1,0,0);
+	garr->desenhar();
+	glTranslatef(0.2,0,0.1);
+	garW->desenhar();
+	glTranslatef(0.15,0,0);
+	copoL->desenhar();
+
+
 	glPopMatrix();
 
 	glPopMatrix();
@@ -227,7 +260,7 @@ void drawScene() {
 	mesaQ->desenharTex(tex[MADEIRA_TEX]);
 	glPushMatrix();
 	glTranslatef(0.0,0.425,0);
-	copoV->desenhar();
+	flt->desenhar();
 	glTranslatef(0.07,0,0.07);
 	copoL->desenhar();
 	glPopMatrix();
@@ -303,10 +336,32 @@ void drawScene() {
 	glPushMatrix();
 	glTranslatef(-2.5,0,6);
 	bil->desenhar(tex[MADEIRA_TEX],tex[TECIDO_SOFA_TEX]);
+	glPushMatrix();
 	glTranslatef(0,1,0);
 	cBilhar->desenhar();
 	glPopMatrix();
+	glTranslatef(0,0,-1.2);
+	bancBalc->desenhar(tex[BANCO_TAMPO_TEX]);
+	glTranslatef(-0.6,0,0);
+	bancBalc->desenhar(tex[BANCO_TAMPO_TEX]);
+	glTranslatef(1.2,0,0);
+	bancBalc->desenhar(tex[BANCO_TAMPO_TEX]);
+	glPopMatrix();
 	
+
+	glPushMatrix();
+	glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,white);
+	glMaterialfv(GL_FRONT,GL_SPECULAR,black);
+	glTranslatef(3.749,0.5,5.749),
+	glRotatef(-90,1,0,0);
+	glRotatef(45,0,0,1);
+	glBindTexture(GL_TEXTURE_2D,tex[PORTA_TEX]);
+	
+	porta->desenhar();
+	
+	glBindTexture(GL_TEXTURE_2D,0);
+
+	glPopMatrix();
 	
 }
 
@@ -314,7 +369,7 @@ void drawScene() {
 
 void renderScene(void) {
 	
-	//printf("%f-%f-%f\n",camX,camY,camZ);
+	printf("%f-%f-%f\n",camX,camY,camZ);
 	
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, mFBO);
 
@@ -378,8 +433,8 @@ void renderScene(void) {
 	//Draw with bright light
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, white);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, white);
-	glLightf(GL_LIGHT1,GL_SPOT_CUTOFF,80.0);
-	glLightf(GL_LIGHT1,GL_SPOT_EXPONENT,1.0);
+	glLightf(GL_LIGHT1,GL_SPOT_CUTOFF,75.0);
+	glLightf(GL_LIGHT1,GL_SPOT_EXPONENT,2.0);
 	glLightfv(GL_LIGHT1,GL_SPOT_DIRECTION,spotDir);
 
 
@@ -499,7 +554,7 @@ void init() {
 	bar = Bar(1);
 	copoV=copo_vinho(0.025);
 	copoL=copo_largo(0.025);
-	flt=flute(0.025);
+	flt=flute(0.035);
 	mesaQ=new MesaQuadrada(0.5,0.2);
 	mesaR=new MesaRedonda(0.4);
 	sofa=new Sofa(0.7,2);
@@ -508,6 +563,8 @@ void init() {
 	balcao=new Balcao(5,0.6,2);
 	cLuz=new CandeeiroLuz(0.1);
 	garr=new GarrafaAgua(0.2);
+	garW=new GarrafaWhisky(0.2);
+	porta=new Plano(0.5,1,10,20);
 	
 	GLfloat fLargest;
 	glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &fLargest);
@@ -616,6 +673,21 @@ void init() {
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAX_LEVEL,10);
 
+	ilBindImage(ima[PORTA_TEX]);
+	ilLoadImage((ILstring)"porta_tex.jpg");
+	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+	imagew=ilGetInteger(IL_IMAGE_WIDTH);
+	imageh=ilGetInteger(IL_IMAGE_HEIGHT);
+	imageData[PORTA_TEX]=ilGetData();
+	glBindTexture(GL_TEXTURE_2D,tex[PORTA_TEX]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, fLargest);
+	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imagew, imageh, GL_RGBA, GL_UNSIGNED_BYTE, imageData[PORTA_TEX]);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_BASE_LEVEL,0);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAX_LEVEL,10);
 
 	//Create the shadow map texture
 	glGenTextures(1, &shadowMapTexture);

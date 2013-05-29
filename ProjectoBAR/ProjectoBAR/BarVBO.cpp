@@ -69,7 +69,7 @@ void  BarVBO::desenhar(int chao_tex, int paredes_tex,int tecto_tex){
 	//CHAO
 	glBindTexture(GL_TEXTURE_2D,chao_tex);
 	glPushMatrix();
-	glTranslatef(comp/2-cateto,0.0f,larg/2-cateto);
+	glTranslatef(comp/2-cateto,-0.0001f,larg/2-cateto);
 		glRotatef(45,0,1,0);
 		chaoDIR->desenhar();
 	glPopMatrix();

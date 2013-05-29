@@ -2,7 +2,7 @@
 #include <GL/glut.h>
 #include "Maths\COLOR.h"
 
-#define DIV 30
+#define DIV 20
 
 GarrafaAgua::GarrafaAgua(float alt)
 {

@@ -35,8 +35,14 @@ Plano::Plano(float ladoX, float ladoZ, int divX, int divZ){
 
 
 
-	for(int iv=0; iv<=divZ; iv++ , x=-ladoX/2,z+=divladoZ){
-		for(int ih=0; ih<=divX; ih++,x+=divladoX){
+	for(int iv=0; iv<=divZ; iv++){
+		 
+		z=-ladoZ/2+iv*divladoZ;
+		
+		for(int ih=0; ih<=divX; ih++){
+			
+			x=-ladoX/2+ih*divladoX;
+
 			vertexB[i]=x;
 			normalB[i]=0;
 			i++;
@@ -46,24 +52,27 @@ Plano::Plano(float ladoX, float ladoZ, int divX, int divZ){
 			vertexB[i]=z; 
 			normalB[i]=0;
 			i++;
-
-			texturaB[texI] = iv * incTextS; texI++;
+			
 			texturaB[texI] = ih * incTextT; texI++;
+			texturaB[texI] = 1-iv * incTextS; texI++;
+			
 		}
-		//z+=divladoZ;
+		
 	} 
 
 	i=0;
 
-	for(int ih=0; ih<divX;ih++){
 
-		for(int iv=0; iv<divZ;iv++){
+	for(int iv=0; iv<divZ;iv++){
+	
+		
+		for(int ih=0; ih<divX;ih++){
 
 			int c1,c2,c3,c4;
-			c1=(divZ+1)*((ih)%divX)+iv;
-			c2=(divZ+1)*((ih)%divX)+iv+1;
-			c3=(divZ+1)*((ih+1)%(divX+1))+iv;
-			c4=(divZ+1)*((ih+1)%(divX+1))+iv+1;
+			c1=(divX+1)*(iv)+ih;
+			c2=(divX+1)*(iv)+ih+1;
+			c3=(divX+1)*((iv+1))+ih;
+			c4=(divX+1)*((iv+1))+ih+1;
 			
 			indices[i]=c1; i++;
 			indices[i]=c3; i++;

@@ -5,6 +5,7 @@
 #include <GL/glut.h>
 #include "primitivas.h"
 #include "copo.h"
+#include "Maths\COLOR.h"
 
 #define DIVH 20
 
@@ -235,11 +236,9 @@ Copo::Copo(float size,float r, float along, float hpe, float rbase, float hbase)
 
 void Copo::desenhar(){
 
-	static float cor[]={1,1,1,1};
 
-
-	glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,cor);
-	glMaterialfv(GL_FRONT,GL_SPECULAR,cor);
+	glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,0.6*white);
+	glMaterialfv(GL_FRONT,GL_SPECULAR,white);
 	glMateriali(GL_FRONT,GL_SHININESS,128);
 
 	glPushMatrix();
@@ -313,6 +312,6 @@ Copo* flute(float size){
 
 Copo* copo_largo(float size){
 
-	Copo *c=new Copo(size,3,0.6,5,2,0.1);
+	Copo *c=new Copo(size,3,0.6,4,2,0.1);
 	return c;
 }

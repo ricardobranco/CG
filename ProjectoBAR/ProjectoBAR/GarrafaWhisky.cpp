@@ -20,6 +20,11 @@ GarrafaWhisky::~GarrafaWhisky(void)
 }
 
 void GarrafaWhisky:: desenhar(){
+	static float cor[]={0.4, 0.25, 0.09};
+	glMaterialfv(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,cor);
+	glMaterialfv(GL_FRONT,GL_SPECULAR,white);
+	glMateriali(GL_FRONT,GL_SHININESS,82);
+		
 	glPushMatrix();
 	glTranslatef(0,altura*0.5,0);
 	glPushMatrix();
