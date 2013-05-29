@@ -263,6 +263,10 @@ void drawScene() {
 	flt->desenhar();
 	glTranslatef(0.07,0,0.07);
 	copoL->desenhar();
+	glTranslatef(-0.15,0.025,-0.15);
+	glFrontFace(GL_CW);
+	glutSolidTeapot(0.05);
+	glFrontFace(GL_CCW);
 	glPopMatrix();
 	glTranslatef(0,0,1);
 	glPushMatrix();
