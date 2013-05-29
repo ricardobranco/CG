@@ -373,7 +373,7 @@ void drawScene() {
 
 void renderScene(void) {
 	
-	printf("%f-%f-%f\n",camX,camY,camZ);
+	//printf("%f-%f-%f\n",camX,camY,camZ);
 	
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, mFBO);
 
