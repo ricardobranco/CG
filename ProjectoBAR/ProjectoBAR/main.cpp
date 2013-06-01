@@ -45,6 +45,7 @@
 
 
 float height = 2.0f;
+int track=0;
 float x = 0.0f;
 float z = 0.0f;
 
@@ -93,6 +94,8 @@ GarrafaAgua *garr;
 GarrafaWhisky *garW;
 Plano *porta;
 
+
+
 int count;
 GLuint buffers[2];
 
@@ -102,7 +105,7 @@ void initMatrix(){
 	glPushMatrix();
 	
 	glLoadIdentity();
-	gluPerspective(107, 1, 0.1, 20);
+	gluPerspective(90, 1, 0.1, 20);
 	
 	glGetFloatv(GL_MODELVIEW_MATRIX, lightProjectionMatrix);
 	
@@ -172,18 +175,15 @@ void changeSize(int w, int h) {
 
 void drawScene() {
 	
-	
 
 	bar->desenhar(tex[CHAO_TEX],tex[PAREDES_TEX],0);
-
+	
 	glPushMatrix();
 	glTranslatef(4.9,1.2,-7.4);
 	glRotatef(-45,1,0,1);
 	cLuz->desenhar();
 	glPopMatrix();
 
-	
-	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(0,0,-3);
@@ -523,31 +523,36 @@ void renderScene(void) {
 
 void processMouseButtons(int button, int state, int xx, int yy) 
 {
-	if(button==GLUT_LEFT_BUTTON){
+	if(button==GLUT_LEFT_BUTTON&&state==GLUT_DOWN){
 		startX=xx;
 		startY=yy;
+		track=1;
 	}
+	if(button==GLUT_LEFT_BUTTON&&state==GLUT_UP)
+		track=0;
+
 	glutPostRedisplay();
 }
 
 
 void processMouseMotion(int xx, int yy)
 {
+	if(track){
+		int deltaX=startX-xx;
+		int deltaY=startY-yy;
+		startX=xx;
+		startY=yy;
 
-	int deltaX=startX-xx;
-	int deltaY=startY-yy;
-	startX=xx;
-	startY=yy;
+		beta+=deltaY*SENS_RATO;
+		alpha+=deltaX*SENS_RATO;
 
-	beta+=deltaY*SENS_RATO;
-	alpha+=deltaX*SENS_RATO;
+		if(beta<0.05)
+			beta=0.05;
+		if(beta>M_PI-0.05)
+			beta=M_PI-0.05;
 
-	if(beta<0.05)
-		beta=0.05;
-	if(beta>M_PI-0.05)
-		beta=M_PI-0.05;
-
-	glutPostRedisplay();
+		glutPostRedisplay();
+	}
 }
 
 

@@ -22,9 +22,9 @@ BancoBalcao::~BancoBalcao(void)
 
 void BancoBalcao::desenhar(int texture){
 	
-	static float ambient[]={0.19225,0.19225,0.19225};
-	static float difuse[]={0.50754, 0.50754, 0.50754};
-	static float specular[]={0.508273,0.508273,0.508273};
+	static float ambient[]={0.19225,0.19225,0.19225,1};
+	static float difuse[]={0.50754, 0.50754, 0.50754,1};
+	static float specular[]={0.508273,0.508273,0.508273,1};
 	static float shinenes=0.4;
 
 	glMaterialfv(GL_FRONT,GL_AMBIENT,ambient);
