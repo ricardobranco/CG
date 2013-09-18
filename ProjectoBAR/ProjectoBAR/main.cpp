@@ -42,6 +42,7 @@
 #define ANG 0.05
 #define MOV 0.1
 
+#define AA_LEVEL 4
 
 
 float height = 2.0f;
@@ -64,7 +65,13 @@ unsigned int tex[N_TEX];
 
 unsigned int shadowMapTexture;
 unsigned int mFBO;
-unsigned int shadowMapSize=4098;
+unsigned int shadowMapSize=6144;
+
+unsigned int aaTexture[2];
+unsigned int aaFBO;
+
+unsigned int aaAuxTexture;
+unsigned int aaAuxFBO;
 
 int wHeight;
 int wWidth;
@@ -147,6 +154,45 @@ void changeSize(int w, int h) {
 
 	wHeight=h;
 	wWidth=w;
+
+	glDeleteFramebuffers(1,&aaFBO);
+	glDeleteTextures(2,aaTexture);
+	glDeleteFramebuffers(1,&aaAuxFBO);
+	glDeleteTextures(1,&aaAuxTexture);
+	
+	
+	glGenTextures(2, aaTexture);
+	
+	glBindTexture(GL_TEXTURE_2D, aaTexture[0]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, AA_LEVEL*wWidth, AA_LEVEL*wHeight, 0,GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+
+	glBindTexture(GL_TEXTURE_2D, aaTexture[1]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, AA_LEVEL*wWidth, AA_LEVEL*wHeight, 0,GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+
+	glGenFramebuffers(1,&aaFBO);
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, aaFBO);
+	glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, aaTexture[0], 0);
+	glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_TEXTURE_2D, aaTexture[1],0);	
+	
+	glGenTextures(1, &aaAuxTexture);
+	glBindTexture(GL_TEXTURE_2D, aaAuxTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, AA_LEVEL*wWidth/2, AA_LEVEL*wHeight/2, 0,GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+
+	glGenFramebuffers(1,&aaAuxFBO);
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, aaAuxFBO);
+	glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, aaAuxTexture, 0);
 
 	//// Prevent a divide by zero, when window is too short
 	//// (you cant make a window with zero width).
@@ -400,7 +446,7 @@ void renderScene(void) {
 	//restore states
 	glCullFace(GL_BACK);
 	
-	glBindFramebuffer(GL_FRAMEBUFFER,0);
+	glBindFramebuffer(GL_FRAMEBUFFER,aaFBO);
 
 	//2nd pass - Draw from camera's point of view
 	glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT);
@@ -411,7 +457,8 @@ void renderScene(void) {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(cameraViewMatrix);
 
-	glViewport(0, 0, wWidth, wHeight);
+	//glViewport(0, 0,wWidth,wHeight);
+	glViewport(0, 0,AA_LEVEL*wWidth,AA_LEVEL*wHeight);
 
 
 	//Use dim light to represent shadowed areas
@@ -432,12 +479,11 @@ void renderScene(void) {
 	drawScene();
 	
 	
-	
 	//3rd pass
 	//Draw with bright light
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, white);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, white);
-	glLightf(GL_LIGHT1,GL_SPOT_CUTOFF,75.0);
+	glLightf(GL_LIGHT1,GL_SPOT_CUTOFF,85.0);
 	glLightf(GL_LIGHT1,GL_SPOT_EXPONENT,2.0);
 	glLightfv(GL_LIGHT1,GL_SPOT_DIRECTION,spotDir);
 
@@ -492,6 +538,8 @@ void renderScene(void) {
 
 	drawScene();
 	
+	
+
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE1);
 	glDisable(GL_TEXTURE0);
@@ -512,7 +560,24 @@ void renderScene(void) {
 	glActiveTexture(GL_TEXTURE0);
 	glDisable(GL_TEXTURE1);
 
-	
+	int fbo1=aaFBO;
+	int fbo2=aaAuxFBO;
+
+	for(int level=AA_LEVEL;level!=1;level=level/2){
+		glBindFramebuffer(GL_READ_FRAMEBUFFER,fbo1);
+		glBindFramebuffer(GL_DRAW_FRAMEBUFFER,fbo2);
+		glBlitFramebuffer(0,0,level*wWidth,level*wHeight,0,0,level*wWidth/2,level*wHeight/2,GL_COLOR_BUFFER_BIT,GL_LINEAR);
+		int aux=fbo1;
+		fbo1=fbo2;
+		fbo2=aux;
+	}
+
+
+	glBindFramebuffer(GL_READ_FRAMEBUFFER,fbo1);
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glBlitFramebuffer(0,0,wWidth,wHeight,0,0,wWidth,wHeight,GL_COLOR_BUFFER_BIT,GL_LINEAR);
+
 	initMatrix();
 // End of frame
 	glutSwapBuffers();
@@ -725,6 +790,39 @@ void init() {
 	glGenFramebuffers(1,&mFBO);
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, mFBO);
 	glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapTexture, 0);
+
+	glGenTextures(2, aaTexture);
+	
+	glBindTexture(GL_TEXTURE_2D, aaTexture[0]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, AA_LEVEL*wWidth, AA_LEVEL*wHeight, 0,GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+
+	glBindTexture(GL_TEXTURE_2D, aaTexture[1]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, AA_LEVEL*wWidth, AA_LEVEL*wHeight, 0,GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+
+	glGenFramebuffers(1,&aaFBO);
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, aaFBO);
+	glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, aaTexture[0], 0);
+	glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_TEXTURE_2D, aaTexture[1],0);
+
+	glGenTextures(1, &aaAuxTexture);
+	glBindTexture(GL_TEXTURE_2D, aaAuxTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, AA_LEVEL*wWidth/2, AA_LEVEL*wHeight/2, 0,GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+
+	glGenFramebuffers(1,&aaAuxFBO);
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, aaAuxFBO);
+	glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, aaAuxTexture, 0);
 
 	// Disable writes to the color buffer
 	glDrawBuffer(GL_NONE);

@@ -18,15 +18,15 @@ void mesa(float alt) {
 
 	cone_solid(altCone,altCone*1.5,camadas,lad);
 
-	glPopMatrix();
-	glPushMatrix();
+	//glPopMatrix();
+	//glPushMatrix();
 
 	glTranslatef(0,(altCone*0.5)+(altCilin/2),0);
 	
 	cilindro_solid(altCilin,altCone*1.5/2,camadas,lad);
 
-	glPopMatrix();
-	glPushMatrix();
+	//glPopMatrix();
+	//glPushMatrix();
 	
 	glTranslatef(0,(altCone*0.5)+(altCilin)+(expMesa/2),0);
 
